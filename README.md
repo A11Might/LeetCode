@@ -1,15 +1,6 @@
 # leetcode
 A Record of My Problem Solving Journey.
 
-
-## 思路图解
-
- 019 [](./images/lc019.jpg)
-| 036 [Java](./codes/lc036.java)
-| 234 [Java](./codes/lc234.java)
-
-## 思路题解
-
  001 [Java](./codes/lc001.java)
 | 002 [Java](./codes/lc002.java)
 | 007 [Java](./codes/lc007.java)
