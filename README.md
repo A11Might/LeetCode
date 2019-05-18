@@ -4,6 +4,9 @@ A Record of My Problem Solving Journey.
 
 ## 思路图解
 
+ 019 [](./images/lc019.jpg)
+| 036 [Java](./codes/lc036.java)
+| 234 [Java](./codes/lc234.java)
 
 ## 思路题解
 
