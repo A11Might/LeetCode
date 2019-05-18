@@ -1,13 +1,11 @@
 # leetcode
 A Record of My Problem Solving Journey.
 
-- - -
 
-思路图解
+## 思路图解
 
-- - -
 
-思路题解
+## 思路题解
 
  001 [Java](./codes/lc001.java)
 | 002 [Java](./codes/lc002.java)
