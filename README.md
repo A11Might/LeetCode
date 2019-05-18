@@ -1,7 +1,15 @@
 # leetcode
 A Record of My Problem Solving Journey.
 
-| 001 [Java](./codes/lc001.java)
+- - -
+
+My solution 
+
+- - -
+
+My solution
+
+ 001 [Java](./codes/lc001.java)
 | 002 [Java](./codes/lc002.java)
 | 007 [Java](./codes/lc007.java)
 | 008 [Java](./codes/lc008.java)
