@@ -1,4 +1,4 @@
-# leetcode
+# leetcode 71/877
 A Record of My Problem Solving Journey.
 
  001 [Java](./codes/lc001.java)
