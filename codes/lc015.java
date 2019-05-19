@@ -14,7 +14,7 @@ class Solution {
         java.util.Arrays.sort(nums); // 排序方便跳过重复元素
         List<List<Integer>> res = new ArrayList<>();
         for (int i = 0; i < nums.length - 2; ++i) { // 先固定第一个数，再在后面的区间内找合为0 - nums[i]的两个数
-            if (i == 0 || (i > 0 && nums[i] != nums[i - 1])) { // 跳过重复元素
+            if (i == 0 || nums[i] != nums[i - 1]) { // 跳过重复元素
                 int twoSum = 0 - nums[i];
                 int l = i + 1;
                 int r = nums.length - 1;
