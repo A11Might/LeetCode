@@ -5,7 +5,7 @@ A Record of My Problem Solving Journey.
 | 002 [Java](./codes/lc002.java)
 | 007 [Java](./codes/lc007.java)
 | 008 [Java](./codes/lc008.java)
-| 010 [Java](./codes/lc010.java)\
+| 010 [Java](./codes/lc010.java)
 | 013 [Java](./codes/lc013.java)
 | 014 [Java](./codes/lc014.java)
 | 015 [Java](./codes/lc015.java)
