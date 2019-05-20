@@ -8,6 +8,16 @@
  * 3、若包含Unicode字符，用哈希表注册
  */
 class Solution {
+    public boolean isAnagram1(String s, String t) {
+        char[] chrsOfS = s.toCharArray();
+        char[] chrsOfT = t.toCharArray();
+        java.util.Arrays.sort(chrsOfS);
+        java.util.Arrays.sort(chrsOfT);
+        s = String.valueOf(chrsOfS);
+        t = String.valueOf(chrsOfT);
+        return s.equals(t);
+    }
+
     public boolean isAnagram2(String s, String t) {
         int[] flag = new int[26];
         char[] chrsS = s.toCharArray();
