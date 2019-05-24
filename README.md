@@ -1,8 +1,10 @@
-# leetcode 80/877
+# leetcode 83/877
 A Record of My Problem Solving Journey.
 
  001 [Java](./codes/lc001.java)
 | 002 [Java](./codes/lc002.java)
+| 003 [Java](./codes/lc003.java)
+| 005 [Java](./codes/lc005.java)
 | 007 [Java](./codes/lc007.java)
 | 008 [Java](./codes/lc008.java)
 | 010 [Java](./codes/lc010.java)
@@ -70,6 +72,7 @@ A Record of My Problem Solving Journey.
 | 283 [Java](./codes/lc283.java)
 | 322 [Java](./codes/lc322.java)
 | 326 [Java](./codes/lc326.java)
+| 334 [Java](./codes/lc334.java)
 | 344 [Java](./codes/lc344.java)
 | 350 [Java](./codes/lc350.java)
 | 384 [Java](./codes/lc384.java)
