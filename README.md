@@ -50,6 +50,7 @@ A Record of My Problem Solving Journey.
 | 151 [Java](./codes/lc151.java)
 | 152 [Java](./codes/lc152.java)
 | 155 [Java](./codes/lc155.java)
+| 160 [Java](./codes/lc160.java)
 | 169 [Java](./codes/lc169.java)
 | 189 [Java](./codes/lc189.java)
 | 190 [Java](./codes/lc190.java)
