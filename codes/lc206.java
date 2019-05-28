@@ -4,7 +4,7 @@
  * [206] 反转链表
  * 
  * 迭代：使用三个指针pre、cur和succ
- * 递归：f(head) = 反转head和head.next之间的链式结果 + f(head.next)
+ * 递归：f(head) = 反转head和head.next之间的链式结构 + f(head.next)
  */
 /**
  * Definition for singly-linked list.
