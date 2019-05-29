@@ -1,4 +1,4 @@
-# leetcode 91/877
+# leetcode 95/877
 A Record of My Problem Solving Journey.
 
  001 [Java](./codes/lc001.java)
@@ -8,9 +8,11 @@ A Record of My Problem Solving Journey.
 | 007 [Java](./codes/lc007.java)
 | 008 [Java](./codes/lc008.java)
 | 010 [Java](./codes/lc010.java)
+| 011 [Java](./codes/lc011.java)
 | 013 [Java](./codes/lc013.java)
 | 014 [Java](./codes/lc014.java)
 | 015 [Java](./codes/lc015.java)
+| 017 [Java](./codes/lc017.java)
 | 019 [Java](./codes/lc019.java)
 | 020 [Java](./codes/lc020.java)
 | 021 [Java](./codes/lc021.java)
@@ -32,6 +34,7 @@ A Record of My Problem Solving Journey.
 | 070 [Java](./codes/lc070.java)
 | 073 [Java](./codes/lc073.java)
 | 088 [Java](./codes/lc088.java)
+| 094 [Java](./codes/lc094.java)
 | 098 [Java](./codes/lc098.java)
 | 101 [Java](./codes/lc101.java)
 | 102 [Java](./codes/lc102.java)
@@ -46,6 +49,7 @@ A Record of My Problem Solving Journey.
 | 136 [Java](./codes/lc136.java)
 | 141 [Java](./codes/lc141.java)
 | 142 [Java](./codes/lc142.java)
+| 148 [Java](./codes/lc148.java)
 | 150 [Java](./codes/lc150.java)
 | 151 [Java](./codes/lc151.java)
 | 152 [Java](./codes/lc152.java)
