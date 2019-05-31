@@ -9,7 +9,7 @@
 class Solution {
     public void nextPermutation(int[] nums) {
         int i = nums.length - 2;
-        while (nums[i] >= nums[i + 1]) {
+        while (i >= 0 && nums[i] >= nums[i + 1]) {
             i--;
         }
         // 当i < 0时，当前元素为最大排列，直接反转为最小排列
