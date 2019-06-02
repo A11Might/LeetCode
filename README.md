@@ -1,4 +1,4 @@
-# leetcode 100/1050
+# leetcode 103/1050
 A Record of My Problem Solving Journey.
 
  001 [Java](./codes/lc001.java)
@@ -29,7 +29,10 @@ A Record of My Problem Solving Journey.
 | 036 [Java](./codes/lc036.java)
 | 038 [Java](./codes/lc038.java)
 | 039 [Java](./codes/lc039.java)
+| 040 [Java](./codes/lc040.java)
 | 041 [Java](./codes/lc041.java)
+| 046 [Java](./codes/lc046.java)
+| 047 [Java](./codes/lc047.java)
 | 048 [Java](./codes/lc048.java)
 | 049 [Java](./codes/lc049.java)
 | 053 [Java](./codes/lc053.java)
