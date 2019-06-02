@@ -7,7 +7,7 @@ import java.util.List;
  *
  * [39] 组合总和
  * 
- * 回溯
+ * 回溯算法
  */
 class Solution {
     public List<List<Integer>> combinationSum(int[] nums, int target) {
@@ -23,7 +23,7 @@ class Solution {
         } else if (target == 0) {
             res.add(new ArrayList<>(tempList)); // ???
         } else {
-            // index相等于背包问题的放与不放但还有放多个(即index不变)
+            // index相当于背包问题的放与不放但还有放多个(即index不变)
             for (int i = index; i < nums.length; ++i) {
                 tempList.add(nums[i]);
                 backtrack(res, tempList, nums, target - nums[i], i); // index == i，数组中的元素可以被重复选取
