@@ -3,7 +3,7 @@
  *
  * [25] k个一组翻转链表
  * 
- * 递归：f(n) = 反转k个节点 + f(n - k)
+ * 递归：f(n) = f(n - k) + 反转k个节点
  */
 /**
  * Definition for singly-linked list.
