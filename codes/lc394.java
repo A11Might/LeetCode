@@ -8,6 +8,7 @@ import java.util.Deque;
  * 
  * 题意：编码规则为:k[encoded_string]，表示其中方括号内部的encoded_string正好重复k次，返回它解码后的字符串
  * 
+ * https://www.bilibili.com/video/av54757532
  * 思路：准备两个辅助栈和一个StringBuilder，依次遍历字符串的每个字符，
  * 1.遇到数字压入数字栈中
  * 2.遇到字符添加进StringBuilder
