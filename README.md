@@ -1,4 +1,4 @@
-# leetcode 105/1050
+# leetcode 106/1050
 
 A Record of My Problem Solving Journey.
 
@@ -107,3 +107,4 @@ A Record of My Problem Solving Journey.
 | 844 [Java](./codes/lc844.java)
 | 859 [Java](./codes/lc859.java)
 | 876 [Java](./codes/lc876.java)
+| 1004 [Java](./codes/lc1004.java)
