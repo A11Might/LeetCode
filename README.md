@@ -1,4 +1,4 @@
-# leetcode 109/1050
+# leetcode 113/1050
 
 A Record of My Problem Solving Journey.
 
@@ -8,6 +8,7 @@ A Record of My Problem Solving Journey.
 | 005 [Java](./codes/lc005.java)
 | 007 [Java](./codes/lc007.java)
 | 008 [Java](./codes/lc008.java)
+| 009 [Java](./codes/lc009.java)
 | 010 [Java](./codes/lc010.java)
 | 011 [Java](./codes/lc011.java)
 | 013 [Java](./codes/lc013.java)
@@ -38,7 +39,7 @@ A Record of My Problem Solving Journey.
 | 049 [Java](./codes/lc049.java)
 | 053 [Java](./codes/lc053.java)
 | 055 [Java](./codes/lc055.java)
-| 056 [Java](./codes/lc056.java)
+| 056 [Java](./codes/lc053.java)
 | 064 [Java](./codes/lc064.java)
 | 066 [Java](./codes/lc066.java)
 | 069 [Java](./codes/lc069.java)
@@ -77,8 +78,10 @@ A Record of My Problem Solving Journey.
 | 217 [Java](./codes/lc217.java)
 | 225 [Java](./codes/lc225.java)
 | 226 [Java](./codes/lc226.java)
+| 231 [Java](./codes/lc231.java)
 | 232 [Java](./codes/lc232.java)
 | 234 [Java](./codes/lc234.java)
+| 235 [Java](./codes/lc235.java)
 | 237 [Java](./codes/lc237.java)
 | 239 [Java](./codes/lc239.java)
 | 240 [Java](./codes/lc240.java)
@@ -86,6 +89,7 @@ A Record of My Problem Solving Journey.
 | 268 [Java](./codes/lc268.java)
 | 278 [Java](./codes/lc278.java)
 | 283 [Java](./codes/lc283.java)
+| 316 [Java](./codes/lc316.java)
 | 322 [Java](./codes/lc322.java)
 | 326 [Java](./codes/lc326.java)
 | 334 [Java](./codes/lc334.java)
