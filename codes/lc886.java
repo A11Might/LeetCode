@@ -12,7 +12,7 @@ import java.util.Set;
  * 当可以用这种方法将每个人分进两组时，返回true；否则返回false
  * 
  * https://www.bilibili.com/video/av54580334
- * 思路：图的染色，c，将图染成两种颜色，可以则返回true，不可以返回false
+ * 思路：图的染色，用dislikes[]数组建图，将图染成两种颜色，可以则返回true，不可以返回false
  */
 class Solution {
     public boolean possibleBipartition(int N, int[][] dislikes) {
