@@ -19,7 +19,7 @@ class Solution {
         }
 
         int lo = max, hi = sum;
-        // 二分查找，寻找满足条件的最小情况(将lo和hi之间分为<和>=两个区间) ????????
+        // 二分查找，寻找满足条件值最小的情况(将lo和hi之间分为<和>=两个区间) ????????
         while (lo < hi) {
             int mid = lo + ((hi - lo) >> 1);
             int pieces = split(nums, mid); // 当和的最大值为mid时，最少可以分pieces份
