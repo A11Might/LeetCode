@@ -89,6 +89,7 @@ A Record of My Problem Solving Journey.
 | 268 [Java](./codes/lc268.java)
 | 278 [Java](./codes/lc278.java)
 | 283 [Java](./codes/lc283.java)
+| 292 [Java](./codes/lc292.java)
 | 316 [Java](./codes/lc316.java)
 | 322 [Java](./codes/lc322.java)
 | 326 [Java](./codes/lc326.java)
