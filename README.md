@@ -1,4 +1,4 @@
-# leetcode 113/1050
+# leetcode 114/1050
 
 A Record of My Problem Solving Journey.
 
