@@ -7,7 +7,7 @@
  * 
  * https://www.bilibili.com/video/av48806706
  * 思路：使用二分查找
- *      将nums分为一组时和的最大值为hi，将nums分为nums.length组时和的最大值为lo
+ *      将nums分为一组时和的最大值的最大值为hi，将nums分为nums.length组时和的最大值的最小值为lo
  *      在lo到hi之间二分查找最小的可以分m组的mid
  */
 class Solution {
