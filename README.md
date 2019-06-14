@@ -1,4 +1,4 @@
-# leetcode 118/1073
+# leetcode 119/1073
 
 A Record of My Problem Solving Journey.
 
@@ -47,6 +47,7 @@ A Record of My Problem Solving Journey.
 | 070 [Java](./codes/lc070.java)
 | 073 [Java](./codes/lc073.java)
 | 075 [Java](./codes/lc075.java)
+| 078 [Java](./codes/lc078.java)
 | 088 [Java](./codes/lc088.java)
 | 094 [Java](./codes/lc094.java)
 | 098 [Java](./codes/lc098.java)
