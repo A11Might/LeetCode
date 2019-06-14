@@ -46,6 +46,7 @@ A Record of My Problem Solving Journey.
 | 069 [Java](./codes/lc069.java)
 | 070 [Java](./codes/lc070.java)
 | 073 [Java](./codes/lc073.java)
+| 075 [Java](./codes/lc075.java)
 | 088 [Java](./codes/lc088.java)
 | 094 [Java](./codes/lc094.java)
 | 098 [Java](./codes/lc098.java)
