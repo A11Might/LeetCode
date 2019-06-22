@@ -1,4 +1,4 @@
-# leetcode 130/1073
+# leetcode 131/1073
 
 A Record of My Problem Solving Journey.
 
@@ -95,6 +95,7 @@ A Record of My Problem Solving Journey.
 | 234 [Java](./codes/lc234.java)
 | 235 [Java](./codes/lc235.java)
 | 237 [Java](./codes/lc237.java)
+| 238 [Java](./codes/lc238.java)
 | 239 [Java](./codes/lc239.java)
 | 240 [Java](./codes/lc240.java)
 | 242 [Java](./codes/lc242.java)
