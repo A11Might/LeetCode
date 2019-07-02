@@ -11,6 +11,9 @@
  *                  状态转移方程：dp[i][j] = (s.charAt(i) == s.charAt(j) && dp[i + 1][j - 1])
  */
 class Solution {
+    /**
+     * Manacher算法
+     */
     public String longestPalindrome(String s) {
         if (s == null || s.length() < 2)
 			return s;
@@ -64,6 +67,9 @@ class Solution {
         return sb.toString();
 	}
 
+    /**
+     * 中心扩展法
+     */
     public String longestPalindrome2(String s) {
         int len = s.length();
         if (s == null || len < 2) {
@@ -96,6 +102,9 @@ class Solution {
         return right - left - 1; // 退出循环的条件为str.charAt(left) != str.charAt(right)，right - left + 1 -2去掉不构成回文子串的两个字符
     }
 
+    /**
+     * 动态规划
+     */
     public String longestPalindrome3(String s) {
         int len = s.length();
         if (s == null || len < 2) {
