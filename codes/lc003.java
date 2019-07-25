@@ -29,7 +29,10 @@ class Solution {
     public int lengthOfLongestSubstring3(String s) {
         int[] chrIndex = new int[128]; // 用一个整数数组作为直接访问表来替换map
         int res = 0;
-        for (int i = 0, j = 0; j < s.length(); ++j) {
+        // i位置通过重复元素位置更新
+        // j位置一直自加即可，因为在[i, j]中，当j位置为重复元素时，[i, j]中不可能有其他重复元素
+        // 当i位置通过重复元素位置更新后，新的[i, j]中不会有重复元素，j直接从当前位置继续即可
+        for (int i = 0, j = 0; j < s.length(); ++j) { 
             i = Math.max(chrIndex[s.charAt(j)], i); // 数组初始化为0，且前往后遍历，当出现重复元素时，chrIndex[s.charAt(j)]会变大，选出的最大值即为，修正后的起始位置
             res = Math.max(res, j - i + 1); // 实时更新无重复字符子串的最大长度
             chrIndex[s.charAt(j)] = j + 1; // 注册当前字符为j + 1，重置起始位置i时，直接取出使用即可
