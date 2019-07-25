@@ -1,4 +1,4 @@
-# leetcode 144/1073
+# leetcode 144/1126
 
 A Record of My Problem Solving Journey.
 
