@@ -30,9 +30,9 @@ class Solution {
         int[] chrIndex = new int[128]; // 用一个整数数组作为直接访问表来替换map
         int res = 0;
         for (int i = 0, j = 0; j < s.length(); ++j) {
-            i = Math.max(chrIndex[s.charAt(j)], i); // 数组初始化为0，选出的最大值即为，修正后的起始位置
-            res = Math.max(res, j - i + 1);
-            chrIndex[s.charAt(j)] = j + 1; // 注册当前字符为j + 1，重置起始位置i时，直接取出使用
+            i = Math.max(chrIndex[s.charAt(j)], i); // 数组初始化为0，且前往后遍历，当出现重复元素时，chrIndex[s.charAt(j)]会变大，选出的最大值即为，修正后的起始位置
+            res = Math.max(res, j - i + 1); // 实时更新无重复字符子串的最大长度
+            chrIndex[s.charAt(j)] = j + 1; // 注册当前字符为j + 1，重置起始位置i时，直接取出使用即可
         }
         return res;
     }
