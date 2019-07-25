@@ -4,7 +4,10 @@ import java.util.HashMap;
  * @lc app=leetcode.cn id=1 lang=java
  *
  * [1] 两数之和
+ *
+ * 题目：在数组中查找两个数使其和为目标值，返回它们的下标
  * 
+ * 思路：
  * 1、暴力，两层遍历
  * 2、用哈希表，省去一层遍历
  */
