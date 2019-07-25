@@ -4,8 +4,10 @@ import java.util.HashMap;
  * @lc app=leetcode.cn id=3 lang=java
  *
  * [3] 无重复字符的最长子串
+ *
+ * 题目：给定一个字符串，请你找出其中不含有重复字符的最长子串的长度
  * 
- * https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/solution/wu-zhong-fu-zi-fu-de-zui-chang-zi-chuan-by-leetcod/
+ * 思路：https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/solution/wu-zhong-fu-zi-fu-de-zui-chang-zi-chuan-by-leetcod/
  * 1、暴力算法
  * 2、滑动窗口，使用 HashSet 将字符存储在当前窗口[i, j)（最初 j = i）中。 然后我们向右侧滑动索引j，如果它不在 HashSet中，我们会继续滑动j
  *             直到 s[j] 已经存在于 HashSet 中，当我们找到重复的字符时，我们可以立即跳过该窗口
