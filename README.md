@@ -1,4 +1,4 @@
-# leetcode 148/1134
+# leetcode 150/1134
 
 A Record of My Problem Solving Journey.
 
@@ -59,6 +59,7 @@ A Record of My Problem Solving Journey.
 | 104 [Java](./codes/lc104.java)
 | 105 [Java](./codes/lc105.java)
 | 108 [Java](./codes/lc108.java)
+| 110 [Java](./codes/lc110.java)
 | 111 [Java](./codes/lc111.java)
 | 112 [Java](./codes/lc112.java)
 | 114 [Java](./codes/lc114.java)
@@ -113,6 +114,7 @@ A Record of My Problem Solving Journey.
 | 322 [Java](./codes/lc322.java)
 | 326 [Java](./codes/lc326.java)
 | 329 [Java](./codes/lc329.java)
+| 333 [Java](./codes/lc333.java)
 | 334 [Java](./codes/lc334.java)
 | 344 [Java](./codes/lc344.java)
 | 347 [Java](./codes/lc347.java)
