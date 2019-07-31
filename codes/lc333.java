@@ -38,8 +38,8 @@ class Solution {
         }
         // 第一步，把process当做黑盒
         // 讨论每种情况
-        ReturnData left = process(node.left);
-        ReturnData right = process(node.right);
+        ReturnData left = process(node.left); // 左子树的信息
+        ReturnData right = process(node.right); // 右子树的信息
         // 最大二叉搜索子树来自head的左子树中
         int case1 = left.size;
         // 最大二叉搜索子树来自head的右子树中
