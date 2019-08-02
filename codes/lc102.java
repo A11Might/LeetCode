@@ -1,5 +1,5 @@
-import java.util.Queue;
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -8,42 +8,51 @@ import java.util.List;
  *
  * [102] 二叉树的层次遍历
  * 
- * 使用last和nlast分别记录当前行的最后一个节点和下一行的最后一个节点
- * 判断目前在哪行和进行换行操作
+ * 题目：返回二叉树按层遍历的节点值(逐层的)
+ * 
+ * 思路：层次遍历，
+ *      使用变量记录每行的最后一个节点,当到达遍历到该行最后一个节点时，换行
  */
 /**
- * Definition for a binary tree node. public class TreeNode { int val; TreeNode
- * left; TreeNode right; TreeNode(int x) { val = x; } }
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
  */
 class Solution {
     public List<List<Integer>> levelOrder(TreeNode root) {
         if (root == null) {
-            return new ArrayList();
+            return new ArrayList<>();
         }
-        TreeNode last = root; // 记录当前行的最后一个节点
-        TreeNode nlast = null; // 记录下一行的最后一个节点
-        Queue<TreeNode> queue = new LinkedList<>();
-        List<List<Integer>> res = new ArrayList<>();
-        List<Integer> list = new ArrayList<>();
-        queue.add(root);
+        List<List<Integer>> res = new LinkedList<>();
+        List<Integer> list = new LinkedList<>();
+        Deque<TreeNode> queue = new LinkedList<>();
+        TreeNode cur = null; // 当前节点
+        TreeNode last = root; // 当前节点所在行的最右节点
+        TreeNode nLast = null; // 当前节点下一行的最右节点
+        queue.offer(root);
         while (!queue.isEmpty()) {
-            TreeNode cur = queue.poll();
+            cur = queue.poll();
             list.add(cur.val);
             if (cur.left != null) {
-                queue.add(cur.left);
-                nlast = cur.left;
-            }
+                queue.offer(cur.left);
+                nLast = cur.left; // 实时更新下一行最右节点
+            } 
             if (cur.right != null) {
-                queue.add(cur.right);
-                nlast = cur.right;
+                queue.offer(cur.right);
+                nLast = cur.right; // 实时更新下一行最右节点
             }
-            // 到达当前行的最后一个节点，更新last，记录下一行节点
+            // 当cur == last时，换行
             if (cur == last) {
-                last = nlast;
+                last = nLast;
                 res.add(list);
-                list = new ArrayList<>();
+                list = new LinkedList<>();
             }
         }
         return res;
     }
 }
+
