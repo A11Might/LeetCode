@@ -11,7 +11,8 @@ import java.util.List;
  * 题目：返回二叉树按层遍历的节点值(逐层的)
  * 
  * 思路：层次遍历，
- *      使用变量记录每行的最后一个节点,当到达遍历到该行最后一个节点时，换行
+ *      1、使用变量记录每行的最后一个节点,当到达遍历到该行最后一个节点时，换行
+ *      2、记录每行节点个数，当打印完该行元素后，换行(左神的方法没这个简单啊，妈蛋)
  */
 /**
  * Definition for a binary tree node.
@@ -23,7 +24,7 @@ import java.util.List;
  * }
  */
 class Solution {
-    public List<List<Integer>> levelOrder(TreeNode root) {
+    public List<List<Integer>> levelOrder1(TreeNode root) {
         if (root == null) {
             return new ArrayList<>();
         }
@@ -54,5 +55,33 @@ class Solution {
         }
         return res;
     }
-}
 
+    public List<List<Integer>> levelOrder2(TreeNode root) {
+        if (root == null) {
+            return new ArrayList<>();
+        }
+        List<List<Integer>> res = new LinkedList<>();
+        Deque<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+        while (!queue.isEmpty()) {
+            LinkedList<Integer> list = new LinkedList<>();
+            // number of elements in the current level
+            int nums = queue.size();
+            for (int i = 0; i < nums; i++) {
+                TreeNode cur = queue.poll();
+                // fulfill the current level
+                list.add(cur.val);
+                // add child nodes of the current level
+                // in the queue for the next level
+                if (cur.left != null) {
+                    queue.offer(cur.left);
+                } 
+                if (cur.right != null) {
+                    queue.offer(cur.right);
+                }
+            }
+            res.add(list);
+        }
+        return res;
+    }
+}
