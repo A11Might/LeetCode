@@ -49,7 +49,7 @@ class Solution {
     
     public List<Integer> preorder2(Node root) {
         if (root == null) {
-            return new ArrayList();
+            return new ArrayList<>();
         }
         List<Integer> res = new ArrayList<>();
         Stack<Node> stack = new Stack<>();
