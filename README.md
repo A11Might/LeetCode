@@ -1,4 +1,4 @@
-# leetcode 161/1134
+# leetcode 163/1138
 
  001 [Java](./codes/lc001.java)
 | 002 [Java](./codes/lc002.java)
@@ -58,6 +58,7 @@
 | 103 [Java](./codes/lc103.java)
 | 104 [Java](./codes/lc104.java)
 | 105 [Java](./codes/lc105.java)
+| 106 [Java](./codes/lc106.java)
 | 107 [Java](./codes/lc107.java)
 | 108 [Java](./codes/lc108.java)
 | 110 [Java](./codes/lc110.java)
@@ -157,6 +158,7 @@
 | 859 [Java](./codes/lc859.java)
 | 876 [Java](./codes/lc876.java)
 | 886 [Java](./codes/lc886.java)
+| 889 [Java](./codes/lc889.java)
 | 938 [Java](./codes/lc938.java)
 | 958 [Java](./codes/lc958.java)
 | 987 [Java](./codes/lc987.java)
