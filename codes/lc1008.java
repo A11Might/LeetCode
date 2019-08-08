@@ -8,7 +8,8 @@ import java.util.Deque;
  * 
  * 题目：二叉搜索树的先序遍历序列还原二叉树
  * 
- * 思路：1、递归
+ * 思路：https://leetcode-cn.com/problems/construct-binary-search-tree-from-preorder-traversal/solution/jian-kong-er-cha-shu-by-leetcode/
+ *      1、递归
  *      2、迭代
  *      3、二叉搜索树的中序遍历序列是升序的，排序先序遍历序列即可得到中序遍历序列
  *          使用105.从前序与中序遍历序列构造二叉树的方法即可
