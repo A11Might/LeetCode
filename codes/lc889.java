@@ -45,7 +45,8 @@ class Solution {
         }
         TreeNode node = new TreeNode(pre[preStart]);
         // 由于寻找左1需向后偏移一位，若当前[preStart, preEnd]只有一个元素，需特殊处理
-        // 即无法复用node节点创建当前面元素，需在之前直接创建返回，防止数组越界错误
+        // 需在使用pre[preStart + 1]之前直接创建返回，防止数组越界错误
+        // 这是和前序中序、中序后序的区别
         int nodeleftIndexInPostorder = postMap.get(pre[preStart + 1]); // 左1在postorder中的index
         int offset = nodeleftIndexInPostorder - postStart + 1; // 左子树节点个数
         node.left = process(postMap, pre, post, preStart + 1, preStart + offset, postStart, nodeleftIndexInPostorder);
