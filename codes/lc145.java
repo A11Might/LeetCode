@@ -78,6 +78,9 @@ class Solution {
         Deque<TreeNode> stack = new LinkedList<>();
         stack.push(root);
         TreeNode cur = null;
+        //用visited标记打印过的最后一个点，初始化为第一个节点，因为它不在判断内容里
+        // 若初始化为null，则会漏打节点，如[1,null,2,3]中，会漏掉3这个节点
+        // 当cur == 2时，cur.left != null & visited != cur.left但是visited == cur.right == null
         TreeNode visited = root;
         while (!stack.isEmpty()) {
             cur = stack.peek();
