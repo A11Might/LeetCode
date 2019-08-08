@@ -39,17 +39,19 @@ class Solution {
         Deque<String> stack = new ArrayDeque<>();
         for (String chr : chrs) {
             // "9,3,4,#,#,1,#,#,2,#,6,#,#"
-            // clean all unnecessary "#"
-            // and replace their father to #
             if (chr.equals("#")) {
+                // clean all unnecessary "#"
                 while (!stack.isEmpty() && stack.peek().equals("#")) {
                     stack.pop();
                     if (stack.isEmpty()) {
                         return false;
                     }
+                    // after pop their father
+                    // continue to judge the provious element
                     stack.pop();
                 }
             }
+            // replace their father to #
             stack.push(chr);
         }
         return stack.size() == 1 && stack.pop().equals("#");
