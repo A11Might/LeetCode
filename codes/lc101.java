@@ -5,12 +5,14 @@ import java.util.Queue;
  * @lc app=leetcode.cn id=101 lang=java
  *
  * [101] 对称二叉树
- * 
- * 迭代：类似于 BFS，每次提取两个结点并比较它们的值，将两个结点的左右子结点按相反的顺序插入队列中(将需要相等的节点放在一起)
  *
- * 递归：树的左子树与右子树镜像对称，那么这个树是对称的，两个树互为镜像：
- *          1. 它们的两个根结点具有相同的值。
- *          2. 每个树的右子树都与另一个树的左子树镜像对称(牛逼，还以为少了左子树与右子树对称能)
+ * 题目：判断给定二叉树是否是对称二叉树
+ *
+ * 思路：判断对称二叉树的左右子树是否是镜像二叉树即可
+ *      1、迭代，类似于 BFS，每次提取两个结点并比较它们的值，将两个结点的左右子结点按相反的顺序插入队列中(将需要相等的节点放在一起)
+ *      2、递归：树的左子树与右子树镜像对称，那么这个树是对称的，两个树互为镜像：
+ *          a、 它们的两个根结点具有相同的值。
+ *          b、 每个树的右子树都与另一个树的左子树镜像对称(牛逼，还以为少了左子树与右子树对称能)
  */
 /**
  * Definition for a binary tree node.
@@ -27,8 +29,8 @@ class Solution {
             return true;
         }
         Queue<TreeNode> queue = new LinkedList<>();
-        queue.add(root);
-        queue.add(root);
+        queue.add(root.left);
+        queue.add(root.right);
         while (!queue.isEmpty()) {
             TreeNode cur1 = queue.poll();
             TreeNode cur2 = queue.poll();
