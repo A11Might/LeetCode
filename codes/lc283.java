@@ -4,21 +4,19 @@
  * [283] 移动零
  * 
  * 1、暴力，遇到0则将后面元素全部前移一位
- * 2、双指针，前指针为元素为0的位置，后指针为元素不为0的位置，swap
+ * 2、类partition，将数组分为非0部分和0部分
  */
 class Solution {
     public void moveZeroes(int[] nums) {
-        for (int i = 0, j = 1; j < nums.length;) {
-            if (nums[i] == 0 && nums[j] != 0) {
-                swap(nums, i, j);
-            } else if (nums[i] == 0 && nums[j] == 0) {
-                j++;
-            } else if (nums[i] != 0 && nums[j] == 0) {
-                i++;
-                j++;
-            } else {
-                i += 2;
-                j += 2;
+        int k = -1; // 非0区间(-无穷, k]
+        for (int i = 0; i < nums.length; i++) {
+            // 当前元素为非0元素需要放置在非0区间
+            // k + 1为非0区间后第一个位置，i为当前非0元素位置，交换元素即可
+            if (nums[i] != 0) {
+                // 若k + 1 == i，则不需要交换位置
+                if (++k != i) { 
+                    swap(nums, k, i);
+                }
             }
         }
     }
