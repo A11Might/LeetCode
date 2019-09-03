@@ -3,8 +3,8 @@
  *
  * [26] 删除排序数组中的重复项
  * 
- * 双指针：慢快指针i和j，当nums[i] = nums[j]时，快指针j增加跳过重复项；
- *                     当nums[i] != nums[j]时，nums[i + 1] == nums[j]，快慢指针同时增加
+ * 双指针：使用两个指针i和j，当nums[i] = nums[j]时，指针j增加跳过重复项；
+ *                     当nums[i] != nums[j]时，nums[i + 1] == nums[j]，两指针同时增加
  */
 class Solution {
     public int removeDuplicates(int[] nums) {
