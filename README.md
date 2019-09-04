@@ -1,4 +1,4 @@
-# leetcode 170/1158
+# leetcode 172/1158
 
  001 [Java](./codes/lc001.java)
 | 002 [Java](./codes/lc002.java)
@@ -85,6 +85,7 @@
 | 152 [Java](./codes/lc152.java)
 | 155 [Java](./codes/lc155.java)
 | 160 [Java](./codes/lc160.java)
+| 167 [Java](./codes/lc167.java)
 | 169 [Java](./codes/lc169.java)
 | 189 [Java](./codes/lc189.java)
 | 190 [Java](./codes/lc190.java)
@@ -127,6 +128,7 @@
 | 333 [Java](./codes/lc333.java)
 | 334 [Java](./codes/lc334.java)
 | 344 [Java](./codes/lc344.java)
+| 345 [Java](./codes/lc345.java)
 | 347 [Java](./codes/lc347.java)
 | 350 [Java](./codes/lc350.java)
 | 384 [Java](./codes/lc384.java)
