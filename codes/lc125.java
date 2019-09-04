@@ -3,7 +3,7 @@
  *
  * [125] 验证回文串
  * 
- * 1、双指针跳过不是小写字母和数字的字符
+ * 1、指针碰撞，两个指针跳过不是小写字母和数字的字符
  * 2、使用while加速跳过(连续跳过多个非法字符) 快一倍
  */
 class Solution {
@@ -22,12 +22,11 @@ class Solution {
                 r--;
             }
             // 比较前后字符后不移动指针，会进入死循环
-            if (l < r) {
-                if (chrsS[l++] != chrsS[r--]) {
+            if (l < r && chrsS[l++] != chrsS[r--]) {
                     return false;
-                }
             }
         }
+        
         return true;
     }
 
