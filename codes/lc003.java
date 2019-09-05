@@ -1,44 +1,38 @@
-import java.util.HashMap;
+import java.util.Arrays;
 
 /*
  * @lc app=leetcode.cn id=3 lang=java
  *
  * [3] 无重复字符的最长子串
- *
+ * 
  * 题目：给定一个字符串，请你找出其中不含有重复字符的最长子串的长度
  * 
- * 思路：https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/solution/wu-zhong-fu-zi-fu-de-zui-chang-zi-chuan-by-leetcod/
- * 1、暴力算法
- * 2、滑动窗口，使用 HashSet 将字符存储在当前窗口[i, j)（最初 j = i）中。 然后我们向右侧滑动索引j，如果它不在 HashSet中，我们会继续滑动j
+ * 思路：滑动窗口，使用 HashSet 将字符存储在当前窗口[i, j)（最初 j = i）中。 然后我们向右侧滑动索引j，如果它不在 HashSet中，我们会继续滑动j
  *             直到 s[j] 已经存在于 HashSet 中，当我们找到重复的字符时，我们可以立即跳过该窗口
- *      1>使用HashMap注册
- *      2>使用asicII数组注册
  */
 class Solution {
-    public int lengthOfLongestSubstring2(String s) {
-        HashMap<Character, Integer> chrIndexMap = new HashMap<>(); // 注册已经遍历过的字符
+    public int lengthOfLongestSubstring(String s) {
+        if (s == null || s.length() == 0) {
+            return 0;
+        }
+        int[] chrIndex = new int[128];
+        Arrays.fill(chrIndex, -1);
+        int n = s.length();
+        int l = 0, r = -1;
         int res = 0;
-        for (int i = 0, j = 0; j < s.length(); ++j) { // 开一个[i, j]的窗口(i不会大于j)，计算最长子串
-            if (chrIndexMap.containsKey(s.charAt(j))) {
-                i = Math.max(chrIndexMap.get(s.charAt(j)) + 1, i); // 当前字符已经注册过，修正子串起始位置i，重新计算最长子串
+        while (r + 1 < n) {
+            r++; // 不断扩大窗口
+            if (chrIndex[s.charAt(r)] != -1) { // "abba"
+                // 更新窗口时，只更新了窗口的左右边界，更新后窗口外之前窗口的值未变化(即窗口外的值仍有注册)
+                // 所以当前元素在chrIndex中有出现时，需要判断想要更新的成为的左边界是否在窗口内，来决定是否更新窗口
+                //          a、在窗口外说明已过期，无须更新
+                //          b、在窗口内则任有效，更新左边界
+                l = Math.max(l, chrIndex[s.charAt(r)] + 1);
             }
-            res = Math.max(res, j - i + 1); // 实时更新无重复字符子串的最大长度
-            chrIndexMap.put(s.charAt(j), j); // 注册当前字符
+            res = Math.max(res, r - l + 1);
+            chrIndex[s.charAt(r)] = r;
         }
-        return res;
-    }
-
-    public int lengthOfLongestSubstring3(String s) {
-        int[] chrIndex = new int[128]; // 用一个整数数组作为直接访问表来替换map
-        int res = 0;
-        // i位置通过重复元素位置更新
-        // j位置一直自加即可，因为在[i, j]中，当j位置为重复元素时，[i, j]中不可能有其他重复元素
-        // 当i位置通过重复元素位置更新后，新的[i, j]中不会有重复元素，j直接从当前位置继续即可
-        for (int i = 0, j = 0; j < s.length(); ++j) { 
-            i = Math.max(chrIndex[s.charAt(j)], i); // 数组初始化为0，且前往后遍历，当出现重复元素时，chrIndex[s.charAt(j)]会变大，选出的最大值即为，修正后的起始位置
-            res = Math.max(res, j - i + 1); // 实时更新无重复字符子串的最大长度
-            chrIndex[s.charAt(j)] = j + 1; // 注册当前字符为j + 1，重置起始位置i时，直接取出使用即可
-        }
+        
         return res;
     }
 }
