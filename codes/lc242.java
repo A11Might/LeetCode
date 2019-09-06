@@ -5,7 +5,6 @@
  * 
  * 1、按asicII码排序后，比较两个字符串是否相等
  * 2、只包含小写字母，用数组注册一个字符串，再校验另一个字符串
- * 3、若包含Unicode字符，用哈希表注册
  */
 class Solution {
     public boolean isAnagram1(String s, String t) {
@@ -19,19 +18,16 @@ class Solution {
     }
 
     public boolean isAnagram2(String s, String t) {
-        int[] flag = new int[26];
-        char[] chrsS = s.toCharArray();
-        char[] chrsT = t.toCharArray();
-        for (char chr : chrsS) {
-            int index = chr - 'a';
-            flag[index]++;
+        int[] times = new int[26];
+        for (char chr : t.toCharArray()) {
+            times[chr - 'a']++;
         }
-        for (char chr : chrsT) {
-            int index = chr - 'a';
-            flag[index]--;
-        }
-        for (int times : flag) {
-            if (times != 0) {
+        for (char chr : s.toCharArray()) {
+            times[chr - 'a']--;
+        }        
+        
+        for (int time : times) {
+            if (time != 0) {
                 return false;
             }
         }
