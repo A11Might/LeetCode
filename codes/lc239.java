@@ -1,32 +1,44 @@
+import java.util.ArrayDeque;
 import java.util.Deque;
-import java.util.LinkedList;
 
 /*
  * @lc app=leetcode.cn id=239 lang=java
  *
  * [239] 滑动窗口最大值
  * 
- * 维护保存当前窗口最大值下标的一个双向队列
+ * 题目：给定数组nums和滑动窗口大小k，滑动窗口从最左侧移到到最右侧，每次移动一位，返回滑动窗口中的最大值
+ * 
+ * 思路：维护保存当前窗口最大值下标的一个双向队列
  */
 class Solution {
     public int[] maxSlidingWindow(int[] nums, int k) {
-        if (nums.length < 1) { // 实例[]
-            return nums;
+        if (nums.length == 0) { // 实例[]
+            return new int[] {};
         }
-        int[] res = new int[nums.length - k + 1];
-        Deque<Integer> deque = new LinkedList<>();
-        for (int i = 0; i < nums.length; ++i) {
-            while (!deque.isEmpty() && nums[deque.getLast()] < nums[i]) { // 保证从大到小，如果前面数小则弹出(窗口中进入队列的数值较大，则可忽略窗口中进入队列数值较小的)
-                deque.removeLast();
+        int n = nums.length;
+        int l = 0, r = -1;
+        Deque<Integer> deque = new ArrayDeque<>();
+        int[] res = new int[n - k + 1]; // 数组中一共可以形成arr.length - w + 1个窗口
+        int index = 0; // res中的索引
+        while (r + 1 < n) {
+            int cur = nums[++r];
+            // 当前元素大于等于窗口中其前面元素时，将前面元素删除
+            while (!deque.isEmpty() && nums[deque.getLast()] <= cur) {
+                deque.pollLast();
             }
-            deque.addLast(i); // 添加当前值对应的数组下标，用于判断数值是否过期
-            if (deque.getFirst() <= i - k) { // 窗口移动后删除出窗的数值
-                deque.removeFirst();
+            deque.addLast(r);
+            // 窗口的第一个元素失效，将其删除
+            // r - l + 1 <= k 即 l >= r - k + 1表示l在窗口内
+            if (r - k + 1 > deque.getFirst()) {
+                deque.pollFirst();
             }
-            if (i >= k - 1) { // 窗口长度为k时，再保存当前窗口中最大值
-                res[i - (k - 1)] = nums[deque.getFirst()];
+            // 形成窗口时开始记录窗口最大值
+            if (r >= k - 1) {
+                res[index++] = nums[deque.getFirst()];
             }
         }
+
         return res;
     }
 }
+
