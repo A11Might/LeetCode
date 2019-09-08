@@ -1,4 +1,4 @@
-# leetcode 178/1158
+# leetcode 180/1158
 
  001 [Java](./codes/lc001.java)
 | 002 [Java](./codes/lc002.java)
@@ -150,6 +150,7 @@
 | 437 [Java](./codes/lc437.java)
 | 438 [Java](./codes/lc438.java)
 | 448 [Java](./codes/lc448.java)
+| 451 [Java](./codes/lc451.java)
 | 460 [Java](./codes/lc460.java)
 | 461 [Java](./codes/lc461.java)
 | 494 [Java](./codes/lc494.java)
@@ -163,6 +164,7 @@
 | 590 [Java](./codes/lc590.java)
 | 617 [Java](./codes/lc617.java)
 | 641 [Java](./codes/lc641.java)
+| 642 [Java](./codes/lc642.java)
 | 647 [Java](./codes/lc647.java)
 | 703 [Java](./codes/lc703.java)
 | 739 [Java](./codes/lc739.java)
@@ -177,4 +179,4 @@
 | 1004 [Java](./codes/lc1004.java)
 | 1008 [Java](./codes/lc1008.java)
 | 1028 [Java](./codes/lc1028.java)
-| 1046 [Java](./codes/lc1046.java)
+| 1146 [Java](./codes/lc1146.java)
