@@ -1,4 +1,4 @@
-# leetcode 180/1158
+# leetcode 181/1158
 
  001 [Java](./codes/lc001.java)
 | 002 [Java](./codes/lc002.java)
@@ -13,6 +13,7 @@
 | 014 [Java](./codes/lc014.java)
 | 015 [Java](./codes/lc015.java)
 | 017 [Java](./codes/lc017.java)
+| 018 [Java](./codes/lc018.java)
 | 019 [Java](./codes/lc019.java)
 | 020 [Java](./codes/lc020.java)
 | 021 [Java](./codes/lc021.java)
