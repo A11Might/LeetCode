@@ -6,8 +6,9 @@ import java.util.List;
  *
  * [15] 三数之和
  * 
- * 排序后固定第一个元素，寻找另两个元素。
- * 两数之和的O(n)的方法不试用，会重复，且逆序。实例[0, 0 , 0]和[0, 0, 0 ,0]
+ * 题目：在给定包含n个整数的数组中找到所有不重复的和为0的三元组
+ * 
+ * 思路：排序后固定第一个元素，双索引寻找另两个元素
  */
 class Solution {
     public List<List<Integer>> threeSum(int[] nums) {
