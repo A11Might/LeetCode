@@ -1,47 +1,45 @@
+import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Map.Entry;
 
 /*
  * @lc app=leetcode.cn id=217 lang=java
  *
  * [217] 存在重复元素
  * 
- * 1、暴力遍历，O(n^2)
- * 2、排序后，比较前后元素，O(nlongn)
- * 3、HashMap<Integer, Integer> 注册数组中元素及其出现次数 O(n) 空间复杂度O(n)
+ * 题目：判断给定数组中是否有重复元素
+ * 
+ * 思路：1、查找表map，统计元素出现次数
+ *      2、排序数组
  */
 class Solution {
-    public boolean containsDuplicate3(int[] nums) {
-        if (nums == null || nums.length < 2) {
+    public boolean containsDuplicate1(int[] nums) {
+        if (nums == null || nums.length == 0) {
             return false;
         }
-        HashMap<Integer, Integer> numTimesMap = new HashMap<>();
+        HashMap<Integer, Integer> record = new HashMap<>(); // <元素的值，出现次数>
         for (int num : nums) {
-            if (!numTimesMap.containsKey(num)) {
-                numTimesMap.put(num, 1);
-            } else {
-                numTimesMap.put(num, numTimesMap.get(num) + 1);
-            }
-        } 
-        for (Entry<Integer, Integer> entry : numTimesMap.entrySet()) {
-            if (entry.getValue() > 1) {
+            record.put(num, record.getOrDefault(num, 0) + 1);
+            // 出现重复元素
+            if (record.get(num) == 2) {
                 return true;
             }
         }
+
         return false;
     }
 
-
-    public boolean containsDuplicate2(int[] nums) {
-        if (nums == null || nums.length < 2) {
+    public boolean containsDuplicate(int[] nums) {
+        if (nums == null || nums.length == 0) {
             return false;
         }
-        java.util.Arrays.sort(nums);
-        for (int i = 1; i < nums.length; ++i) {
-            if (nums[i] == nums[i - 1]) {
+        Arrays.sort(nums);
+        for (int i = 0; i < nums.length; i++) {
+            // 出现重复元素
+            if (i > 0 && nums[i] == nums[i - 1]) {
                 return true;
             }
         }
+
         return false;
     }
 }
