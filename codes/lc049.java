@@ -8,50 +8,52 @@ import java.util.List;
  *
  * [49] 字母异位词分组
  * 
- * 1、当且仅当它们的排序字符串相等时，两个字符串是字母异位词
- * 2、当且仅当它们的字符计数（每个字符的出现次数）相同时，两个字符串是字母异位词
+ * 题目：将给定字符串数组中字母异位词组合在一起
+ * 
+ * 思路：查找表map,
+ *       1、use sort string as key
+ *       2、use char's frequence as key(所有26位字母的词频组成的字符串)
  */
 class Solution {
     public List<List<String>> groupAnagrams1(String[] strs) {
-        if (strs.length == 0) {
-            return new ArrayList<>();
-        }
-        HashMap<String, List<String>> map = new HashMap<>();
-        for (String s : strs) {
-            char[] chrsOfS = s.toCharArray();
-            Arrays.sort(chrsOfS);
-            String key = String.valueOf(chrsOfS);
+        HashMap<String, ArrayList<String>> map = new HashMap<>();
+        for (String str : strs) {
+            char[] chrs = str.toCharArray();
+            Arrays.sort(chrs);
+            String key = String.valueOf(chrs);
             if (!map.containsKey(key)) {
                 map.put(key, new ArrayList<>());
             }
-            map.get(key).add(s);
+            map.get(key).add(str);
         }
+
         return new ArrayList<>(map.values());
     }
 
-    public List<List<String>> groupAnagrams2(String[] strs) {
-        if (strs.length == 0) {
-            return new ArrayList<>();
-        }
-        HashMap<String, List<String>> map = new HashMap<>();
-        int[] times = new int[26];
-        for (String s : strs) {
-            Arrays.fill(times, 0); // 每次用完数组需要重置一下
-            for (char chr : s.toCharArray()) {
-                times[chr - 'a']++;
-            }
-            StringBuilder sb = new StringBuilder("");
-            for (int i = 0; i < times.length; ++i) {
-                sb.append("#");
-                sb.append(times[i]);
-            }
-            String key = sb.toString();
+    public List<List<String>> groupAnagrams(String[] strs) {
+        HashMap<String, ArrayList<String>> map = new HashMap<>();
+        for (String str : strs) {
+            String key = getKey(str);
             if (!map.containsKey(key)) {
                 map.put(key, new ArrayList<>());
             }
-            map.get(key).add(s);
+            map.get(key).add(str);
         }
+
         return new ArrayList<>(map.values());
+    }
+
+    private String getKey(String str) {
+        int[] freq = new int[26];
+        for (char chr : str.toCharArray()) {
+            freq[chr - 'a']++;
+        }
+        StringBuilder sb = new StringBuilder();
+        for (int num : freq) {
+            sb.append(num + "#");
+        }
+
+        return sb.toString();
     }
 }
 
