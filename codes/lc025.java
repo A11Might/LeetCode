@@ -2,8 +2,12 @@
  * @lc app=leetcode.cn id=25 lang=java
  *
  * [25] k个一组翻转链表
+ *
+ * 题目：k个一组翻转给定链表的节点
+ *
+ * 难度：hard
  * 
- * 递归：f(n) = f(n - k) + 反转k个节点
+ * 思路：递归，f(n) = f(n - k) + 反转k个节点
  */
 /**
  * Definition for singly-linked list.
@@ -18,9 +22,11 @@ class Solution {
         if (head == null) {
             return null;
         }
-        ListNode tail = head;
+        ListNode tail = head; // tail当前链表第k个元素
         int count = 1;
         // 从头数k个节点
+        // tail.next != null，保证数出k个节点
+        // (tail != null，虽然可以tail = tail.next，但可能让tail == null)
         while (tail.next != null && count < k) {
             tail = tail.next;
             count++;

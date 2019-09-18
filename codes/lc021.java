@@ -2,8 +2,12 @@
  * @lc app=leetcode.cn id=21 lang=java
  *
  * [21] 合并两个有序链表
- * 
- * 同归并排序的merge
+ *
+ * 题目：将两个给定的有序链表合并为一个有序链表
+ *
+ * 难度：easy
+ *
+ * 思路：同归并排序的merge
  */
 /**
  * Definition for singly-linked list.
