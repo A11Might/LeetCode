@@ -2,8 +2,12 @@
  * @lc app=leetcode.cn id=234 lang=java
  *
  * [234] 回文链表
- * 
- * 反转后半部分链表，再同时从头节点尾节点遍历，比较值是否相等，全部相等即为回文链表
+ *
+ * 题目：判断给定链表是否是回文链表
+ *
+ * 难度：easy
+ *
+ * 思路：双索引找到中间节点，反转后半部分链表后，依次从头节点和尾节点遍历，比较值是否相等，全部相等即为回文链表
  */
 /**
  * Definition for singly-linked list.
@@ -32,6 +36,8 @@ class Solution {
             pre = cur;
             cur = succ;
         }
+        // cur为后半部分链表的当前节点
+        // head为前半部分链表的当前节点
         cur = pre;
         // 判断是否为回文链表
         while (cur != head && cur != null) {

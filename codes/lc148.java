@@ -23,6 +23,7 @@ class Solution {
         if (node == null || node.next == null) {
             return node;
         }
+        // 将链表一分为二，分别递归排序
         ListNode fast = node, slow = node, slowPre = null;
         while (fast != null && fast.next != null) {
             fast = fast.next.next;
@@ -32,29 +33,32 @@ class Solution {
         slowPre.next = null;
         ListNode left = mergeSort(node);
         ListNode right = mergeSort(slow);
+        // 将排序后的两链表合并
         return merge(left, right);
     }
 
     private ListNode merge(ListNode left, ListNode right) {
+        // 使用dummyhead，储存排序后的链表
         ListNode dummyHead = new ListNode(0);
-        ListNode end = dummyHead;
+        ListNode tail = dummyHead;
         while (left != null && right != null) {
             if (left.val <= right.val) {
-                end.next = left;
-                end = left;
+                tail.next = left;
+                tail = left;
                 left = left.next;
             } else {
-                end.next = right;
-                end = right;
+                tail.next = right;
+                tail = right;
                 right = right.next;
             }
         }
         // 剩下部分本就是有序链表，只需要与已排好序的链表连接一下即可
         if (left == null) {
-            end.next = right;
+            tail.next = right;
         } else {
-            end.next = left;
+            tail.next = left;
         }
+
         return dummyHead.next;
     }
 
