@@ -1,4 +1,4 @@
-# leetcode 192/1170
+# leetcode 198/1176
 
  001 [Java](./codes/lc001.java)
 | 002 [Java](./codes/lc002.java)
@@ -47,6 +47,7 @@
 | 066 [Java](./codes/lc066.java)
 | 069 [Java](./codes/lc069.java)
 | 070 [Java](./codes/lc070.java)
+| 071 [Java](./codes/lc071.java)
 | 073 [Java](./codes/lc073.java)
 | 075 [Java](./codes/lc075.java)
 | 076 [Java](./codes/lc076.java)
