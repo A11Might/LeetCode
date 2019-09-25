@@ -9,8 +9,7 @@
  *
  * 难度：medium
  *
- * 思路：实现把所有结果遍历出来，
- *      递归遍历列表中的数据，是整数就放入List，不是则再递归遍历
+ * 思路：dfs遍历列表中的数据，是整数就放入List，不是则再dfs遍历该nestedlist
  */
 
 import java.util.ArrayList;
@@ -36,12 +35,11 @@ import java.util.List;
  */
 public class NestedIterator implements Iterator<Integer> {
 
-    public List<Integer> list;
-    public int index;
+    public List<Integer> list = new ArrayList<>();
+    public int index = 0;
 
     public NestedIterator(List<NestedInteger> nestedList) {
-        list = dfs(nestedList);
-        index = 0;
+        dfs(nestedList);
     }
 
     @Override
@@ -54,18 +52,14 @@ public class NestedIterator implements Iterator<Integer> {
         return index < list.size();
     }
 
-    // 将嵌套的整型列表中的所有整数遍历出来，存入列表
-    private List<Integer> dfs(List<NestedInteger> nestedList) {
-        ArrayList<Integer> list = new ArrayList<>();
+    private void dfs(List<NestedInteger> nestedList) {
         for (NestedInteger temp : nestedList) {
             if (temp.isInteger()) {
                 list.add(temp.getInteger());
             } else {
-                list.addAll(dfs(temp.getList()));
+                dfs(temp.getList());
             }
         }
-
-        return list;
     }
 }
 
