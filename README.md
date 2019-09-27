@@ -1,4 +1,4 @@
-# leetcode 200/1176
+# leetcode 200/1184
 
  001 [Java](./codes/lc001.java)
 | 002 [Java](./codes/lc002.java)

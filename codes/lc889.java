@@ -40,10 +40,10 @@ class Solution {
         if (preStart > preEnd || postStart > postEnd) {
             return null;
         }
-        if (preStart == preEnd || postStart == postEnd) {  // <-----
-            return new TreeNode(pre[preStart]);
-        }
         TreeNode node = new TreeNode(pre[preStart]);
+        if (preStart == preEnd || postStart == postEnd) { // <-----
+            return node;
+        }
         // 由于寻找左1需向后偏移一位，若当前[preStart, preEnd]只有一个元素，需特殊处理
         // 需在使用pre[preStart + 1]之前直接创建返回，防止数组越界错误
         // 这是和前序中序、中序后序的区别
