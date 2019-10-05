@@ -1,5 +1,6 @@
-import java.util.LinkedList;
-import java.util.List;
+import javafx.util.Pair;
+
+import java.util.*;
 
 /**
  * @author qhhu
@@ -14,57 +15,130 @@ import java.util.List;
  *
  * 难度：medium
  *
- * 思路：对问题建模，整个问题转化为一个图论问题，
- *       
+ * 思路：https://leetcode-cn.com/problems/word-ladder/solution/dan-ci-jie-long-by-leetcode/
+ *      对问题建模，整个问题转化为一个图论问题，
+ *      将问题抽象在一个无向无权图中，每个单词作为节点，差距只有一个字母的两个单词之间连一条边
+ *      问题变成找到从起点到终点的最短路径，如果存在的话
+ *      1、广度优先搜索方法
+ *      2、双向广度优先搜索
  */
-public class Solution {
+class Solution {
+    public int ladderLength1(String beginWord, String endWord, List<String> wordList) {
+        // 每个单词一样长
+        int n = beginWord.length();
+        // 对wordlist进行预处理，方便快速查找
+        HashMap<String, ArrayList<String>> allComboDict = new HashMap<>();
+        for (String word : wordList) {
+            for (int i = 0; i < n; i++) {
+                String temp = word.substring(0, i) + "*" + word.substring(i + 1, n);
+                ArrayList<String> list = allComboDict.getOrDefault(temp, new ArrayList<>());
+                list.add(word);
+                allComboDict.put(temp, list);
+            }
+        }
 
-    public int ladderLength(String beginWord, String endWord, List<String> wordList) {
-
-        int end = wordList.indexOf(endWord);
-        if(end == -1)
-            return 0;
-
-        if(!wordList.contains(beginWord))
-            wordList.add(beginWord);
-        int begin = wordList.indexOf(beginWord);
-
-        int n = wordList.size();
-        boolean[][] g = new boolean[n][n];
-        for(int i = 0 ; i < n ; i ++)
-            for(int j = 0 ; j < i ; j ++)
-                g[j][i] = g[i][j] = similar(wordList.get(i), wordList.get(j));
-
-        // bfs
-        LinkedList<Integer> q = new LinkedList<>();
-        int[] step = new int[n];
-
-        q.addLast(begin);
-        step[begin] = 1;
-        while(!q.isEmpty()){
-
-            int cur = q.removeFirst();
-
-            for(int i = 0 ; i < n ; i ++)
-                if(step[i] == 0 && g[cur][i]){
-                    if(i == end)
-                        return step[cur] + 1;
-                    step[i] = step[cur] + 1;
-                    q.addLast(i);
+        // 图的广度优先遍历
+        Deque<Pair<String, Integer>> queue = new ArrayDeque<>();
+        queue.offer(new Pair(beginWord, 1));
+        HashSet<String> visited = new HashSet<>(); // set用于注册遍历过得单词
+        while (!queue.isEmpty()) {
+            Pair<String, Integer> pair = queue.poll();
+            String curWord = pair.getKey();
+            int step = pair.getValue();
+            // 遍历所有相差一个字符的单词
+            for (int i = 0; i < n; i++) {
+                String temp = curWord.substring(0, i) + "*" + curWord.substring(i + 1, n);
+                for (String word : allComboDict.getOrDefault(temp, new ArrayList<>())) {
+                    // 遇到endWord，找到最短路径
+                    if (word.equals(endWord)) {
+                        return step + 1;
+                    }
+                    // 否则继续搜索
+                    if (!visited.contains(word)) {
+                        queue.offer(new Pair(word, step + 1));
+                        visited.add(word);
+                    }
                 }
+            }
         }
 
         return 0;
     }
 
-    private boolean similar(String word1, String word2){
-        int diff = 0;
-        for(int i = 0 ; i < word1.length() ; i ++)
-            if(word1.charAt(i) != word2.charAt(i)){
-                diff ++;
-                if(diff > 1)
-                    return false;
+
+    public int ladderLength2(String beginWord, String endWord, List<String> wordList) {
+        if (!wordList.contains(endWord)) {
+            return 0;
+        }
+        // 对wordlist进行预处理，方便快速查找
+        HashMap<String, ArrayList<String>> allComboDict = new HashMap<>();
+        for (String word : wordList) {
+            for (int i = 0; i < word.length(); i++) {
+                String temp = word.substring(0, i) + "*" + word.substring(i + 1, word.length());
+                ArrayList<String> list = allComboDict.getOrDefault(temp, new ArrayList<String>());
+                list.add(word);
+                allComboDict.put(temp, list);
             }
-        return true;
+        }
+
+        // beginQueue从begin to end 搜索使用的队列
+        // endQueue从end to begin 搜索使用的队列
+        // cur word -> cur step
+        Deque<Pair<String, Integer>> beginQueue = new ArrayDeque<>();
+        Deque<Pair<String, Integer>> endQueue = new ArrayDeque<>();
+        beginQueue.offer(new Pair<String, Integer>(beginWord, 1));
+        endQueue.offer(new Pair<String, Integer>(endWord, 1));
+        // beginVisited从begin to end 搜索使用的注册map
+        // endVisited从end to begin 搜索使用的注册map
+        // cur word -> cur step
+        HashMap<String, Integer> beginVisited = new HashMap<>();
+        HashMap<String, Integer> endVisited = new HashMap<>();
+        beginVisited.put(beginWord, 1);
+        endVisited.put(endWord, 1);
+        while (!beginQueue.isEmpty() && !endQueue.isEmpty()) {
+            // begin to end
+            int ans = visitedWordNode(allComboDict, beginQueue, beginVisited, endVisited);
+            if (ans > -1) {
+                return ans;
+            }
+            // end to begin
+            ans = visitedWordNode(allComboDict, endQueue, endVisited, beginVisited);
+            if (ans > -1) {
+                return ans;
+            }
+        }
+
+        return 0;
+    }
+
+    /**
+     * 从当前方向广度优先搜索(begin to end or end to begin)
+     * @param allComboDict 将wordlist预处理成hashmap方便查找，相差一个字母的所有单词
+     * @param queue 当前搜索方向的队列(begin to end is beginQueue or end to begin is endQueue)
+     * @param visited 当前搜索方向的注册map
+     * @param otherVisited 另一个方向的注册map
+     * @return 如果找到最短路径返回最短路径长度，否则返回-1
+     */
+    private int visitedWordNode(HashMap<String, ArrayList<String>> allComboDict, Deque<Pair<String, Integer>> queue, HashMap<String, Integer> visited, HashMap<String, Integer> otherVisited) {
+        Pair<String, Integer> pair = queue.poll();
+        String curWord = pair.getKey();
+        int step = pair.getValue();
+        // 遍历所有相差一个字符的单词
+        for (int i = 0; i < curWord.length(); i++) {
+            String temp = curWord.substring(0, i) + "*" + curWord.substring(i + 1, curWord.length());
+            for (String word : allComboDict.getOrDefault(temp, new ArrayList<>())) {
+                // 双向搜索的相交，找到最短路径
+                if (otherVisited.containsKey(word)) {
+                    return step + otherVisited.get(word);
+                }
+                // 否则继续搜索
+                if (!visited.containsKey(word)) {
+                    queue.offer(new Pair<>(word, step + 1));
+                    visited.put(word, step + 1);
+                }
+            }
+        }
+
+        return -1;
     }
 }
