@@ -1,4 +1,4 @@
-# leetcode 200/1184
+# leetcode 202/1184
 
  001 [Java](./codes/lc001.java)
 | 002 [Java](./codes/lc002.java)
@@ -81,6 +81,8 @@
 | 121 [Java](./codes/lc121.java)
 | 122 [Java](./codes/lc122.java)
 | 125 [Java](./codes/lc125.java)
+| 126 [Java](./codes/lc126.java)
+| 127 [Java](./codes/lc127.java)
 | 136 [Java](./codes/lc136.java)
 | 139 [Java](./codes/lc139.java)
 | 141 [Java](./codes/lc141.java)

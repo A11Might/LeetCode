@@ -23,6 +23,61 @@ import java.util.*;
  *      2、双向广度优先搜索
  */
 class Solution {
+    // 与lc126方法统一
+    public int ladderLength(String beginWord, String endWord, List<String> wordList) {
+        if (!wordList.contains(endWord)) {
+            return 0;
+        }
+        HashSet<String> dict = new HashSet<String>(wordList);
+        HashMap<String, Integer> distance = new HashMap<String, Integer>();
+        Deque<String> queue = new ArrayDeque<String>();
+        queue.offer(beginWord);
+        distance.put(beginWord, 1);
+        while (!queue.isEmpty()) {
+            int curLevelSize = queue.size();
+            // 按层，遍历每一个节点(每次遍历一层中所有节点)
+            for (int i = 0; i < curLevelSize; i++) {
+                String cur = queue.poll();
+                int curDistance = distance.get(cur);
+                // 当前节点所连接下一层节点
+                ArrayList<String> neighbors = getNeighbors(dict, cur);
+                for (String neighbor : neighbors) {
+                    if (!distance.containsKey(neighbor)) { // distance可以当visited使用
+                        // 找到最短路径
+                        if (neighbor.equals(endWord)) {
+                            return curDistance + 1;
+                        }
+                        queue.offer(neighbor);
+                        distance.put(neighbor, curDistance + 1);
+                    }
+                }
+            }
+        }
+
+        return 0;
+    }
+
+    // Find all next level nodes
+    private ArrayList<String> getNeighbors(HashSet<String> dict, String word) {
+        ArrayList<String> ans = new ArrayList<String>();
+        int n = word.length();
+        char[] chrs = word.toCharArray();
+        // 每次替换一个位置为另一个字母，来寻找所有相邻的节点
+        for (int i = 0; i < n; i++) {
+            for (char chr = 'a'; chr <= 'z'; chr++) {
+                if (chrs[i] == chr) continue;
+                char oldChr = chrs[i];
+                chrs[i] = chr;
+                if (dict.contains(String.valueOf(chrs))) {
+                    ans.add(String.valueOf(chrs));
+                }
+                chrs[i] = oldChr;
+            }
+        }
+
+        return ans;
+    }
+
     public int ladderLength1(String beginWord, String endWord, List<String> wordList) {
         // 每个单词一样长
         int n = beginWord.length();
@@ -67,6 +122,7 @@ class Solution {
 
 
     public int ladderLength2(String beginWord, String endWord, List<String> wordList) {
+        // 需特殊处理wordlist无endword的情况(若不处理，当wordlist中无endword时也会返回最短路径，是错误的)
         if (!wordList.contains(endWord)) {
             return 0;
         }
