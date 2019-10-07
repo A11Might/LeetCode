@@ -23,8 +23,8 @@ import java.util.*;
  *      2、双向广度优先搜索
  */
 class Solution {
-    // 与lc126方法统一
-    public int ladderLength(String beginWord, String endWord, List<String> wordList) {
+    // 与lc126方法统一的方法1
+    public int ladderLengthI(String beginWord, String endWord, List<String> wordList) {
         if (!wordList.contains(endWord)) {
             return 0;
         }
@@ -78,6 +78,79 @@ class Solution {
         return ans;
     }
 
+
+    // 与lc126方法统一的方法2
+    public int ladderLengthII(String beginWord, String endWord, List<String> wordList) {
+        if (!wordList.contains(endWord)) {
+            return 0;
+        }
+        HashSet<String> dict = new HashSet<String>(wordList);
+        HashMap<String, Integer> beginDistance = new HashMap<String, Integer>();
+        HashMap<String, Integer> endDistance = new HashMap<String, Integer>();
+        Deque<String> beginQueue = new ArrayDeque<String>();
+        Deque<String> endQueue = new ArrayDeque<String>();
+        beginQueue.offer(beginWord);
+        endQueue.offer(endWord);
+        beginDistance.put(beginWord, 1);
+        endDistance.put(endWord, 1);
+        while (!beginQueue.isEmpty() && !endQueue.isEmpty()) {
+            // begin to end
+            int ans = visitedWordNode(dict, beginQueue, beginDistance, endDistance);
+            if (ans != -1) {
+                return ans;
+            }
+            // end to begin
+            ans = visitedWordNode(dict, endQueue, endDistance, beginDistance);
+            if (ans != -1) {
+                return ans;
+            }
+        }
+
+        return 0;
+    }
+
+    private int visitedWordNode(HashSet<String> dict, Deque<String> queue, HashMap<String, Integer> distance, HashMap<String, Integer> otherDistance) {
+        int levelSize = queue.size();
+        for (int i = 0; i < levelSize; i++) {
+            String cur = queue.poll();
+            int curDistance = distance.get(cur);
+            ArrayList<String> neighbors = getNeighbors(dict, cur);
+            for (String neighbor : neighbors) {
+                if (otherDistance.containsKey(neighbor)) {
+                    return curDistance + otherDistance.get(neighbor);
+                }
+                if (!distance.containsKey(neighbor)) {
+                    queue.offer(neighbor);
+                    distance.put(neighbor, curDistance + 1);
+                }
+            }
+        }
+
+        return -1;
+    }
+
+//    private ArrayList<String> getNeighbors(HashSet<String> dict, String word) {
+//        int n = word.length();
+//        char[] chrs = word.toCharArray();
+//        ArrayList<String> ans = new ArrayList<String>();
+//        for (int i = 0; i < n; i++) {
+//            for (char chr = 'a'; chr < 'z'; chr++) {
+//                if (chrs[i] == chr) continue;
+//                char oldChr = chrs[i];
+//                chrs[i] = chr;
+//                if (dict.contains(String.valueOf(chrs))) {
+//                    ans.add(String.valueOf(chrs));
+//                }
+//                chrs[i] = oldChr;
+//            }
+//        }
+//
+//        return ans;
+//    }
+
+
+
+    // leetcode官方解方法1
     public int ladderLength1(String beginWord, String endWord, List<String> wordList) {
         // 每个单词一样长
         int n = beginWord.length();
@@ -120,7 +193,7 @@ class Solution {
         return 0;
     }
 
-
+    // leetcode官方解方法2
     public int ladderLength2(String beginWord, String endWord, List<String> wordList) {
         // 需特殊处理wordlist无endword的情况(若不处理，当wordlist中无endword时也会返回最短路径，是错误的)
         if (!wordList.contains(endWord)) {
