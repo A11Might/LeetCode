@@ -35,7 +35,7 @@ class Solution {
         distance.put(beginWord, 1);
         while (!queue.isEmpty()) {
             int curLevelSize = queue.size();
-            // 按层，遍历每一个节点(每次遍历一层中所有节点)
+            // 遍历当前层的每一个节点(类似二叉树的按层打印)
             for (int i = 0; i < curLevelSize; i++) {
                 String cur = queue.poll();
                 int curDistance = distance.get(cur);

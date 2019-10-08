@@ -7,16 +7,23 @@ import java.util.Queue;
  * [100] 相同的树
  * 
  * 题目：判断两个二叉树是否相同
+ *
+ * 难度：easy
  * 
  * 思路：1、递归，递归判断每个节点是否相同
  *      2、迭代，bfs判断每个节点是否相同
  */
 /**
- * Definition for a binary tree node. public class TreeNode { int val; TreeNode
- * left; TreeNode right; TreeNode(int x) { val = x; } }
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
  */
 class Solution {
-    public boolean isSameTree1(TreeNode p, TreeNode q) {
+    public boolean isSameTree(TreeNode p, TreeNode q) {
         // p == null & q == null
         if (p == null && q == null) {
             return true;
@@ -33,7 +40,7 @@ class Solution {
         return isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
     }
 
-    public boolean isSameTree(TreeNode p, TreeNode q) {
+    public boolean isSameTree2(TreeNode p, TreeNode q) {
         if (p == null && q == null) {
             return true;
         }

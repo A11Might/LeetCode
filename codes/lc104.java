@@ -3,7 +3,9 @@
  *
  * [104] 二叉树的最大深度
  * 
- * 题目：求二叉树的最大深度
+ * 题目：求给定二叉树的最大深度
+ *
+ * 难度：easy
  * 
  * 思路：树型dp
  *      情况：a、最大深度来自左子树
@@ -21,21 +23,13 @@
  */
 class Solution {
     public int maxDepth(TreeNode root) {
-        return process(root);
-    }
-
-    private int process(TreeNode node) {
         // 第三步，定义递归基
-        if (node == null) {
+        if (root == null) {
             return 0;
         }
         // 第一步，把process当做黑盒
         // 讨论每种情况
-        int left = process(node.left); // 左子树的信息
-        int right = process(node.right); // 右子树的信息
         // 第二步将黑盒实现
-        int maxD = Math.max(left, right) + 1;
-        return maxD;
+        return Math.max(maxDepth(root.left), maxDepth(root.right)) + 1;
     }
 }
-

@@ -28,7 +28,7 @@ class Solution {
         HashMap<String, ArrayList<String>> allNeighbors = new HashMap<String, ArrayList<String>>(); // Neighbors for every word
         HashMap<String, Integer> distance = new HashMap<String, Integer>(); // Distance of every node from the start node
         bfs(beginWord, endWord, dict, allNeighbors, distance);
-        dfs(beginWord, endWord, dict, allNeighbors, distance, new ArrayList<String>(), res);
+        dfs(beginWord, endWord, allNeighbors, distance, new ArrayList<String>(), res);
 
         return res;
     }
@@ -41,7 +41,7 @@ class Solution {
         while (!queue.isEmpty()) {
             int curLevelSize = queue.size(); // 当前层所含节点数
             boolean findEndWord = false; // 是否找到最短路径
-            // 按层，遍历每一个节点(每次遍历一层中所有节点)
+            // 遍历当前层的每一个节点(类似二叉树的按层打印)
             for (int i = 0; i < curLevelSize; i++) {
                 String cur = queue.poll();
                 int curDistance = distance.get(cur);
@@ -61,6 +61,7 @@ class Solution {
                 }
             }
 
+            // 找到最短路径并遍历完最短路径所在的最后一层即可返回(再往下遍历不可能是最短路径)
             if (findEndWord) {
                 break;
             }
@@ -68,7 +69,7 @@ class Solution {
     }
 
     // DFS: output all paths with the shortest distance
-    private void dfs(String cur, String endWord, HashSet<String> dict, HashMap<String, ArrayList<String>> allNeighbors, HashMap<String, Integer> distance, ArrayList<String> solution, ArrayList<List<String>> res) {
+    private void dfs(String cur, String endWord, HashMap<String, ArrayList<String>> allNeighbors, HashMap<String, Integer> distance, ArrayList<String> solution, ArrayList<List<String>> res) {
         solution.add(cur);
         if (cur.equals(endWord)) {
             res.add(new ArrayList<String>(solution));
@@ -76,8 +77,12 @@ class Solution {
             // 由于bfs找到最短路径，遍历完最短路径那一层就停了，所以那一层没有neighbors，使用getOrDefault防止空指针
             for (String neighbor : allNeighbors.getOrDefault(cur, new ArrayList<String>())) {
                 // 一步一步进行dfs
+                // 防止neighbor是当前节点的上一层节点(确保neighbor是当前节点的下一层节点)
+                // in dfs , thereason for if (distance.get(next) == distance.get(cur) + 1) is
+                // just in case that the next node is the next level of current node，
+                // otherwise it can be one of the parent nodes of current node，or it is not the shortest node .
                 if (distance.get(cur) + 1 == distance.get(neighbor)) {
-                    dfs(neighbor, endWord, dict, allNeighbors, distance, solution, res);
+                    dfs(neighbor, endWord, allNeighbors, distance, solution, res);
                 }
             }
         }
