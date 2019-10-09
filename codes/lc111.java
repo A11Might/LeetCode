@@ -34,13 +34,16 @@ class Solution {
         //        |
         //        4
         // 最短路径为2，不是1
+        // case 1
         if (root.left == null && root.right == null) {
             return 1;
         }
         int res = Integer.MAX_VALUE;
+        // case 2
         if (root.left != null) {
             res = Math.min(res, 1 + minDepth(root.left));
         }
+        // case 3
         if (root.right != null) {
             res = Math.min(res, 1 + minDepth(root.right));
         }

@@ -10,7 +10,8 @@ import java.util.Queue;
  *
  * 难度：easy
  * 
- * 思路：1、递归，递归判断每个节点是否相同
+ * 思路：同101对称二叉树
+ *      1、递归，递归判断每个节点是否相同
  *      2、迭代，bfs判断每个节点是否相同
  */
 /**
@@ -44,53 +45,28 @@ class Solution {
         if (p == null && q == null) {
             return true;
         }
-        if (!check(p, q)) {
-            return false;
-        }
-        Queue<TreeNode> queueP = new LinkedList<>();
-        Queue<TreeNode> queueQ = new LinkedList<>();
-        queueP.offer(p);
-        queueQ.offer(q);
-        while (!queueP.isEmpty()) {
-            p = queueP.poll();
-            q = queueQ.poll();
-            if (!check(p, q)) { // 当前节点相同(可能都为null)
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(p);
+        queue.add(q);
+        while (!queue.isEmpty()) {
+            TreeNode cur1 = queue.poll();
+            TreeNode cur2 = queue.poll();
+            // 判断相同位置节点是否相等
+            if (cur1 == null && cur2 == null) {
+                continue;
+            }
+            if (cur1 == null || cur2 == null) {
                 return false;
             }
-            if (p != null) { // 当p为null时，q也为null，跳过为空的情况(节点为空时无法check)
-                // 当p、q节点的左子节点相同，加入队列中
-                // 若不判断，则可能出现队列中加入空的情况(出现空指针错误)
-                if (!check(p.left, q.left)) {
-                    return false;
-                }
-                if (p.left != null) {
-                    queueP.offer(p.left);
-                    queueQ.offer(q.left);
-                }
-                // 当p、q节点的右子节点相同，加入队列中
-                if (!check(p.right, q.right)) {
-                    return false;
-                }
-                if (p.right != null) {
-                    queueP.offer(p.right);
-                    queueQ.offer(q.right);
-                }
+            if (cur1.val != cur2.val) {
+                return false;
             }
+            // 将相同位置的节点，放在相邻的位置
+            queue.add(cur1.left);
+            queue.add(cur2.left);
+            queue.add(cur1.right);
+            queue.add(cur2.right);
         }
-        return true;
-    }
-
-    // 判断p和q节点是否相同
-    public boolean check(TreeNode p, TreeNode q) {
-        // p and q are null
-        if (p == null && q == null)
-            return true;
-        // one of p and q is null
-        if (q == null || p == null)
-            return false;
-        // none of p and q is null
-        if (p.val != q.val)
-            return false;
         return true;
     }
 }
