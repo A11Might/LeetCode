@@ -30,21 +30,22 @@ import java.util.*;
  */
 class Solution {
     public List<String> binaryTreePaths1(TreeNode root) {
-        LinkedList<String> paths = new LinkedList();
+        List<String> paths = new ArrayList<>();
         dfs(root, "", paths);
         return paths;
     }
 
-    private void dfs(TreeNode root, String path, LinkedList<String> paths) {
-        if (root != null) {
-            path += Integer.toString(root.val); // string基础类型变量一样，参数传递的是拷贝份
-            if ((root.left == null) && (root.right == null)) // 当前节点是叶子节点
-                paths.add(path); // 把路径加入到答案中
-            else {
-                path += "->"; // 当前节点不是叶子节点，继续递归遍历
-                dfs(root.left, path, paths);
-                dfs(root.right, path, paths);
-            }
+    private void dfs(TreeNode root, String path, List<String> paths) {
+        if (root == null) {
+            return;
+        }
+        path += Integer.toString(root.val); // string基础类型变量一样，参数传递的是拷贝份
+        if ((root.left == null) && (root.right == null)) // 当前节点是叶子节点
+            paths.add(path); // 把路径加入到答案中
+        else {
+            path += "->"; // 当前节点不是叶子节点，继续递归遍历
+            dfs(root.left, path, paths);
+            dfs(root.right, path, paths);
         }
     }
 
