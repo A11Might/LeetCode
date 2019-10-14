@@ -2,8 +2,12 @@
  * @lc app=leetcode.cn id=108 lang=java
  *
  * [108] 将有序数组转换为二叉搜索树
- * 
- * 分而治之：f(n) = f(n / 2) + f(1) + f(n / 2)
+ *
+ * 题目：将有序数组转化为二叉搜素树
+ *
+ * 难度：easy
+ *
+ * 思路：分治，f(n) = f(n / 2) + f(1) + f(n / 2)
  */
 /**
  * Definition for a binary tree node.
@@ -16,20 +20,19 @@
  */
 class Solution {
     public TreeNode sortedArrayToBST(int[] nums) {
-        if (nums == null || nums.length < 1) {
-            return null;
-        }
-        return process(nums, 0, nums.length - 1);
+        return buildTree(nums, 0, nums.length - 1);
     }
 
-    private TreeNode process(int[] nums, int l, int r) {
-        if (l > r) {
+    private TreeNode buildTree(int[] nums, int start, int end) {
+        if (start > end) {
             return null;
         }
-        int mid = l + ((r - l) >> 1);
+        // 左右等分建立左右子树，中间节点作为子树根节点，递归该过程
+        int mid = start + ((end - start) >> 1);
         TreeNode root = new TreeNode(nums[mid]);
-        root.left = process(nums, l, mid - 1);
-        root.right = process(nums, mid + 1, r);
+        root.left = buildTree(nums, start, mid - 1);
+        root.right = buildTree(nums, mid + 1, end);
+
         return root;
     }
 }

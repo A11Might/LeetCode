@@ -176,6 +176,7 @@
 | 445 [Java](./codes/lc445.java)
 | 447 [Java](./codes/lc447.java)
 | 448 [Java](./codes/lc448.java)
+| 450 [Java](./codes/lc450.java)
 | 451 [Java](./codes/lc451.java)
 | 454 [Java](./codes/lc454.java)
 | 460 [Java](./codes/lc460.java)

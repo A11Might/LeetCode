@@ -7,9 +7,10 @@ import java.util.Deque;
  * [230] 二叉搜索树中第K小的元素
  * 
  * 题目：查找二叉搜索树的第k个小的元素
+ *
+ * 难度：medium
  * 
  * 思路：二叉搜索树的中序遍历是升序，中序遍历二叉树找到第k个元素即可
- *      (剑指offer上的方法看不懂，难过)
  *      1、递归
  *      2、迭代
  */
@@ -23,26 +24,30 @@ import java.util.Deque;
  * }
  */
 class Solution {
-    public TreeNode res = null;
-    public int count = 0;
-    public int kthSmallest(TreeNode root, int k) {
-        dfs(root, k);
-        return res.val;
+    public int kthSmallest1(TreeNode root, int k) {
+        // 递归中的k为同一个k
+        int[] K = {k};
+
+        return dfs(root, K).val;
     }
 
-    private void dfs(TreeNode node, int k) {
-        // shut down the unnecessary recursion
-        // when count bigger than k
-        // the recursion is unnecessray
-        if (node == null || count > k) {
-            return;
+    private TreeNode dfs(TreeNode root, int[] K) {
+        if (root == null) {
+            return null;
         }
-        dfs(node.left, k);
-        count++;
-        if (count == k) {
-            res = node;
+        TreeNode ans = dfs(root.left, K);
+        // 需要将ans = dfs(root.right, K)也括起来
+        // 防止k[0] == 1返回至TreeNode ans = dfs(root.left, K)后，再将ans置为null
+        if (ans == null) {
+            if (K[0] == 1) {
+                return root;
+            }
+            // 每遍历一个节点，都消耗一个k
+            K[0]--;
+            ans = dfs(root.right, K);
         }
-        dfs(node.right, k);
+
+        return ans;
     }
 
     public int kthSmallest2(TreeNode root, int k) {
