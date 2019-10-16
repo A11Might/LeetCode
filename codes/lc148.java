@@ -2,9 +2,13 @@
  * @lc app=leetcode.cn id=148 lang=java
  *
  * [148] 排序链表
- * 
- * 1、链表的归并排序：递归排序三部曲：1，快慢指针找中点；2，递归调用mergeSort，3，合并两个链表
- * 2、bottom-to-up：热评三https://leetcode-cn.com/problems/sort-list/comments/
+ *
+ * 题目：在O(n * logn)的时间复杂度和空间复杂度下，对链表进行排序
+ *
+ * 难度：medium
+ *
+ * 思路：1、链表的归并排序：递归排序三部曲：1，快慢指针找中点；2，递归调用mergeSort，3，合并两个链表
+ *       2、bottom-to-up：热评三https://leetcode-cn.com/problems/sort-list/comments/
  */
 /**
  * Definition for singly-linked list.
@@ -72,16 +76,16 @@ class Solution {
             ++length;
             p = p->next;
         }
-        
+
         for (int size = 1; size < length; size <<= 1) {
             auto cur = dummyHead.next;
             auto tail = &dummyHead;
-            
+
             while (cur) {
                 auto left = cur;
                 auto right = cut(left, size); // left->@->@ right->@->@->@...
                 cur = cut(right, size); // left->@->@ right->@->@  cur->@->...
-                
+
                 tail->next = merge(left, right);
                 while (tail->next) {
                     tail = tail->next;
@@ -90,20 +94,20 @@ class Solution {
         }
         return dummyHead.next;
     }
-    
+
     ListNode* cut(ListNode* head, int n) {
         auto p = head;
         while (--n && p) {
             p = p->next;
         }
-        
+
         if (!p) return nullptr;
-        
+
         auto next = p->next;
         p->next = nullptr;
         return next;
     }
-    
+
     ListNode* merge(ListNode* l1, ListNode* l2) {
         ListNode dummyHead(0);
         auto p = &dummyHead;
@@ -111,7 +115,7 @@ class Solution {
             if (l1->val < l2->val) {
                 p->next = l1;
                 p = l1;
-                l1 = l1->next;       
+                l1 = l1->next;
             } else {
                 p->next = l2;
                 p = l2;
