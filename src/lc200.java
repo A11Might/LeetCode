@@ -2,36 +2,42 @@
  * @lc app=leetcode.cn id=200 lang=java
  *
  * [200] 岛屿的个数
+ *
+ * 题目: 给定一个由 '1'（陆地）和 '0'（水）组成的的二维网格，计算岛屿的数量
+ *
+ * 难度: medium
  * 
- * 使用感染函数，每遇到一个岛就把岛全部感染为2，用于区别岛与岛
+ * 思路: floodfill
  */
 class Solution {
     public int numIslands(char[][] grid) {
-        if (grid.length < 1 || grid == null) { // 实例 [],grid[0].length数组越界
+        if (grid.length == 0 || grid == null) { // 实例 [], grid[0].length数组越界
             return 0;
         }
-        int res = 0;
-        int row = grid.length;
-        int column = grid[0].length;
-        for (int i = 0; i < row; ++i) {
-            for (int j = 0; j < column; ++j) {
-                if (grid[i][j] == '1') {
-                    res++;
-                    infection(grid, i, j);
+        int rows = grid.length, cols = grid[0].length;
+        boolean[][] visited = new boolean[rows][cols];
+        int ans = 0;
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                if (grid[i][j] == '1' && !visited[i][j]) {
+                    ans++;
+                    dfs(grid, visited, i, j);
                 }
             }
         }
-        return res;
+
+        return ans;
     }
 
-    private void infection(char[][] grid, int a, int b) {
-        if (a >= 0 && a < grid.length && b >= 0 && b < grid[0].length && grid[a][b] == '1') { // 在矩阵中且为同一个岛则感染
-            grid[a][b] = '2'; // 感染
-            infection(grid, a - 1, b); // 向上感染
-            infection(grid, a + 1, b); // 向下感染
-            infection(grid, a, b - 1); // 向左感染
-            infection(grid, a, b + 1); // 向右感染
+    // 从grid[row][col]位置, 进行floodfill
+    // 保证(row, col)合法, 且grid[row][col]是没有被访问过的陆地
+    private void dfs(char[][] grid, boolean[][] visited, int row, int col) {
+        if (0 <= row && row < grid.length && 0 <= col && col < grid[0].length && grid[row][col] == '1' && !visited[row][col]) {
+            visited[row][col] = true;
+            dfs(grid, visited, row + 1, col);
+            dfs(grid, visited, row - 1, col);
+            dfs(grid, visited, row, col + 1);
+            dfs(grid, visited, row, col - 1);
         }
     }
 }
-
