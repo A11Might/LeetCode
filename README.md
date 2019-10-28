@@ -89,6 +89,7 @@
 | 127 [Java](src/lc127.java)
 | 129 [Java](src/lc129.java)
 | 131 [Java](src/lc131.java)
+| 130 [Java](src/lc130.java)
 | 136 [Java](src/lc136.java)
 | 139 [Java](src/lc139.java)
 | 141 [Java](src/lc141.java)
