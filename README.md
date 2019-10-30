@@ -1,4 +1,4 @@
-# leetcode 218/1230
+# leetcode 219/1230
 
  001 [Java](src/lc001.java)
 | 002 [Java](src/lc002.java)
@@ -39,6 +39,7 @@
 | 048 [Java](src/lc048.java)
 | 049 [Java](src/lc049.java)
 | 051 [Java](src/lc051.java)
+| 052 [Java](src/lc052.java)
 | 053 [Java](src/lc053.java)
 | 055 [Java](src/lc055.java)
 | 056 [Java](src/lc053.java)
