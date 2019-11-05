@@ -2,7 +2,12 @@
  * @lc app=leetcode.cn id=64 lang=java
  *
  * [64] 最小路径和
- * 状态转移方程：f(i, j) = grid[i][j] + Math.min(f(i + 1, col), f(i, col + 1))
+ *
+ * 题目: 在给定的包含非负整数的m * n的网格中, 找到一条从左上角到右下角的路径, 使得路径的数字总和最小
+ *
+ * 难度: medium
+ *
+ * 思路: 状态转移方程：f(i, j) = grid[i][j] + Math.min(f(i + 1, col), f(i, col + 1))
  */
 class Solution {
     // 动态规划
@@ -28,29 +33,29 @@ class Solution {
         return dp[0][0];
     }
 
-    // 回溯
+    // 回溯(超时)
     public int minPathSum2(int[][] grid) {
         if (grid.length < 1 || grid[0].length < 1) {
             return 0;
         }
-        return process(grid, 0, 0);
+        return dfs(grid, 0, 0);
     }
 
-    private int process(int[][] matrix, int row, int col) {
+    private int dfs(int[][] matrix, int row, int col) {
         // (matrix.length - 1,matrix[0].length - 1)时最短路径为其上的值
         if (row == matrix.length - 1 && col == matrix[0].length - 1) {
             return matrix[row][col];
         }
         // 当到达最底层只能向右走，最短路径为其上的值与(a,b + 1)到终点的最短路径的和
         if (row == matrix.length - 1) {
-            return matrix[row][col] + process(matrix, row, col + 1);
+            return matrix[row][col] + dfs(matrix, row, col + 1);
         }
         // 当到达最右侧只能向下走，最短路径为其上的值与(a + 1,b)到终点的最短路径的和
         if (col == matrix[0].length - 1) {
-            return matrix[row][col] + process(matrix, row + 1, col);
+            return matrix[row][col] + dfs(matrix, row + 1, col);
         }
         // 一般情况为，下一步向右和向下到达终点所需路径的最小值
-        return matrix[row][col] + Math.min(process(matrix, row + 1, col), process(matrix, row, col +1));
+        return matrix[row][col] + Math.min(dfs(matrix, row + 1, col), dfs(matrix, row, col +1));
     }
 }
 

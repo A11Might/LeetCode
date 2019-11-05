@@ -2,7 +2,12 @@
  * @lc app=leetcode.cn id=70 lang=java
  *
  * [70] 爬楼梯
- * 状态转移方程为f(n) = f(n - 1) + f(n - 2)
+ *
+ * 题目: n阶楼梯, 每次可以爬1或2个台阶, 有多少种方法可以爬完
+ *
+ * 难度: easy
+ *
+ * 思路: 状态转移方程为f(n) = f(n - 1) + f(n - 2)
  */
 class Solution {
 
@@ -26,7 +31,7 @@ class Solution {
         return dp[n];
     }
 
-    // 回溯
+    // 递归
     public int climbStairs2(int n) {
         return process(n);
     }
