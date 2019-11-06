@@ -1,6 +1,7 @@
 ## 索引
 
 - [数组](#数组)
+- [链表](#链表)
 - [递归和回溯](#递归和回溯)
 
 ### 数组
@@ -52,6 +53,36 @@
 - [219. contains duplicate II](../src/lc219.java)
 - [217. contains duplicate](../src/lc217.java)
 - [220. contains duplicate III](../src/lc220.java)
+
+### 链表
+
+#### 穿针引线
+
+- [206. reverse linked list](../src/lc206.java)
+- [92. reverse linked list II](../src/lc092.java)
+- [83. remove duplicates from sorted list](../src/lc083.java)
+- [86. partition list](../src/lc086.java)
+- [328. odd even linked list](../src/lc328.java)
+- [2. add two numbers](../src/lc002.java)
+- [445. add two numbers II](../src/lc445.java)
+
+#### 虚拟头节点
+
+- [203. remove linked list elements](../src/lc203.java)
+- [82. remove duplicates from sorted list II](../src/lc082.java)
+- [21. merge two sorted lists](../src/lc021.java)
+- [24. swap nodes in pairs](../src/lc024.java)
+- [25. reverse nodes in k-group](../src/lc025.java)
+- [147. insertion sort list](../src/lc147.java)
+- [148. sort list](../src/lc148.java)
+- [237. delete node in a linked list](../src/lc237.java)
+
+#### 双指针
+
+- [19. remove nth node from end of list](../src/lc019.java)
+- [61. rotate list](../src/lc061.java)
+- [143. reorder list](../src/lc143.java)
+- [234. palindrome linked list](../src/lc234.java)
 
 ### 递归和回溯
 

@@ -20,14 +20,16 @@ import java.util.Deque;
 class Solution {
     public int numSquares(int n) {
         int[] dp = new int[n + 1];
-        // dp[0] = 0;
-        for (int i = 1; i <= n; i++) {
-            int minVal = Integer.MAX_VALUE;
-            for (int j = 1; j * j <= i; ++j) {
-                minVal = Math.min(minVal, dp[i - (j * j)]);
+        dp[0] = 0;
+        for (int i = 2; i <= n; i++) {
+            int min = Integer.MAX_VALUE;
+            for (int j = 1; j * j <= i; j++) {
+                // f(i) = f(j * j) + f(i - j * j)
+                min = Math.min(min, 1 + dp[i - (j * j)]);
             }
-            dp[i] = minVal + 1; // 加上j * j这个完全平方数
+            dp[i] = min;
         }
+
         return dp[n];
     }
 
