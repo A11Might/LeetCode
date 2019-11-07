@@ -2,6 +2,7 @@
 
 - [数组](#数组)
 - [链表](#链表)
+- [栈和队列](#栈和队列)
 - [递归和回溯](#递归和回溯)
 
 ### 数组
@@ -83,6 +84,38 @@
 - [61. rotate list](../src/lc061.java)
 - [143. reorder list](../src/lc143.java)
 - [234. palindrome linked list](../src/lc234.java)
+
+### 栈和队列
+
+#### 栈
+
+- [20. valid parentheses](../src/lc020.java)
+- [150. evaluate reverse polish notation](../src/lc150.java)
+- [71. simplify path](../src/lc071.java)
+
+#### 栈和递归
+
+- [144. binary tree preorder traversal](../src/lc144.java)
+- [94. binary tree inorder traversal](../src/lc094.java)
+- [145. binary tree postorder traversal](../src/lc145.java)
+- [341. flatten nestedlist lterator](../src/lc341.java)
+
+#### 队列-树的遍历
+
+- [102. binary tree level order traversal](../src/lc102.java)
+- [107. binary tree zigzag level order traversal II](../src/lc107.java)
+- [103. binary tree zigzag level order traversal](../src/lc103.java)
+- [199. binary tree right side view](../src/lc199.java)
+
+#### 队列-无权图的最短路径
+
+- [279. perfect squeres](../src/lc279.java)
+- [127. word ladder](../src/lc127.java)
+- [126. word ladder II](../src/lc126.java)
+
+#### 队列-优先队列
+- [347. top k frequent elements](../src/lc234.java)
+- [23. merge k sorted lists](../src/lc234.java)
 
 ### 递归和回溯
 
