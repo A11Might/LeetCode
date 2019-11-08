@@ -3,6 +3,7 @@
 - [数组](#数组)
 - [链表](#链表)
 - [栈和队列](#栈和队列)
+- [二叉树与递归](#二叉树与递归)
 - [递归和回溯](#递归和回溯)
 
 ### 数组
@@ -114,8 +115,35 @@
 - [126. word ladder II](../src/lc126.java)
 
 #### 队列-优先队列
-- [347. top k frequent elements](../src/lc234.java)
-- [23. merge k sorted lists](../src/lc234.java)
+- [347. top k frequent elements](../src/lc347.java)
+- [23. merge k sorted lists](../src/lc023.java)
+
+### 二叉树与递归
+
+#### 二叉树
+
+- [104. maximum depth of binary tree](../src/lc104.java)
+- [111. minimum depth of binary tree](../src/lc111.java)
+- [226. invert binary tree](../src/lc226.java)
+- [100. same tree](../src/lc100.java)
+- [101. symmetiric tree](../src/lc101.java)
+- [222. count complete tree nodes](../src/lc222.java)
+- [110. balanced binary tree](../src/lc110.java)
+- [112. path sum](../src/lc112.java)
+- [404. sum of left leaves](../src/lc404.java)
+- [257. binary tree paths](../src/lc257.java)
+- [113 path sum II](../src/lc113.java)
+- [129. sum root to leaf numbers](../src/lc129.java)
+- [437. path sum II](../src/lc437.java)
+
+#### 二叉搜索树
+
+- [235. lowest common ancestor of a bniary search tree](../src/lc235.java)
+- [98. validate binary search tree](../src/lc098.java)
+- [450. delete node in a bst](../src/lc450.java)
+- [108. convert sorted array to binary search tree](../src/lc108.java)
+- [230. kth smallest elemet in a bst](../src/lc230.java)
+- [236. lowest comment ansector of a binary tree](../src/lc236.java)
 
 ### 递归和回溯
 
