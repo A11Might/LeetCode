@@ -5,6 +5,8 @@
 - [栈和队列](#栈和队列)
 - [二叉树与递归](#二叉树与递归)
 - [递归和回溯](#递归和回溯)
+- [动态规划](#动态规划)
+- [贪心算法](#贪心算法)
 
 ### 数组
 
@@ -180,3 +182,33 @@
 - [200. number of islands](../src/lc200.java)
 - [130. surrounded regions](../src/lc130.java)
 - [417. pacific atlantic water flow](../src/lc417.java)
+
+### 动态规划
+
+- [70. climbing stairs](../src/lc070.java)
+- [120. triangle](../src/lc120.java)
+- [64. minimum path sum](../src/lc064.java)
+- [343. integer break](../src/lc343.java)
+- [279. perfect squares](../src/lc279.java)
+- [91. decode ways](../src/lc091.java)
+- [62. unique paths](../src/lc062.java)
+- [63. unique paths II](../src/lc063.java)
+- [198. hose robber](../src/lc198.java)
+- [213. house robber II](../src/lc213.java)
+- [337. house robber III](../src/lc337.java)
+- [309. best time to buy and sell stock with cooldown](../src/lc309.java)
+- [416. partition equal subset sum](../src/lc416.java)
+- [322. con change](../src/lc322.java)
+- [377. combination sum IV](../src/lc377.java)
+- [474. ones and zeroes](../src/lc474.java)
+- [139. word break](../src/lc139.java)
+- [494. target sum](../src/lc494.java)
+- [300. longest increasing subsequence](../src/lc300.java)
+- [376. wiggle subsequence](../src/lc376.java)
+
+
+### 贪心算法
+
+- [455. assign cookies](../src/lc455.java)
+- [392. is subsquence](../src/lc392.java)
+- [435. non-overlapping intervals](../src/lc435.java)
