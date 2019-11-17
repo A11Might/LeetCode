@@ -2,25 +2,27 @@
  * @lc app=leetcode.cn id=121 lang=java
  *
  * [121] 买卖股票的最佳时机
+ *
+ * 题目: 给定数组中第i个元素是一支股票的第i天的价格, 最多允许完成一笔交易, 返回能够获得最大利润
+ *
+ * 难度: easy
  * 
- * 前i天的最大收益 = max{前i-1天的最大收益，第i天的价格-前i-1天中的最小价格}
+ * 思路: 动态规划, 前i天的最大收益 = max(前i-1天的最大收益，第i天的价格-前i-1天中的最小价格)
  */
 class Solution {
     public int maxProfit(int[] prices) {
-        // min为今天之前买入的最小值
-        // 计算今天之前最小值买入，今天卖出的获利，也即今天卖出的最大获利
-        // max为比较每天的最大获利，取取得最大值
-        if (prices == null || prices.length <= 1) {
+        if (prices.length <= 1) {
             return 0;
         }
-        int min = prices[0], max = 0;
-        for (int i = 1; i < prices.length; ++i) { 
-            // 前i天的最大收益
-            max = Math.max(max, prices[i] - min);
-            // 第i + 1天之前的最小价格
-            min = Math.min(min, prices[i]);
+        int ans = 0; // 第i天的最大收益
+        int minPrices = Integer.MAX_VALUE; // 第i天前的最小价格
+        for (int i = 0; i < prices.length; i++) {
+            // 第i天的最大收益 = max(第i-1天的最大收益，第i天的价格-前i-1天中的最小价格)
+            ans = Math.max(ans, prices[i] - minPrices);
+            minPrices = Math.min(minPrices, prices[i]); // 更新当前最小价格
         }
-        return max;
+
+        return ans;
     }
 }
 

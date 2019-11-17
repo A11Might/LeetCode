@@ -20,7 +20,7 @@ class Solution {
         int len = prices.length;
         int[] hold = new int[len]; // 第i天持有股票, 获得的最大利润
         int[] cash = new int[len]; // 第i天不持有股票, 获得的最大利润
-        cash[0] = 0;
+        cash[0] = 0; // 第1天之前不可能持有股票, 所以第i天获得得最大利润为0
         hold[0] = -prices[0];
         cash[1] = Math.max(cash[0], hold[0] + prices[1]); // 今天不持有股票 = max(昨天不持有股票并且今天不交易, 昨天持有股票并且今天卖出股票)
         hold[1] = Math.max(cash[0] - prices[1], hold[0]); // 今天持有股票 = max(昨天持有股票并且今天不交易, 昨天不持有股票并且今天买入股票)
