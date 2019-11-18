@@ -18,18 +18,19 @@ class Solution {
         }
 
         int len = prices.length;
-        int[] hold = new int[len]; // 第i天持有股票, 获得的最大利润
-        int[] cash = new int[len]; // 第i天不持有股票, 获得的最大利润
-        cash[0] = 0; // 第1天之前不可能持有股票, 所以第i天获得得最大利润为0
-        hold[0] = -prices[0];
-        cash[1] = Math.max(cash[0], hold[0] + prices[1]); // 今天不持有股票 = max(昨天不持有股票并且今天不交易, 昨天持有股票并且今天卖出股票)
-        hold[1] = Math.max(cash[0] - prices[1], hold[0]); // 今天持有股票 = max(昨天持有股票并且今天不交易, 昨天不持有股票并且今天买入股票)
+        // dp[i][0], 第i天不持有股票
+        // dp[i][1], 第i天持有股票
+        int[][] dp = new int[len][2];
+        dp[0][0] = 0; // 第1天之前不可能持有股票, 所以第i天获得得最大利润为0
+        dp[0][1] = -prices[0]; // 第1天持有股票可以获得的最大利润就是在第一天买下股票, 即-prices[0]
+        dp[1][0] = Math.max(dp[0][0], dp[0][1] + prices[1]); // 今天不持有股票 = max(昨天不持有股票并且今天不交易, 昨天持有股票并且今天卖出股票)
+        dp[1][1] = Math.max(dp[0][0] - prices[1], dp[0][1]); // 今天持有股票 = max(昨天持有股票并且今天不交易, 昨天不持有股票并且今天买入股票)
 
         for (int i = 2; i < len; i++) {
-            cash[i] = Math.max(cash[i - 1], hold[i - 1] + prices[i]);
-            hold[i] = Math.max(hold[i - 1], cash[i - 2] - prices[i]); // 卖出股票后，你无法在第二天买入股票
+            dp[i][0] = Math.max(dp[i - 1][0], dp[i - 1][1] + prices[i]);
+            dp[i][1] = Math.max(dp[i - 1][1], dp[i - 2][0] - prices[i]); // 卖出股票后，你无法在第二天买入股票
         }
 
-        return cash[len - 1];
+        return dp[len - 1][0];
     }
 }

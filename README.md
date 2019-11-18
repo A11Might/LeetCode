@@ -1,4 +1,4 @@
-# leetcode 225/1230
+# leetcode 229/1230
 
 #### [leetcode高频面试题](navigate/liuyubobobo.md)
 

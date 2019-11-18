@@ -12,20 +12,27 @@
  */
 class Solution {
     public int maxProfit(int[] prices) {
-        if (prices.length <= 1) {
+        if (prices.length <= 1) { // 实例 []
             return 0;
         }
+
         int len = prices.length;
-        int[] hold = new int[len]; // 第i天持有股票, 获得的最大利润
-        int[] cash = new int[len]; // 第i天不持有股票, 获得的最大利润
-        hold[0] = -prices[0];
-        cash[0] = 0; // 第1天之前不可能持有股票, 所以第i天获得得最大利润为0
+        // dp[0][0], 第1天之前不可能持有股票, 即第1天没有股票可以买钱, 所以第1天不持有股票可以获得的最大利润为0
+        // dp[0][1], 第1天持有股票可以获得的最大利润就是在第一天买下股票, 即-prices[0]
+        int dp_i_0 = 0, dp_i_1 = -prices[0];
+
         for (int i = 1; i < len; i++) {
-            hold[i] = Math.max(hold[i - 1], cash[i - 1] - prices[i]); // 今天持有股票 = max(昨天持有股票并且今天不交易, 昨天不持有股票并且今天买入股票)
-            cash[i] = Math.max(cash[i - 1], hold[i - 1] + prices[i]); // 今天不持有股票 = max(昨天不持有股票并且今天不交易, 昨天持有股票并且今天卖出股票)
+            int temp = dp_i_0;
+            // dp[i][0], 第i天不持有股票, 可以获得的最大利润
+            // 今天不持有股票可以获得的最大利润 = max(昨天不持有股票并且今天不交易可以获得的最大利润, 昨天持有股票并且今天卖出股票可以获得的最大利润)
+            dp_i_0 = Math.max(dp_i_0, dp_i_1 + prices[i]);
+            // dp[i][1], 第i天持有股票, 可以获得的最大利润
+            // 今天持有股票可以获得的最大利润 = max(昨天持有股票并且今天不交易可以获得的最大利润, 昨天不持有股票并且今天买入股票可以获得的最大利润)
+            dp_i_1 = Math.max(dp_i_1, temp - prices[i]);
         }
 
-        return cash[len - 1];
+        // 最终获得的最大利润肯定是不持有股票时
+        return dp_i_0; // dp[len - 1][0]
     }
 }
 

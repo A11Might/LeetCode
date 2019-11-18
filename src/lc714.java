@@ -16,17 +16,19 @@ class Solution {
         if (prices.length <= 1) {
             return 0;
         }
+
         int len = prices.length;
-        int[] cash = new int[len]; // 第i天不持有股票, 获得的最大利润
-        int[] hold  = new int[len]; // 第i天持有股票, 获得的最大利润
-        cash[0] = 0; // 今天不持有股票 = max(昨天不持有股票并且今天不交易, 昨天持有股票并且今天卖出股票)
-        hold[0] = -prices[0]; // 今天持有股票 = max(昨天持有股票并且今天不交易, 昨天不持有股票并且今天买入股票)
+        // dp[i][0], 第i天不持有股票
+        // dp[i][1], 第i天持有股票
+        int[][] dp = new int[len][2];
+        dp[0][0] = 0; // 第1天之前不可能持有股票, 所以第i天获得得最大利润为0
+        dp[0][1] = -prices[0]; // 第1天持有股票可以获得的最大利润就是在第一天买下股票, 即-prices[0]
 
         for (int i = 1; i < len; i++) {
-            cash[i] = Math.max(cash[i - 1], hold[i - 1] + prices[i] - fee); // 每次交易需要手续费
-            hold[i] = Math.max(hold[i - 1], cash[i - 1] - prices[i]);
+            dp[i][0] = Math.max(dp[i - 1][0], dp[i - 1][1] + prices[i] - fee); // 买入卖出算一次交易, 每次交易需要手续费
+            dp[i][1] = Math.max(dp[i - 1][1], dp[i - 1][0] - prices[i]);
         }
 
-        return cash[len - 1];
+        return dp[len - 1][0];
     }
 }
