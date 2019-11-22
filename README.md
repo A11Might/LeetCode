@@ -1,4 +1,4 @@
-# leetcode 229/1230
+# leetcode 230/1230
 
 #### [leetcode高频面试题](navigate/liuyubobobo.md)
 
@@ -180,6 +180,7 @@
 | 347 [Java](src/lc347.java)
 | 349 [Java](src/lc349.java)
 | 350 [Java](src/lc350.java)
+| 377 [Java](src/lc377.java)
 | 384 [Java](src/lc384.java)
 | 387 [Java](src/lc387.java)
 | 394 [Java](src/lc394.java)
