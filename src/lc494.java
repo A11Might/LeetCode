@@ -3,57 +3,89 @@
  *
  * [494] 目标和
  * 
- * 题目：改变一个非负整数数组中元素的符号，返回数组和为目标数的方法数
+ * 题目：改变一个非负整数数组中元素的符号, 返回数组和为目标数的方法数
+ *
+ * 难度: medium
  * 
- * 思路：1、回溯算法，考虑每个元素符号变与不变
- *      2、动态规划？？？？？？？？
+ * 思路：1、回溯算法, 考虑每个元素前的符号
+ *      2、动态规划0-1背包问题, dp[i][j] 表示用数组中的前 i 个元素, 组成和为 j 的方案数
+ *         状态转移方程: dp[i][j] = dp[i - 1][j - nums[i]] + dp[i - 1][j + nums[i]]
  */
 class Solution {
-    private int times = 0;
-
-    public int findTargetSumWays1(int[] nums, int S) {
-        if (nums == null || nums.length == 0) {
-            return S == 0 ? 1 : 0;
-        }
-        process(nums, S, 0);
-        return times;
+    /**
+     * 时间复杂度: O(2 ^ n)
+     * 空间复杂度: O(n), 递归栈的深度为n
+     */
+    public int findTargetSumWays(int[] nums, int S) {
+        int[] times = {0};
+        dfs(nums, 0, S, times);
+        return times[0];
     }
 
-    private void process(int[] nums, int target, int index) {
+    private void dfs(int[] nums, int index,int restS, int[] times) {
         if (index == nums.length) {
-            times += target == 0 ? 1 : 0;
-        } else {
-            process(nums, target + nums[index], index + 1); // 当前元素符号不变
-            process(nums, target - nums[index], index + 1); // 当前元素符号变化
+            times[0] += restS == 0 ? 1 : 0;
+            return;
         }
+        dfs(nums, index + 1, restS - nums[index], times); // 当前元素符号为'+'
+        dfs(nums, index + 1, restS + nums[index], times); // 当前元素符号为'-'
     }
 
     /**
-     * sum(+)符号应为+的元素和，sum(-)符号应为-的元素和(都是正数) 则sum(+) - sum(-) = target => sum(all) +
-     * sum(+) - sum(-) = target + sum(all) => 2 * sum(+) = target + sum(all) =>
-     * sum(+) = (target + sum(all)) / 2 因此题目转化为01背包，也就是能组合成容量为sum(+)的方式有多少种
+     * 时间复杂度: O(n * sum)
+     * 空间复杂度: O(n * sum)
      */
     public int findTargetSumWays2(int[] nums, int S) {
-        int sum = 0;
-        for (int num : nums) {
-            sum += num;
-        }
-        if (sum < S || (sum + S) % 2 == 1) { // nums为非负整数，sum(+)不可能有小数
-            return 0;
-        }
-        int w = (sum + S) / 2;
-        int[] dp = new int[w + 1];
-        dp[0] = 1; // 和是0的解 一定有一个 就是一个都不选
-        for (int num : nums) {
-            // 这个循环是 每次拿出一个数， 用它还是不用，算出和是 dp[i]的解的数量
-            // 因为要算和是i 所以 当num > i 时 是不用算的
-            for (int i = w; i >= num; i--) {
-                // 这行 依然是 01背包算法
-                // dp[i] 是不用 num 和是 i 的解的个数
-                // dp[i-num] 是用 num 和是 i 的解的个数
-                dp[i] = dp[i] + dp[i - num];
+        int len = nums.length;
+        // 由于数组中所有数的和不超过 1000, 那么 j 的最小值可以达到 -1000
+        // 为了使用数组索引表示, 需要给 dp[i][j] 的第二维预先增加 1000
+        int[][] dp = new int[len][2001];
+        dp[0][1000 - nums[0]] += 1;
+        dp[0][1000 + nums[0]] += 1;
+        // 就想着写完base case后填表就行, 不要多想(vip)
+        for (int i = 1; i < len; i++) {
+            for (int j = 0; j < 2001; j++) {
+                if (j - nums[i] >= 0 && j - nums[i] < 2001) {
+                    dp[i][j] += dp[i - 1][j - nums[i]]; // 当前元素符号为 '-'
+                }
+                if (j + nums[i] >= 0 && j + nums[i] < 2001) {
+                    dp[i][j] += dp[i - 1][j + nums[i]]; // 当前元素符号为 '+'
+                }
             }
         }
-        return dp[w];
+
+        if(1000 + S < 0 || 1000 + S >= 2001) {
+            return 0;
+        }
+        return dp[len - 1][1000 + S];
+    }
+
+    // 方法二中动态规划的状态转移方程中，dp[i][...] 只和 dp[i - 1][...]有关
+    /**
+     * 时间复杂度: O(n * sum)
+     * 空间复杂度: O(sum)
+     */
+    public int findTargetSumWays3(int[] nums, int S) {
+        int len = nums.length;
+        int[] dp = new int[2001];
+        dp[1000 - nums[0]] += 1;
+        dp[1000 + nums[0]] += 1;
+        for (int i = 1; i < len; i++) {
+            int[] temp = new int[2001];
+            for (int j = 0; j < 2001; j++) {
+                if (j - nums[i] >= 0 && j - nums[i] < 2001) {
+                    temp[j] += dp[j - nums[i]]; // 当前元素符号为 '-'
+                }
+                if (j + nums[i] >= 0 && j + nums[i] < 2001) {
+                    temp[j] += dp[j + nums[i]]; // 当前元素符号为 '+'
+                }
+            }
+            dp = temp;
+        }
+
+        if(1000 + S < 0 || 1000 + S >= 2001) {
+            return 0;
+        }
+        return dp[1000 + S];
     }
 }
