@@ -1,4 +1,4 @@
-# leetcode 230/1230
+# leetcode 231/1230
 
 #### [leetcode高频面试题](navigate/liuyubobobo.md)
 
@@ -204,6 +204,7 @@
 | 454 [Java](src/lc454.java)
 | 460 [Java](src/lc460.java)
 | 461 [Java](src/lc461.java)
+| 474 [Java](src/lc474.java)
 | 494 [Java](src/lc494.java)
 | 496 [Java](src/lc496.java)
 | 538 [Java](src/lc538.java)
