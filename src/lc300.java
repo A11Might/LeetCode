@@ -6,59 +6,75 @@ import java.util.Arrays;
  * [300] 最长上升子序列
  * 
  * 题目：找到无序整数数组的最长上升子序列的长度
+ *
+ * 难度:  medium
  * 
- * 思路：1、动态规划，dp[i] = max{dp[i], 1 + dp[j] if j < i and nums[i] > nums[j]}
- *      2、贪心算法，遍历原数组试图找到最长上升子序列，让找到的序列里面的元素的值尽量小
+ * 思路：1、动态规划, dp[i] = max{dp[i], 1 + dp[j] if j < i and nums[i] > nums[j]}
+ *      2、动态规划, O(n * logn)的方法
  */
 class Solution {
-    public int lengthOfLIS1(int[] nums) {
-        int n = nums.length;
-        int[] dp = new int[n]; // dp[i]为以nums[i]结尾的最长上升子序列的长度
+    /**
+     * 时间复杂度: O(n ^ 2)
+     * 空间复杂度: O(n)
+     */
+    public int lengthOfLIS(int[] nums) {
+        int len = nums.length;
+        int[] dp = new int[len]; // dp[i]为以nums[i]结尾的最长上升子序列的长度
         Arrays.fill(dp, 1); // 每个位置的至少有由自己的构成的上升子序列，长度为1
-        for (int i = 1; i < n; ++i) {
-            for (int j = 0; j < i; ++j) {
+
+        for (int i = 1; i < len; i++) {
+            for (int j = 0; j < i; j++) {
                 // 当前元素比nums[j]大，以当前元素为结尾的最长上升子序列的长度可以为dp[j] + 1
                 // dp[i]选取最长上升子序列的长度
-                if (nums[j] < nums[i]) {
-                    dp[i] = Math.max(dp[i], dp[j] + 1); 
+                if (nums[i] > nums[j]) {
+                    dp[i] = Math.max(dp[i], 1 + dp[j]);
                 }
             }
         }
-        int res = 0;
-        for (int len : dp) {
-            res = Math.max(res, len);
+
+        int ans = 0;
+        for (int num : dp) {
+            ans = num > ans ? num : ans;
         }
-        return res;
+        return ans;
     }
 
+    /**
+     * 时间复杂度: O(n * logn)
+     * 空间复杂度: O(n)
+     */
     public int lengthOfLIS2(int[] nums) {
-        if (nums == null || nums.length == 0) {
+        int len = nums.length;
+        if (len == 0) {
             return 0;
         }
-        int[] longestLTS = new int[nums.length];
-        longestLTS[0] = nums[0];
-        int maxLen = 0;
-        for (int i = 1; i < nums.length; ++i) {
-            if (nums[i] > longestLTS[maxLen]) {
-                longestLTS[++maxLen] = nums[i];
-            // 由于上升子序列需要严格单调，不能存在相等的元素
-            // 当当前元素小于等于上升子序列最后一个元素时，为让整个序列里面的元素尽量小
-            // 将序列中第一个大于或等于当前元素替换为当前元素
+
+        // dp[i]表示所有长度为i的递增子序列中, 最小的那个序列的最后一个元素
+        int dp[] = new int[len + 1];
+        int maxL = 1; // 最长递增子序列的长度
+        dp[1] = nums[0];
+        for (int i = 1; i < len; i++) {
+            // num > dp[maxL], 表示num比所有已知递增序列的尾数都大, 将num添加入dp数组尾部, 并将最长递增序列长度maxL加1
+            if (nums[i] > dp[maxL]) {
+                dp[++maxL] = nums[i];
+            // num <= dp[i], 只更新相应的dp
             } else {
-                // 二分查找，将数组分为< 和 >= 两部分
-                int lo = 0, hi = maxLen;
+                // 二分查找, 找到第一个大于等于当前元素nums[i]的元素
+                // 即将dp数组分为< 和 >= 部分
+                int lo = 0, hi = maxL + 1; // [lo, hi)区间内是为确定< 或者 >= 的部分
                 while (lo < hi) {
-                    int mid = lo + (hi - lo) / 2;
-                    if (longestLTS[mid] < nums[i]) { // 在longestLTS中找到第一个不小于当前元素的元素，将其替换为当前元素
+                    int mid = lo + ((hi - lo) >> 1);
+                    if (dp[mid] < nums[i]) {
                         lo = mid + 1;
                     } else {
-                        hi = mid;
+                        lo = mid;
                     }
                 }
-                longestLTS[lo] = nums[i];
+                dp[lo] = nums[i];
             }
         }
-        return maxLen + 1;
+
+        return maxL;
     }
 }
 

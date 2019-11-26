@@ -8,11 +8,16 @@
  *
  * 难度: medium
  *
- * 思路: 动态规划, dp[i][j]表示使用i个0和j个1能拼出的字符串的数量
+ * 思路: 动态规划0-1背包问题, 这道题的背包有0和1两种容量, 每个物品(字符串)需要分别占用0和1的若干容量
+ *      dp[i][j]表示使用i个0和j个1能拼出的字符串的数量
  *      状态转移方程: dp(i, j) = max(1 + dp(i - cost_zero[k], j - cost_one[k])) if i >= cost_zero[k] and j >= cost_one[k]
  *      其中 k 表示第 k 个字符串，cost_zero[k] 和 cost_one[k] 表示该字符串中 0 和 1 的个数
  */
 class Solution {
+    /**
+     * 时间复杂度: O(strs.length * m * n)
+     * 空间复杂度: O(m * n)
+     */
     public int findMaxForm(String[] strs, int m, int n) {
         int[][] dp = new int[m + 1][n + 1];
         for (String str : strs) {
