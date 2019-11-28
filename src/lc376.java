@@ -11,7 +11,7 @@
  *
  * 思路: 1. 动态规划, 状态转移方程: f(i, 0) = max(f(j, 1) + 1) if nums[i] > nums[j]
  *                        and f(i, 1) = max(f(j, 0) + 1) if nums[i] < nums[j]
- *       2. 动态规划,
+ *       2. 动态规划
  */
 class Solution {
     /**
@@ -23,8 +23,8 @@ class Solution {
         if (len < 2) {
             return len;
         }
-        // dp[i][0]表示以nums[i]结尾最后一次差值为正值的作为摆动序列的最长子序列的长度
-        // dp[i][1]表示以nums[i]结尾最后一次差值为负值的作为摆动序列的最长子序列的长度
+        // dp[i][0]表示到目前为止最长的以第i个元素结尾的上升摆动序列的长度
+        // dp[i][1]表示到目前为止最长的以第i个元素结尾的下降摆动序列的长度
         int[][] dp = new int[len][2];
         dp[0][0] = 1;
         dp[0][1] = 1;
@@ -34,6 +34,7 @@ class Solution {
                     dp[i][0] = Math.max(dp[i][0], 1 + dp[j][1]);
                 } else if (nums[i] - nums[j] < 0) {
                     dp[i][1] = Math.max(dp[i][1], 1 + dp[j][0]);
+                // 当前元素等于前面元素时, 最长摆动序列的长度也相同
                 } else { // 实例[0, 0]
                     dp[i][0] = Math.max(dp[i][0], dp[j][0]);
                     dp[i][1] = Math.max(dp[i][1], dp[j][1]);
@@ -54,26 +55,31 @@ class Solution {
         if (len < 2) {
             return len;
         }
-        // dp[i][0]表示以nums[i]结尾最后一次差值为正值的作为摆动序列的最长子序列的长度
-        // dp[i][1]表示以nums[i]结尾最后一次差值为负值的作为摆动序列的最长子序列的长度
+        // dp[i][0]到i为止最长的最后向上摆动的序列
+        // dp[i][1]到i为止最长的最后向下摆动的序列
         int[][] dp = new int[len][2];
         dp[0][0] = 1;
         dp[0][1] = 1;
         for (int i = 1; i < len; i++) {
-            // 这里在摆动上升, 若前一个数字处于下降的位置, up[i] = down[i - 1] + 1
-            // 若前一个数字处于上升的位置, down[i]与down[i − 1]保持相同
+            // nums[i] > nums[i - 1] -> nums[i] > down(dp[i][1]摆动序列的尾部)
+            // 因为如果dp[i][1]以a为摆动序列的尾部, nums[i]一定 >= a, 不然就会更新nums[i]为尾部
+            // 所以dp[i][0] = dp[i - 1][1] + 1(到i为止最长的最后向上摆动的序列是到i - 1为止最长的摆动向下序列 + 1)
+            // 而dp[i][1] = dp[i - 1][1](到i为止最长的最后向下摆动的序列不变)
             if (nums[i] > nums[i - 1]) {
                 dp[i][0] = dp[i - 1][1] + 1;
                 dp[i][1] = dp[i - 1][1];
+            // 与上类似
             } else if (nums[i] < nums[i - 1]) {
                 dp[i][1] = dp[i - 1][0] + 1;
                 dp[i][0] = dp[i - 1][0];
+            // 当前元素等于前面元素时, 最长摆动序列的长度相同
             } else {
                 dp[i][0] = dp[i - 1][0];
                 dp[i][1] = dp[i - 1][1];
             }
         }
 
+        // 不管大于小于等于都会更新当前dp值, 即当前可以获得的作为摆动序列的最长子序列的长度, 所以最后即为最大值
         return Math.max(dp[len - 1][0], dp[len - 1][1]);
     }
 
@@ -81,7 +87,7 @@ class Solution {
      * 时间复杂度: O(n)
      * 空间复杂度: O(1)
      */
-    // 优化方法二的
+    // dp过程中更新up[i]up[i]和down[i]down[i], 其实只需要up[i - 1]和down[i - 1], 优化方法二的空间复杂度
     public int wiggleMaxLength3(int[] nums) {
         if (nums.length < 2)
             return nums.length;
@@ -93,4 +99,5 @@ class Solution {
                 down = up + 1;
         }
         return Math.max(down, up);
+    }
 }

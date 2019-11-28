@@ -1,4 +1,4 @@
-# leetcode 232/1230
+# leetcode 233/1230
 
 #### [leetcode高频面试题](navigate/liuyubobobo.md)
 
@@ -233,4 +233,5 @@
 | 1004 [Java](src/lc1004.java)
 | 1008 [Java](src/lc1008.java)
 | 1028 [Java](src/lc1028.java)
+| 1143 [Java](src/lc1143.java)
 | 1146 [Java](src/lc1146.java)
