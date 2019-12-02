@@ -4,6 +4,8 @@
  * [5] 最长回文子串
  * 
  * 题目：给定一个字符串 s，找到 s 中最长的回文子串
+ *
+ * 难度: medium
  * 
  * 思路：1、Manacher算法
  *      2、中心扩展法，回文中心的两侧互为镜像，所以回文可以从它的中心展开，并且只有2n-1个这样的中心(一个元素为中心的情况有n个，两个元素为中心的情况有n-1个)
@@ -104,6 +106,8 @@ class Solution {
 
     /**
      * 动态规划
+     * 时间复杂度: O(n * n)
+     * 空间复杂度: O(n * n)
      */
     public String longestPalindrome3(String s) {
         int len = s.length();
@@ -111,25 +115,28 @@ class Solution {
             return s;
         }
         int longestPalindrome = 0; // 最长回文子串的长度
-        int start = 0;
-        int end = 0;
+        int start = 0; // 最长回文子串的起始位置
+        int end = 0; // 最长回文子串的结束位置
         boolean[][] dp = new boolean[len][len];
-        for (int r = 0; r < len; ++r) {
-            for (int l = 0; l <= r; ++l) {
+        for (int right = 0; right < len; right++) {
+            for (int left = 0; left <= right; left++) {
                 // dp[i][j] == true, s.substring(i, j + 1)为回文子串
                 // dp[i][j] = (s.charAt(i) == s.charAt(j) && dp[i + 1][j - 1])
                 // 当s.substring(l + 1, r)最多只有一个字符时，其本身就是回文子串不用再通过dp[l + 1][r - 1]判断
-                if ((s.charAt(l) == s.charAt(r)) && (r - l < 2 || dp[l + 1][r - 1])) {
-                    dp[l][r] = true;
+                // 另外: 若写成((left == right) || (s.charAt(left) == s.charAt(right) && dp[left + 1][right - 1]))
+                //       当"cbbd", 若left和right为紧挨着的两个b时, 再去dp[left + 1][right - 1]会出错, 所以写成如下形式
+                if ((s.charAt(left) == s.charAt(right)) && (right - left < 2 || dp[left + 1][right - 1])) {
+                    dp[left][right] = true;
                     // 更新最长回文子串的长度和最长回文子串位置
-                    if (r - l + 1 > longestPalindrome) {
-                        longestPalindrome = r - l + 1;
-                        start = l;
-                        end = r;
+                    if (right - left + 1 > longestPalindrome) {
+                        longestPalindrome = right - left + 1;
+                        start = left;
+                        end = right;
                     }
                 }
             }
         }
+
         return s.substring(start, end + 1);
     }
 }
