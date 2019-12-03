@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 /*
@@ -8,41 +7,54 @@ import java.util.List;
  * [95] 不同的二叉搜索树 II
  * 
  * 题目：生成所有[1, n]为节点的所有二叉搜索树
+ *
+ * 难度: medium
  * 
- * 思路：树型DP
- *       情况：以[1, n]中每个数字为头结点，左侧所有二叉搜素树组合和
- *             右侧所有二叉搜素树组合再组合，即为所有情况
+ * 思路：树型DP,
+ *       情况：以[1, n]中每个数字为头节点，左侧所有二叉搜素树组合和右侧所有二叉搜素树组合再组合，即为所有情况
  */
 /**
- * Definition for a binary tree node. public class TreeNode { int val; TreeNode
- * left; TreeNode right; TreeNode(int x) { val = x; } }
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
  */
 class Solution {
     public List<TreeNode> generateTrees(int n) {
         if (n == 0) {
             return new ArrayList<>();
         }
-        return process(1, n);
+        return generateTreesCore(1, n);
     }
 
-    private List<TreeNode> process(int start, int end) {
-        List<TreeNode> res = new LinkedList<>();
+    private List<TreeNode> generateTreesCore(int start, int end) {
+        List<TreeNode> ans = new ArrayList<>();
+        // 处理两个边界条件:
+        // 当i == start时, generateTreesCore(start, i - 1)
+        // 和当i == end时, generateTreesCore(i + 1, end)
+        // 当前子树没有节点, 为null
         if (start > end) {
-            res.add(null);
-            return res;
+            ans.add(null);
+            return ans;
         }
+        // 分别以[start, end]为头节点
         for (int i = start; i <= end; i++) {
-            List<TreeNode> left = process(start, i - 1);
-            List<TreeNode> right = process(i + 1, end);
-            for (TreeNode l : left) {
-                for (TreeNode r : right) {
-                    TreeNode cur = new TreeNode(i);
-                    cur.left = l;
-                    cur.right = r;
-                    res.add(cur);
+            List<TreeNode> leftSubtrees = generateTreesCore(start, i - 1); // 头节点左侧节点组成的所有二叉搜素树组合
+            List<TreeNode> rightSubtrees = generateTreesCore(i + 1, end); // 头节点右侧节点组成的所有二叉搜素树组合
+            // 以i为头节点，组合头节点左侧节点组成的所有二叉搜素树组合和头节点右侧节点组成的所有二叉搜素树组合
+            for (TreeNode leftSubtreeRoot : leftSubtrees) {
+                for (TreeNode rightSubtreeRoot : rightSubtrees) {
+                    TreeNode root = new TreeNode(i);
+                    root.left = leftSubtreeRoot;
+                    root.right = rightSubtreeRoot;
+                    ans.add(root);
                 }
             }
         }
-        return res;
+
+        return ans;
     }
 }
