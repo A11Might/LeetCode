@@ -13,7 +13,7 @@
 class Solution {
     /**
      * 时间复杂度: O(n)
-     * 空间复杂度: O(n)
+     * 空间复杂度: O(n) (空间最优解为O(1))
      */
     public int maxSubArray(int[] nums) {
         int len = nums.length;

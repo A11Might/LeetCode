@@ -23,6 +23,11 @@ import java.util.List;
  * }
  */
 class Solution {
+    /**
+     * 时间复杂度: O(4 ^ n / n ^ (1 / 2))
+     * 空间复杂度: O(4 ^ n / n ^ (1 / 2))
+     * https://leetcode-cn.com/problems/unique-binary-search-trees-ii/solution/bu-tong-de-er-cha-sou-suo-shu-ii-by-leetcode/
+     */
     public List<TreeNode> generateTrees(int n) {
         if (n == 0) {
             return new ArrayList<>();

@@ -14,11 +14,15 @@
  *      可得状态转移方程: f(n) = f(0) * f(n - 1) + f(1) * f(n - 2) + ... + f(n - 1) * f(0)
  */
 class Solution {
+    /**
+     * 时间复杂度: O(n ^ 2)
+     * 空间复杂度: O(n)
+     */
     public int numTrees(int n) {
         int[] dp = new int[n + 1];
         dp[0] = 1;
         dp[1] = 1;
-        for (int i = 2; i < n + 1; ++i) {
+        for (int i = 2; i <= n; ++i) {
             // f(n) = f(0) * f(n - 1) + f(1) * f(n - 2) + ... + f(n - 1) * f(0)
             for (int j = 0; j < i; ++j) {
                 dp[i] += dp[j] * dp[i - j - 1];
