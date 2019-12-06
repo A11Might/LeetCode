@@ -12,7 +12,8 @@ import java.util.Deque;
  *
  * 难度：medium
  * 
- * 思路：1、动态规划，f(n) = 1 + min{f(n-1^2), f(n-2^2), f(n-3^2), f(n-4^2), ... , f(n-k^2) //(k为满足k^2<=n的最大的k)}
+ * 思路：1、动态规划，
+ *         状态转移方程: f(n) = 1 + min{f(n-1^2), f(n-2^2), f(n-3^2), f(n-4^2), ... , f(n-k^2) //(k为满足k^2<=n的最大的k)}
  *      2、对问题建模，整个问题转化为一个图论问题，
  *         从n到0，每个数字表示一个节点，如果两个数字x到y相差一个完全平方数则连接一条边，就可以得到一个无权图，原问题转化为，求
  *         这个无权图中从n到0的最短路径
@@ -21,13 +22,12 @@ class Solution {
     public int numSquares(int n) {
         int[] dp = new int[n + 1];
         dp[0] = 0;
-        for (int i = 2; i <= n; i++) {
-            int min = Integer.MAX_VALUE;
+        for (int i = 1; i <= n; i++) {
+            dp[i] = i; // 一个数组多有i个1组成
             for (int j = 1; j * j <= i; j++) {
-                // f(i) = f(j * j) + f(i - j * j)
-                min = Math.min(min, 1 + dp[i - (j * j)]);
+                // f(i) = f(i - j * j) + f(j * j)
+                dp[i] = Math.min(dp[i], dp[i - j * j] + 1);
             }
-            dp[i] = min;
         }
 
         return dp[n];
