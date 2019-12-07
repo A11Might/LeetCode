@@ -19,23 +19,23 @@ class Solution {
      */
     public int lengthOfLIS(int[] nums) {
         int len = nums.length;
+        if (len == 0) {
+            return 0;
+        }
         int[] dp = new int[len]; // dp[i]为以nums[i]结尾的最长上升子序列的长度
-        Arrays.fill(dp, 1); // 每个位置的至少有由自己的构成的上升子序列，长度为1
-
-        for (int i = 1; i < len; i++) {
+        int ans = 0; // 最长上升子序列的长度
+        for (int i = 0; i < len; i++) {
+            dp[i] = 1; // 每个位置的至少有由自己的构成的上升子序列，长度为1
             for (int j = 0; j < i; j++) {
                 // 当前元素比nums[j]大，以当前元素为结尾的最长上升子序列的长度可以为dp[j] + 1
                 // dp[i]选取最长上升子序列的长度
                 if (nums[i] > nums[j]) {
-                    dp[i] = Math.max(dp[i], 1 + dp[j]);
+                    dp[i] = Math.max(dp[i], dp[j] + 1);
                 }
             }
+            ans = dp[i] > ans ? dp[i] : ans;
         }
 
-        int ans = 0;
-        for (int num : dp) {
-            ans = num > ans ? num : ans;
-        }
         return ans;
     }
 
