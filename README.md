@@ -1,4 +1,4 @@
-# leetcode 236/1284
+# leetcode 238/1284
 
 #### [leetcode高频面试题](navigate/liuyubobobo.md)
 
@@ -165,6 +165,7 @@
 | 297 [Java](src/lc297.java)
 | 300 [Java](src/lc300.java)
 | 303 [Java](src/lc303.java)
+| 304 [Java](src/lc304.java)
 | 309 [Java](src/lc309.java)
 | 314 [Java](src/lc314.java)
 | 316 [Java](src/lc316.java)
@@ -176,6 +177,7 @@
 | 333 [Java](src/lc333.java)
 | 334 [Java](src/lc334.java)
 | 337 [Java](src/lc337.java)
+| 338 [Java](src/lc338.java)
 | 341 [Java](src/lc341.java)
 | 343 [Java](src/lc343.java)
 | 344 [Java](src/lc344.java)
