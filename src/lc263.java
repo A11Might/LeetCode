@@ -13,6 +13,10 @@
  *       对能被2,3,5整除的数不断除2,3,5，最后剩1就是，剩0就不是
  */
 class Solution {
+    /**
+     * 时间复杂度: O(logn)
+     * 空间复杂度: O(1)
+     */
     public boolean isUgly(int num) {
         if (num < 1) return false;
         while ((num & 1) == 0) num >>= 1;

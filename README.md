@@ -1,4 +1,4 @@
-# leetcode 238/1284
+# leetcode 239/1284
 
 #### [leetcode高频面试题](navigate/liuyubobobo.md)
 
@@ -185,6 +185,7 @@
 | 347 [Java](src/lc347.java)
 | 349 [Java](src/lc349.java)
 | 350 [Java](src/lc350.java)
+| 368 [Java](src/lc368.java)
 | 376 [Java](src/lc376.java)
 | 377 [Java](src/lc377.java)
 | 384 [Java](src/lc384.java)

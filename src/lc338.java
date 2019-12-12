@@ -12,6 +12,10 @@
  *       所以i的1的个数就是 i & (i - 1)的1的个数加上1
  */
 class Solution {
+    /**
+     * 时间复杂度: O(n)
+     * 空间复杂度: O(n)
+     */
     public int[] countBits(int num) {
         int[] ans = new int[num + 1];
         for (int i = 1; i <= num; ++i) {

@@ -12,6 +12,10 @@
  * 思路: 丑数的质因子只有2, 3和5，所以每个丑数都是由一个较小的丑数乘以2, 3和5所得, 从小到大按顺序存储乘积所得丑数即可
  */
 class Solution {
+    /**
+     * 时间复杂度: O(n)
+     * 空间复杂度: O(n)
+     */
     public int nthUglyNumber(int n) {
         if (n < 7) {
             return n;
