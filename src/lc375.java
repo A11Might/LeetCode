@@ -31,7 +31,7 @@ class Solution {
                     dp[i][j] = 0; // 只有一个数, 肯定一次猜中
                 } else {
                     dp[i][j] = Integer.MAX_VALUE;
-                    // 分别猜x ~ [i, j]
+                    // 分别猜x ~ [i, j], 再从中选出花费最少的情况
                     for (int x = i; x <= j; x++) {
                         dp[i][j] = Math.min(dp[i][j], Math.max(dp[i][x - 1], dp[x + 1][j]) + x);
                     }
