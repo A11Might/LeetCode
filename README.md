@@ -1,4 +1,4 @@
-# leetcode 241/1284
+# leetcode 249/1298
 
 #### [leetcode高频面试题](navigate/liuyubobobo.md)
 
@@ -54,6 +54,7 @@
 | 069 [Java](src/lc069.java)
 | 070 [Java](src/lc070.java)
 | 071 [Java](src/lc071.java)
+| 072 [Java](src/lc072.java)
 | 073 [Java](src/lc073.java)
 | 075 [Java](src/lc075.java)
 | 076 [Java](src/lc076.java)
@@ -192,6 +193,7 @@
 | 377 [Java](src/lc377.java)
 | 384 [Java](src/lc384.java)
 | 387 [Java](src/lc387.java)
+| 392 [Java](src/lc392.java)
 | 394 [Java](src/lc394.java)
 | 399 [Java](src/lc399.java)
 | 401 [Java](src/lc401.java)
@@ -199,10 +201,12 @@
 | 406 [Java](src/lc406.java)
 | 410 [Java](src/lc410.java)
 | 412 [Java](src/lc412.java)
+| 413 [Java](src/lc413.java)
 | 416 [Java](src/lc416.java)
 | 417 [Java](src/lc417.java)
 | 428 [Java](src/lc428.java)
 | 429 [Java](src/lc429.java)
+| 435 [Java](src/lc435.java)
 | 437 [Java](src/lc437.java)
 | 438 [Java](src/lc438.java)
 | 445 [Java](src/lc445.java)
@@ -243,3 +247,7 @@
 | 1028 [Java](src/lc1028.java)
 | 1143 [Java](src/lc1143.java)
 | 1146 [Java](src/lc1146.java)
+| 1290 [Java](src/lc1290.java)
+| 1291 [Java](src/lc1291.java)
+| 1292 [Java](src/lc1292.java)
+| 1293 [Java](src/lc1293.java)
