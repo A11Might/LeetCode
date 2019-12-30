@@ -13,6 +13,10 @@ import java.util.Arrays;
  * 思路: 贪心, 按照结束位置先后选取能够选取的区间
  */
 class Solution {
+    /**
+     * 时间复杂度: O(n * logn) n为总区间个数
+     * 空间复杂度: O(1)
+     */
     public int eraseOverlapIntervals(int[][] intervals) {
         Arrays.sort(intervals, (a, b) -> a[1] - b[1]); // 按照区间结束位置先后排序
         int start = Integer.MIN_VALUE;

@@ -14,6 +14,10 @@ import java.util.Arrays;
  * 思路: 贪心, 用尽可能小的饼干去满足的孩子
  */
 class Solution {
+    /**
+     * 时间复杂度: O(n * logn)
+     * 空间复杂度: O(1)
+     */
     public int findContentChildren(int[] g, int[] s) {
         Arrays.sort(g);
         Arrays.sort(s);
