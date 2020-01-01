@@ -5,52 +5,41 @@ import java.util.Arrays;
  *
  * [16] 最接近的三数之和
  * 
- * 题目：在给定包括n个整数的数组中找到和最接近target的三个数
+ * 题目: 在给定包括n个整数的数组中返回和最接近target的三个数的和
  *       (每组输入只存在唯一答案)
+ *
+ * 难度: medium
  * 
- * 思路：排序后固定第一个元素，双索引寻找另两个元素
+ * 思路: 遍历所有三数之和, 找到最接近target的
  */
 class Solution {
+    /**
+     * 时间复杂度: O(n ^ 2)
+     * 空间复杂度: O(1)
+     */
     public int threeSumClosest(int[] nums, int target) {
-        if (nums == null || nums.length == 0) {
-            return 0;
-        }
-        Arrays.sort(nums); // 排序方便跳过重复元素
-        int diff = Math.abs(nums[0] + nums[1] + nums[2] - target); // 当前最接近target的三数之和与target的差值
-        int res = nums[0] + nums[1] + nums[2]; // 当前最接近target的三数之和
-        for (int i = 0; i < nums.length; i++) { // 先固定第一个数，再在后面的区间内找合最接近0 - nums[i]的两个数
-            if (i > 0 && nums[i] == nums[i - 1]) { // 跳过重复元素
-                continue;
-            }
-            int twoSum = target - nums[i];
-            int l = i + 1, r = nums.length - 1;
-            while (l < r) {
-                // 用后面数组最小值加最大值与0 - nums[i]比较，判断两数位置
-                int curSum = nums[l] + nums[r];
-                // 三数之和和为target，最接近直接返回
-                if (curSum == twoSum) { 
-                    return nums[i] + nums[l] + nums[r];
-                // 三数之和不为target
+        Arrays.sort(nums); // 先进行排序, 方便利用有序特性调整三数之和的大小(同[167] 两数之和 II - 输入有序数组)
+        int len = nums.length;
+        int ans = nums[0] + nums[1] + nums[2]; // 最接近target的三数之和(为了方便初始化为前三数之和)
+        // 先固定第一个数, 再在后面的区间内找另外两个数
+        for (int i = 0; i < len - 2; i++) {
+            int left = i + 1, right = len - 1;
+            while (left < right) {
+                int sum = nums[i] + nums[left] + nums[right];
+                // 实时更新最接近target的三数之和
+                ans = Math.abs(target - sum) < Math.abs(target - ans) ? sum : ans;
+                // 根据当前和的大小调整后面两个数, 来使三数之和靠近target
+                if (sum == target) {
+                    return sum;
+                } else if (sum > target) {
+                    right--;
                 } else {
-                    // 更新当前和最接近target的三个数
-                    if (Math.abs(curSum - twoSum) < diff) {
-                        diff = Math.abs(curSum - twoSum);
-                        res = nums[i] + curSum;
-                    }
-                    // 移动索引试图使和接近target
-                    if (curSum > twoSum) {
-                        while (l < r && nums[r] == nums[--r]) {
-                        }
-                    } else {
-                        while (l < r && nums[l] == nums[++l]) {
-                        }
-                        
-                    }
+                    left++;
                 }
             }
         }
 
-        return res;
+        return ans;
     }
 }
 

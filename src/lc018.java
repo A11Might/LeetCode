@@ -7,49 +7,49 @@ import java.util.List;
  *
  * [18] 四数之和
  * 
- * 题目：在给定的包含n个整数的数组中找到所有和为target的四个元素的不重复元组
- * 
- * 思路：排序后固定前两个元素，再用双索引寻找另两个元素
+ * 题目: 在给定包含n个整数的数组中找到所有不重复的满足a + b + c + d == target的四元组
+ *
+ * 难度: medium
+ *
+ * 思路: 排序后固定前两个元素, 再用双索引寻找另两个元素, 同[15] 三数之和
  */
 class Solution {
+    /**
+     * 时间复杂度: O(n ^ 3)
+     * 空间复杂度: O(1)
+     */
     public List<List<Integer>> fourSum(int[] nums, int target) {
-        ArrayList<List<Integer>> res = new ArrayList<>();
-        if (nums == null || nums.length == 0) {
-            return res;
-        }
-        Arrays.sort(nums); // 排序方便跳过重复元素
-        int n = nums.length;
-        // 先固定前两个数，再在后面的区间内找合为target - nums[i] - nums[j]的两个数
-        for (int i = 0; i < n - 3; i++) { 
-            if (i > 0 && nums[i] == nums[i - 1]) { // 跳过重复元素
+        Arrays.sort(nums); // 题目要求找出所有不重复的四元组, 排序后方便跳过重复元素
+        int len = nums.length;
+        List<List<Integer>> ans = new ArrayList<>();
+        // 先固定前两个数, 再在后面的区间内找合为target - nums[i] - nums[j]的两个数
+        for (int i = 0; i < len - 3; i++) {
+            if (i != 0 && nums[i] == nums[i - 1]) { // 跳过重复元素
                 continue;
             }
-            for (int j = i + 1; j < n - 2; j++) {
-                if (j > i + 1 && nums[j] == nums[j - 1]) { // 跳过重复元素
+            for (int j = i + 1; j < len - 2; j++) {
+                if (j != i + 1 && nums[j] == nums[j - 1]) { // 跳过重复元素
                     continue;
                 }
-                int l = j + 1, r = n - 1;
                 int twoSum = target - nums[i] - nums[j];
-                while (l < r) {
-                    int curTwoSum = nums[l] + nums[r];
-                    // 用后面数组最小值加最大值与target - nums[i] - nums[j]比较，判断两数位置
-                    if (curTwoSum == twoSum) { 
-                        res.add(Arrays.asList(nums[i], nums[j], nums[l], nums[r])); // 命中加入返回列表，继续寻找
-                        while (l < r && nums[l] == nums[++l]) { // 跳过重复元素
-                        }
-                        while (l < r && nums[r] == nums[--r]) {
-                        }
-                    } else if (curTwoSum > twoSum) {
-                        while (l < r && nums[r] == nums[--r]) {
-                        }
+                int left = j + 1, right = len - 1;
+                while (left < right) {
+                    int curSum = nums[left] + nums[right];
+                    if (curSum == twoSum) { // 用后面数组最小值加最大值与target - nums[i] - nums[j]比较, 判断两数位置
+                        ans.add(Arrays.asList(nums[i], nums[j], nums[left++], nums[right--])); // 命中加入返回列表, 继续寻找
+                        while (left < right && nums[left] == nums[left - 1]) left++; // 跳过重复元素
+                        while (left < right && nums[right] == nums[right + 1]) right--;
+                    } else if (curSum < twoSum) {
+                        left++;
+                        while (left < right && nums[left] == nums[left - 1]) left++;
                     } else {
-                        while (l < r && nums[l] == nums[++l]) {
-                        }
+                        right--;
+                        while (left < right && nums[right] == nums[right + 1]) right--;
                     }
                 }
             }
         }
-        
-        return res;
+
+        return ans;
     }
 }
