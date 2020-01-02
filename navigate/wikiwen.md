@@ -29,3 +29,6 @@
     - [LeetCode 15. 3Sum](https://leetcode-cn.com/problems/3sum/) [[java]](https://github.com/A11Might/leetcode/blob/master/src/lc015.java)
     - [LeetCode 16. 3Sum Closest](https://leetcode-cn.com/problems/3sum-closest/) [[java]](https://github.com/A11Might/leetcode/blob/master/src/lc016.java)
     - [LeetCode 18. 4Sum](https://leetcode-cn.com/problems/4sum/) [[java]](https://github.com/A11Might/leetcode/blob/master/src/lc018.java)
+    
+- Contains Duplicate
+    - [LeetCode 217. Contains Duplicate](https://leetcode-cn.com/problems/contains-duplicate/) [[java]](https://github.com/A11Might/leetcode/blob/master/src/lc217.java)
