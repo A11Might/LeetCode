@@ -32,3 +32,6 @@
     
 - Contains Duplicate
     - [LeetCode 217. Contains Duplicate](https://leetcode-cn.com/problems/contains-duplicate/) [[java]](https://github.com/A11Might/leetcode/blob/master/src/lc217.java)
+    
+- 3 数组中重复的数字(287. Find the Duplicate Number)
+    - [LeetCode 287. Find the Duplicate Number](https://leetcode-cn.com/problems/find-the-duplicate-number/) [[java]](https://github.com/A11Might/leetcode/blob/master/src/lc287.java)
