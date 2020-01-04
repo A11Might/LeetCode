@@ -2,11 +2,11 @@
  * @lc app=leetcode.cn id=5 lang=java
  *
  * [5] 最长回文子串
- * 
+ *
  * 题目：给定一个字符串 s，找到 s 中最长的回文子串
  *
  * 难度: medium
- * 
+ *
  * 思路：1、Manacher算法
  *      2、中心扩展法，回文中心的两侧互为镜像，所以回文可以从它的中心展开，并且只有2n-1个这样的中心(一个元素为中心的情况有n个，两个元素为中心的情况有n-1个)
  *      3、动态规划，dp[i][j] == true, s.substring(i, j + 1)为回文子串
@@ -54,7 +54,7 @@ class Solution {
                 end = i + (pArr[i] - 1);
             }
         }
-        
+
         return chrs.substring(start, end + 1).replace("#", "");
     }
 

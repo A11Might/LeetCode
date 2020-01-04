@@ -35,3 +35,7 @@
     
 - 3 数组中重复的数字(287. Find the Duplicate Number)
     - [LeetCode 287. Find the Duplicate Number](https://leetcode-cn.com/problems/find-the-duplicate-number/) [[java]](https://github.com/A11Might/leetcode/blob/master/src/lc287.java)
+    
+- 26 Remove Duplicates from Sorted Array
+    - [LeetCode 26. Remove Duplicates from Sorted Array](https://leetcode-cn.com/problems/remove-duplicates-from-sorted-array/) [[java]](https://github.com/A11Might/leetcode/blob/master/src/lc026.java)
+    - [LeetCode 80. Remove Duplicates from Sorted Array II](https://leetcode-cn.com/problems/remove-duplicates-from-sorted-array-ii/) [[java]]()
