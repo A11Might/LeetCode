@@ -2,7 +2,7 @@
  * @author qhhu
  * @date 2020/1/5 - 15:59
  *
- * [5304] 子数组异或查询
+ * [1310] 子数组异或查询
  *
  * 题目: 给定一个正整数数组arr和一个查询数组queries, 其中queries[i] = [Li, Ri], 每个查询i为计算Li, Ri的xor值
  *      (即arr[Li] ^ arr[Li + 1] ^ ... ^ arr[Ri]), 返回所有查询结果

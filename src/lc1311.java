@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
  * @author qhhu
  * @date 2020/1/5 - 16:00
  *
- * [5305] 获取你好友已观看的视频
+ * [1311] 获取你好友已观看的视频
  *
  * 题目: 有 n 个人, 每个人都有一个 0到n - 1的唯一 id. 给你数组watchedVideos和friends, 其中watchedVideos[i]和friends[i]
  *      分别表示id = i的人观看过的视频列表和他的好友列表. Level1的视频包含所有你好友观看过的视频, level2的视频包含所有你

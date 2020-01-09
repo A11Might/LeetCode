@@ -2,39 +2,56 @@
  * @lc app=leetcode.cn id=189 lang=java
  *
  * [189] 旋转数组
+ *
+ * 题目: 将给定数组中的元素向右移动k个位置, 其中k是非负数
+ *       (三种解决方案; 原地算法)
+ *
+ * 难度: easy
+ *
+ * 思路: 1. 一步一步向右移动数组, 一共移动k次
+ *          Original List                   : 1 2 3 4 5 6 7
+ *          After move one time             : 7 1 2 3 4 5 6
+ *          After move two times            : 6 7 1 2 3 4 5
+ *          ...
+ *          After move k times              : 5 6 7 1 2 3 4 --> Result
+ *       2. 三次翻转操作
+ *          Original List                   : 1 2 3 4 5 6 7
+ *          After reversing all numbers     : 7 6 5 4 3 2 1
+ *          After reversing first k numbers : 5 6 7 4 3 2 1
+ *          After revering last n-k numbers : 5 6 7 1 2 3 4 --> Result
+ *       3. 循环替换, 直接把每一个数字放到它最后的位置, 把被替换的数字保存在变量temp里面
+ *          https://leetcode-cn.com/problems/rotate-array/solution/xuan-zhuan-shu-zu-by-leetcode/
+ *       4. 使用额外的数组, 索引i用i+k替换, 然后把组织好的数组复制过去: temp[i] = nums[(i + k) % len]
  */
 class Solution {
+    /**
+     * 时间复杂度: O(k * n)
+     * 空间复杂度: O(1)
+     */
     public void rotate(int[] nums, int k) {
-        int n = nums.length;
-        if (nums == null || n < 2) {
-            return;
-        }
-        k %= n;
-        while (k > 0) {
-            int temp = nums[nums.length - 1];
-            for (int i = nums.length - 2; i >= 0; --i) {
-                nums[i + 1] = nums[i];
+        int len = nums.length;
+        if (len < 2) return;
+        k %= len;
+        for (int i = 0; i < k; i++) {
+            int temp = nums[len - 1];
+            for (int j = len - 2; j >= 0; j--) {
+                nums[j + 1] = nums[j];
             }
             nums[0] = temp;
-            k--;
         }
     }
 
-//     arr=[1,2,3,4,5]--右移两位-->[4,5,1,2,3]
-//     假设 n = arr.length，k=右移位数，可得：[1,2,3,4,5]--翻转索引为[0,n-1]之间的元素-->[5,4,3,2,1]--翻转索引为[0,k-1]之间的元素-->[4,5,3,2,1]--翻转索引为[k,n-1]之间的元素-->[4,5,1,2,3]
-//     旋转数组其实就是把数组分成了两部分，
-//     解题关键就是在保证原有顺序的情况下 把后面一部分移到前面去。数组整体翻转满足了第二个要素，
-//     但是打乱了数组的 原有顺序，所以此时再次对两部分进行翻转，让他们恢复到原有顺序（翻转之后
-//     再翻转，就恢复成原有顺序了）。
     /**
-     * 翻转 时间复杂度：O(n) 空间复杂度：O(1)
+     * 时间复杂度: O(n)
+     * 空间复杂度: O(1)
      */
-    public void rotate_2(int[] nums, int k) {
-        int n = nums.length;
-        k %= n;
-        reverse(nums, 0, n - 1);
+    public void rotate2(int[] nums, int k) {
+        int len = nums.length;
+        if (len < 2) return;
+        k %= len;
+        reverse(nums, 0, len - 1);
         reverse(nums, 0, k - 1);
-        reverse(nums, k, n - 1);
+        reverse(nums, k, len - 1);
     }
 
     private void reverse(int[] nums, int start, int end) {
@@ -46,23 +63,25 @@ class Solution {
     }
 
     /**
-     * 循环交换 时间复杂度：O(n) 空间复杂度：O(1)
+     * 时间复杂度: O(n)
+     * 空间复杂度: O(1)
      */
-    public void rotate_3(int[] nums, int k) {
-        int n = nums.length;
-        k %= n;
-        // 第一次交换完毕后，前 k 位数字位置正确，后 n-k 位数字中最后 k 位数字顺序错误，继续交换
-        for (int start = 0; start < nums.length && k != 0; n -= k, start += k, k %= n) {
-            for (int i = 0; i < k; i++) {
-                swap(nums, start + i, nums.length - k + i);
-            }
+    public void rotate3(int[] nums, int k) {
+        int len = nums.length;
+        k = k % len;
+        int count = 0;
+        for (int start = 0; count < len; start++) {
+            int current = start;
+            int prev = nums[start];
+            do {
+                int next = (current + k) % len;
+                int temp = nums[next];
+                nums[next] = prev;
+                prev = temp;
+                current = next;
+                count++;
+            } while (start != current);
         }
-    }
-
-    private void swap(int[] nums, int i, int j) {
-        int temp = nums[i];
-        nums[i] = nums[j];
-        nums[j] = temp;
     }
 
 }
