@@ -46,5 +46,9 @@
 - 8. 53 数字在排序数组中出现的次数
     - [CodingInterview 53 数字在排序数组中出现的次数](https://www.nowcoder.com/practice/70610bf967994b22bb1c26f9ae901fa2?tpId=13&tqId=11190&tPage=2&rp=2&ru=/ta/coding-interviews&qru=/ta/coding-interviews/question-ranking) [[java]](https://github.com/A11Might/codingInterview/blob/master/code/offer53.java)
     
-- 9, 旋转数组(189. Rotate Array)
-    - [LeetCode 189. 旋转数组](https://leetcode-cn.com/problems/rotate-array/) [[java]](https://github.com/A11Might/leetcode/blob/master/src/lc189.java)
+- 9. 旋转数组(189. Rotate Array)
+    - [LeetCode 189. Rotate Array](https://leetcode-cn.com/problems/rotate-array/) [[java]](https://github.com/A11Might/leetcode/blob/master/src/lc189.java)
+    
+- 10. Intersection of Two Arrays(系列)
+    - [LeetCode 349. Intersection of Two Arrays](https://leetcode-cn.com/problems/intersection-of-two-arrays/) [[java]](https://github.com/A11Might/leetcode/blob/master/src/lc349.java)
+    - [LeetCode 350. Intersection of Two Arrays II](https://leetcode-cn.com/problems/intersection-of-two-arrays-ii/) [[java]](https://github.com/A11Might/leetcode/blob/master/src/lc350.java)
