@@ -13,8 +13,8 @@ import java.util.HashSet;
  */
 class Solution {
     /**
-     * 时间复杂度: O(n)
-     * 空间复杂度: O(n)
+     * 时间复杂度: O(n + m)
+     * 空间复杂度: O(n + m)
      */
     public int[] intersection(int[] nums1, int[] nums2) {
         HashSet<Integer> record = new HashSet<>();
