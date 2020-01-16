@@ -1,14 +1,39 @@
 ## 索引
 
-- [数组](#数组)
-- [链表](#链表)
-- [栈和队列](#栈和队列)
-- [二叉树与递归](#二叉树与递归)
-- [递归和回溯](#递归和回溯)
-- [动态规划](#动态规划)
-- [贪心算法](#贪心算法)
+- [数组](#[数组])
+    - [排序树组](#排序树组)
+    - [指针碰撞](#指针碰撞)
+    - [滑动窗口](#滑动窗口)
+    - [查找表](#查找表)
+    - [滑动窗口 + 查找表](#滑动窗口-+-查找表)
+    
+- [链表](#[链表])
+    - [穿针引线](#穿针引线)
+    - [虚拟头节点](#虚拟头节点)
+    - [双指针](#双指针)
 
-### 数组
+- [栈和队列](#[栈和队列])
+    - [栈](#栈)
+    - [栈和递归](#栈和递归)
+    - [队列-树的遍历](#队列-树的遍历)
+    - [队列-无权图的最短路径](#队列-无权图的最短路径)
+    - [队列-优先队列](#队列-优先队列)
+
+- [二叉树与递归](#[二叉树与递归])
+    - [二叉树](#二叉树)
+    - [二叉搜索树](#二叉搜索树)
+
+- [递归和回溯](#[递归和回溯])
+    - [树型问题](#树型问题)
+    - [排列问题](#排列问题)
+    - [组合问题](#组合问题)
+    - [回溯](#回溯)
+    - [floodfill](#floodfill)
+    
+- [动态规划](#[动态规划])
+- [贪心算法](#[贪心算法])
+
+### [数组]
 
 #### 排序树组
 
@@ -58,7 +83,7 @@
 - [217. contains duplicate](../src/lc217.java)
 - [220. contains duplicate III](../src/lc220.java)
 
-### 链表
+### [链表]
 
 #### 穿针引线
 
@@ -88,7 +113,7 @@
 - [143. reorder list](../src/lc143.java)
 - [234. palindrome linked list](../src/lc234.java)
 
-### 栈和队列
+### [栈和队列]
 
 #### 栈
 
@@ -103,24 +128,24 @@
 - [145. binary tree postorder traversal](../src/lc145.java)
 - [341. flatten nestedlist lterator](../src/lc341.java)
 
-#### 队列-树的遍历
+#### 队列 树的遍历
 
 - [102. binary tree level order traversal](../src/lc102.java)
 - [107. binary tree zigzag level order traversal II](../src/lc107.java)
 - [103. binary tree zigzag level order traversal](../src/lc103.java)
 - [199. binary tree right side view](../src/lc199.java)
 
-#### 队列-无权图的最短路径
+#### 队列 无权图的最短路径
 
 - [279. perfect squeres](../src/lc279.java)
 - [127. word ladder](../src/lc127.java)
 - [126. word ladder II](../src/lc126.java)
 
-#### 队列-优先队列
+#### 队列 优先队列
 - [347. top k frequent elements](../src/lc347.java)
 - [23. merge k sorted lists](../src/lc023.java)
 
-### 二叉树与递归
+### [二叉树与递归]
 
 #### 二叉树
 
@@ -147,7 +172,7 @@
 - [230. kth smallest elemet in a bst](../src/lc230.java)
 - [236. lowest comment ansector of a binary tree](../src/lc236.java)
 
-### 递归和回溯
+### [递归和回溯]
 
 #### 树型问题
 
@@ -183,7 +208,7 @@
 - [130. surrounded regions](../src/lc130.java)
 - [417. pacific atlantic water flow](../src/lc417.java)
 
-### 动态规划
+### [动态规划]
 
 - [70. climbing stairs](../src/lc070.java)
 - [120. triangle](../src/lc120.java)
@@ -197,12 +222,9 @@
 - [213. house robber II](../src/lc213.java)
 - [337. house robber III](../src/lc337.java)
 - [309. best time to buy and sell stock with cooldown](../src/lc309.java)
-
-#### 背包问题
 - [416. partition equal subset sum](../src/lc416.java)
 - [322. con change](../src/lc322.java)
 - [377. combination sum IV](../src/lc377.java)
-
 - [474. ones and zeroes](../src/lc474.java)
 - [139. word break](../src/lc139.java)
 - [494. target sum](../src/lc494.java)
@@ -210,7 +232,7 @@
 - [376. wiggle subsequence](../src/lc376.java)
 
 
-### 贪心算法
+### [贪心算法]
 
 - [455. assign cookies](../src/lc455.java)
 - [392. is subsquence](../src/lc392.java)

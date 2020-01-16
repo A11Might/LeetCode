@@ -17,6 +17,7 @@ class Solution {
      * 空间复杂度: O(1)
      */
     public int[] twoSum(int[] numbers, int target) {
+        if (numbers == null) return null;
         int len = numbers.length;
         int left = 0, right = len - 1;
         while (left < right) {
