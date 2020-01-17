@@ -24,15 +24,15 @@
 
 #### 双指针
 
-双指针主要用于遍历数组, 两个指针指向不同的元素, 从而协同完成任务
+双指针主要用于遍历数组, 两个指针指向不同的元素, 从而协同完成任务, 包括指针碰撞, 快慢指针, 双指针
 
 - [1. 有序数组的 Two Sum](https://leetcode-cn.com/problems/two-sum-ii-input-array-is-sorted/description/) [[java]](../src/lc167.java)
-- [2. 两数平方和]() [[java]]()
-- [3. 反转字符串中的元音字符]() [[java]]()
-- [4. 回文字符串]() [[java]]()
-- [5. 归并两个有序数组]() [[java]]()
-- [6. 判断链表是否存在环]() [[java]]()
-- [7. 最长子序列]() [[java]]()
+- [2. 两数平方和](https://leetcode-cn.com/problems/sum-of-square-numbers/description/) [[java]](../src/lc633.java)
+- [3. 反转字符串中的元音字符](https://leetcode-cn.com/problems/sum-of-square-numbers/description/) [[java]](../src/lc345.java)
+- [4. 回文字符串](https://leetcode-cn.com/problems/valid-palindrome-ii/description/) [[java]](../src/lc680.java)
+- [5. 归并两个有序数组](https://leetcode-cn.com/problems/merge-sorted-array/description/) [[java]](../src/lc080.java)
+- [6. 判断链表是否存在环](https://leetcode-cn.com/problems/linked-list-cycle/description/) [[java]](../src/lc141.java)
+- [7. 最长子序列](https://leetcode-cn.com/problems/longest-word-in-dictionary-through-deleting/description/) [[java]](../src/lc524.java)
 
 #### 排序
 
