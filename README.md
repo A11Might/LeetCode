@@ -1,4 +1,4 @@
-# leetcode 257/1312
+# leetcode 259/1327
 
  001 [Java](src/lc001.java)
 | 002 [Java](src/lc002.java)
@@ -220,6 +220,7 @@
 | 474 [Java](src/lc474.java)
 | 494 [Java](src/lc494.java)
 | 496 [Java](src/lc496.java)
+| 524 [Java](src/lc524.java)
 | 538 [Java](src/lc538.java)
 | 543 [Java](src/lc543.java)
 | 557 [Java](src/lc557.java)
@@ -233,6 +234,7 @@
 | 642 [Java](src/lc642.java)
 | 647 [Java](src/lc647.java)
 | 653 [Java](src/lc653.java)
+| 680 [Java](src/lc680.java)
 | 703 [Java](src/lc703.java)
 | 714 [Java](src/lc714.java)
 | 739 [Java](src/lc739.java)

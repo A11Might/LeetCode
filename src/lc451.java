@@ -1,53 +1,77 @@
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.PriorityQueue;
+import java.util.*;
 
 /*
  * @lc app=leetcode.cn id=451 lang=java
  *
  * [451] 根据字符出现频率排序
  * 
- * 题目：将给定字符串中的字符按照出现频率降序排列
+ * 题目: 将给定字符串中的字符按照出现频率降序排列
+ *
+ * 难度: medium
  * 
- * 思路：查找表map
+ * 思路: 查找表map, 1. 堆排序
+ *               2. 桶排序
  */
 class Solution {
+    /**
+     * 时间复杂度: O(n * logn)
+     * 空间复杂度: O(n)
+     */
     public String frequencySort(String s) {
-        if (s == null || s.length() == 0) {
-            return "";
-        }
+        HashMap<Character, Integer> freq = new HashMap<>(); // (char, time)
         // 统计每个字符的出现频率
-        HashMap<Character, Integer> map = new HashMap<>();
         for (int i = 0; i < s.length(); i++) {
-            char cur = s.charAt(i);
-            if (!map.containsKey(cur)) {
-                map.put(cur, 1);
-            } else {
-                map.put(cur, map.get(cur) + 1);
-            }
+            char chr = s.charAt(i);
+            freq.put(chr, freq.getOrDefault(chr, 0) + 1);
         }
 
         // 按出现频率排序字母
-        PriorityQueue<Map.Entry<Character, Integer>> queue = new PriorityQueue<>(new Comparator<Map.Entry<Character, Integer>>() {
-            public int compare(Map.Entry<Character, Integer> o1, Map.Entry<Character, Integer> o2) {
-                return o2.getValue() - o1.getValue();
-            }
-        });
-        for (Map.Entry<Character, Integer> entry : map.entrySet()) {
-            queue.add(entry);
-        }
+        PriorityQueue<Character> queue = new PriorityQueue<>(
+                (o1, o2) -> freq.get(o2) - freq.get(o1)
+        );
+        freq.forEach(
+                (k, v) -> queue.offer(k)
+        );
 
         // 按格式输出
         StringBuilder sb = new StringBuilder();
         while (!queue.isEmpty()) {
-            Map.Entry<Character, Integer> curEntry = queue.poll();
-            for (int i = 0; i < curEntry.getValue(); i++) {
-                sb.append(curEntry.getKey());
+            char chr = queue.poll();
+            for (int i = 0; i < freq.get(chr); i++) {
+                sb.append(chr);
             }
         }
-        
         return sb.toString();
     }
-}
 
+    /**
+     * 时间复杂度: O(n)
+     * 空间复杂度: O(n)
+     */
+    public String frequencySort2(String s) {
+        Map<Character, Integer> frequencyForNum = new HashMap<>();
+        for (char c : s.toCharArray())
+            frequencyForNum.put(c, frequencyForNum.getOrDefault(c, 0) + 1);
+
+        List<Character>[] frequencyBucket = new ArrayList[s.length() + 1];
+        for (char c : frequencyForNum.keySet()) {
+            int f = frequencyForNum.get(c);
+            if (frequencyBucket[f] == null) {
+                frequencyBucket[f] = new ArrayList<>();
+            }
+            frequencyBucket[f].add(c);
+        }
+        StringBuilder str = new StringBuilder();
+        for (int i = frequencyBucket.length - 1; i >= 0; i--) {
+            if (frequencyBucket[i] == null) {
+                continue;
+            }
+            for (char c : frequencyBucket[i]) {
+                for (int j = 0; j < i; j++) {
+                    str.append(c);
+                }
+            }
+        }
+        return str.toString();
+    }
+}
