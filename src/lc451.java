@@ -35,6 +35,8 @@ class Solution {
 
         // 按格式输出
         StringBuilder sb = new StringBuilder();
+        // 优先队列只能保证队首元素符合比较器, 当队首元素弹出时新的队首才会满足比较器(debug发现的)
+        // 所以若使用foreach生成stream, stream中的元素并不是按照比较器排列的, 所以需要一个一个弹出遍历
         while (!queue.isEmpty()) {
             char chr = queue.poll();
             for (int i = 0; i < freq.get(chr); i++) {

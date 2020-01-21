@@ -1,4 +1,5 @@
 import java.util.*;
+import java.util.stream.Collectors;
 
 /*
  * @lc app=leetcode.cn id=347 lang=java
@@ -37,11 +38,7 @@ class Solution {
                 }
         );
 
-        List<Integer> ans = new ArrayList<>();
-        heap.forEach(
-                element -> ans.add(element)
-        );
-        return ans;
+        return heap.stream().collect(Collectors.toList());
     }
 
     /**

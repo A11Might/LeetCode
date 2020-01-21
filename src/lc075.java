@@ -20,7 +20,8 @@ class Solution {
         while (index < big) {
             if (nums[index] == 0) {
                 // 当前++small位置为元素1或者第一个未排序元素, 交换后不需要也不能再次判断当前index位置元素
-                // 若当前++small位置为第一个未排序元素且其为0, 交换后再次判断当前index位置元素, 会再次进入此条件导致small再次自加并交换, 出现错误
+                // 若当前++small位置为第一个未排序元素且其为0, 交换后再次判断当前index位置元素(实际上并无变化)
+                // 然后会再次进入此条件导致small再次自加并交换, 出现错误
                 // 实例[2, 0, 2, 1, 1, 0]
                 swap(nums, ++small, index++);
             } else if (nums[index] == 2) {
