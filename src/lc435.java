@@ -18,19 +18,20 @@ class Solution {
      * 空间复杂度: O(1)
      */
     public int eraseOverlapIntervals(int[][] intervals) {
-        Arrays.sort(intervals, (a, b) -> a[1] - b[1]); // 按照区间结束位置先后排序
-        int start = Integer.MIN_VALUE;
+        Arrays.sort(intervals, (o1, o2) -> o1[1] - o2[1]); // 按照区间结束位置先后排序
+        int end = Integer.MIN_VALUE; // 上一个区间结束的位置
         int ans = 0;
         // 按照结束位置先后选取能够选取的区间, 如下
         // [[1,2], [2,3], [1,3], [3,4]]
         // 先选取[1, 2], 后选取[2, 3], 最后选取[3, 4]
         for (int[] interval : intervals) {
-            // 不能选取的即为需要移除的区间
-            if (interval[0] < start) {
+            if (interval[0] >= end) {
+                // 当前区间可以选取, 更新结束为止
+                end = interval[1];
+            } else {
+                // 当前区间不可以选取, 更新移除区间数
                 ans++;
-                continue;
             }
-            start = interval[1];
         }
 
         return ans;

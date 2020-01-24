@@ -9,17 +9,32 @@
  *
  * 难度: easy
  *
- * 思路: 1. 双指针, s是t的子序列，即s中的所有字符都会按照顺序出现在t中
- *      2. 动态规划, f(i, j)表示长度为i的s的前缀串是否为长度为j的t的前缀串的子序列
+ * 思路: 1. 使用indexOf进行检索查找
+ *      2. 双指针, s是t的子序列，即s中的所有字符都会按照顺序出现在t中
+ *      3. 动态规划, f(i, j)表示长度为i的s的前缀串是否为长度为j的t的前缀串的子序列
  *         状态转移方程: f(i, j) = f(i - 1, j - 1) if cur chars same
  *                              = f(i, j - 1) if cur chars not same
  */
 class Solution {
     /**
+     * 时间复杂度: O(n * m) (jdk8 indexOf()是暴力算法, JDK的编写者们认为大多数情况下, 字符串都不长, 使用原始实现可能代价更低)
+     * 空间复杂度: O(1)
+     */
+    public boolean isSubsequence(String s, String t) {
+        int index = -1;
+        for (char chr : s.toCharArray()) {
+            index = t.indexOf(chr, index + 1);
+            if (index == -1) return false;
+        }
+
+        return true;
+    }
+
+    /**
      * 时间复杂度: O(n)
      * 空间复杂度: O(1)
      */
-    public boolean isSubsequence1(String s, String t) {
+    public boolean isSubsequence2(String s, String t) {
         int indexS = 0, indexT = 0;
         while (indexS < s.length() && indexT < t.length()) {
             if (s.charAt(indexS) == t.charAt(indexT)) {
@@ -37,7 +52,7 @@ class Solution {
      * 时间复杂度: O(m * n)
      * 空间复杂度: O(m * n)
      */
-    public boolean isSubsequence2(String s, String t) {
+    public boolean isSubsequence3(String s, String t) {
         int sLen = s.length(), tLen = t.length();
         int[][] dp = new int[sLen + 1][tLen + 1]; // dp[i][j]表示长度为i的s的前缀串是否为长度为j的t的前缀串的子序列, 1代表是
         // t为空串时

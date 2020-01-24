@@ -13,6 +13,10 @@
  *      二分查找目标元素 - 1的下标加一和目标元素的下标
  */
 class Solution {
+    /**
+     * 时间复杂度: O(logn)
+     * 空间复杂度: O(1)
+     */
     public int[] searchRange(int[] nums, int target) {
         int start = binarySearch(nums, target);
         // 本方法的二分查找返回不大于目标元素的最后一个元素
@@ -36,32 +40,6 @@ class Solution {
             }
         }
         return lo - 1;
-    }
-
-    /**
-     * 同上
-     */
-    public int[] searchRange2(int[] nums, int target) {
-        int start = binarySearch2(nums, target);
-        if (start == nums.length || nums[start] != target) return new int[] {-1, -1};
-        int end = binarySearch2(nums, target + 1) - 1;
-        return new int[] {start, end};
-
-    }
-
-    private int binarySearch2(int[] nums, int target) {
-        int len = nums.length;
-        int lo = 0, hi = len;
-        while (lo < hi) {
-            int mid = lo + ((hi - lo) >> 1);
-            if (nums[mid] >= target) {
-                hi = mid;
-            } else {
-                lo = mid + 1;
-            }
-        }
-
-        return lo;
     }
 }
 

@@ -3,11 +3,11 @@
  *
  * [53] 最大子序和
  * 
- * 题目：给一个数组，返回它的最大连续子数组的和(要求时间复杂度O(n))
+ * 题目: 给一个数组, 返回它的最大连续子数组的和(要求时间复杂度O(n))
  *
  * 难度: easy
  * 
- * 思路：动态规划，f(i)表示以i个元素结尾的子数组的最大和
+ * 思路: 动态规划, f(i)表示以i个元素结尾的子数组的最大和
  *       状态转移方程: f(i) = nums[i] + f(i - 1) if f(i - 1) > 0
  */
 class Solution {
@@ -17,10 +17,8 @@ class Solution {
      */
     public int maxSubArray(int[] nums) {
         int len = nums.length;
-        int ans = Integer.MIN_VALUE;
-        if (len == 0) {
-            return ans;
-        }
+        int ans = Integer.MIN_VALUE; // 实例[], 返回Integer.MIN_VALUE
+        if (len == 0) return ans;
 
         // dp[i]表示以i元素结尾的子数组的最大和
         int[] dp = new int[len];
@@ -33,6 +31,26 @@ class Solution {
             }
             // 实时更新最大连续子数组的和
             ans = dp[i] > ans ? dp[i] : ans;
+        }
+
+        return ans;
+    }
+
+    /**
+     * 同上
+     * 时间复杂度: O(n)
+     * 空间复杂度: O(1)
+     */
+    public int maxSubArray2(int[] nums) {
+        int len = nums.length;
+        int ans = Integer.MIN_VALUE; // 实例[], 返回Integer.MIN_VALUE
+        if (len == 0) return ans;
+
+        int curSum = 0;
+        ans = curSum;
+        for (int num : nums) {
+            curSum = curSum >= 0 ? curSum + num : num;
+            ans = Math.max(curSum, ans);
         }
 
         return ans;

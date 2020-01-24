@@ -7,10 +7,32 @@
  *
  * 难度: easy
  * 
- * 思路: 动态规划
+ * 思路: 1. 贪心算法, 记录目前为止的最小价格, 将这个最小价格作为买入价格, 然后将当前的价格作为售出价格, 查看当前收益是不是最大收益
+ *      2. 动态规划
  */
 class Solution {
+    /**
+     * 时间复杂度: O(n)
+     * 空间复杂度: O(1)
+     */
     public int maxProfit(int[] prices) {
+        if (prices.length == 0) return 0;
+        int soFarMin = prices[0]; // 目前为止的最小价格
+        int profit = 0; // 最大收益
+        for (int price : prices) {
+            if (price < soFarMin) {
+                // 以当前价格买入, 更新目前为止的最小价格
+                soFarMin = price;
+            } else {
+                // 以当前价格卖出, 更新最大利润
+                profit = Math.max(price - soFarMin, profit);
+            }
+        }
+
+        return profit;
+    }
+
+    public int maxProfit2(int[] prices) {
         if (prices.length <= 1) { // 实例 []
             return 0;
         }

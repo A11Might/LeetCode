@@ -19,6 +19,7 @@ class Solution {
      * 空间复杂度: O(1)
      */
     public int findContentChildren(int[] g, int[] s) {
+        if (g == null || s == null) return 0;
         Arrays.sort(g);
         Arrays.sort(s);
         int child = 0, cookie = 0;

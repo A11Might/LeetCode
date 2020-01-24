@@ -8,10 +8,27 @@
  *
  * 难度: easy
  *
- * 思路: 动态规划
+ * 思路: 1. 贪心算法, 当前prices[i] > prices[i-1], 就把prices[i] - prices[i-1]添加到收益中
+ *      2. 动态规划
  */
 class Solution {
+    /**
+     * 时间复杂度: O(n)
+     * 空间复杂度: O(1)
+     */
     public int maxProfit(int[] prices) {
+        if (prices.length == 0) return 0;
+        int profit = 0;
+        for (int i = 1; i < prices.length; i++) {
+            if (prices[i] > prices[i - 1]) {
+                // 当前prices[i] > prices[i-1], 就把prices[i] - prices[i-1]添加到收益中
+                profit += (prices[i] - prices[i - 1]);
+            }
+        }
+        return profit;
+    }
+
+    public int maxProfit2(int[] prices) {
         if (prices.length <= 1) { // 实例 []
             return 0;
         }
