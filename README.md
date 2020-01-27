@@ -1,4 +1,4 @@
-# leetcode 265/1327
+# leetcode 271/1327
 
  001 [Java](src/lc001.java)
 | 002 [Java](src/lc002.java)
@@ -152,6 +152,7 @@
 | 238 [Java](src/lc238.java)
 | 239 [Java](src/lc239.java)
 | 240 [Java](src/lc240.java)
+| 241 [Java](src/lc241.java)
 | 242 [Java](src/lc242.java)
 | 257 [Java](src/lc257.java)
 | 263 [Java](src/lc263.java)
@@ -244,6 +245,7 @@
 | 714 [Java](src/lc714.java)
 | 739 [Java](src/lc739.java)
 | 744 [Java](src/lc744.java)
+| 763 [Java](src/lc763.java)
 | 844 [Java](src/lc844.java)
 | 859 [Java](src/lc859.java)
 | 876 [Java](src/lc876.java)
@@ -265,6 +267,10 @@
 | 1310 [Java](src/lc1310.java)
 | 1311 [Java](src/lc1311.java)
 | 1312 [Java](src/lc1312.java)
+| 1332 [Java](src/lc5319.java)
+| 1333 [Java](src/lc5320.java)
+| 1334 [Java](src/lc5321.java)
+| 1335 [Java](src/lc5322.java)
 
 # 分类
 

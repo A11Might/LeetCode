@@ -94,7 +94,7 @@
 - [8. 判断是否为子序列]() [[java]](../src/lc392.java)
 - [9. 修改一个数成为非递减数组]() [[java]](../src/lc665.java)
 - [10. 子数组最大的和]() [[java]](../src/lc053.java)
-- [11. 分隔字符串使同种字符出现在一起]() [[java]](../src/lc.java)
+- [11. 分隔字符串使同种字符出现在一起]() [[java]](../src/lc763.java)
 
 #### 二分查找
 
@@ -189,6 +189,9 @@ l   m   h
 - [6. 查找区间](https://leetcode-cn.com/problems/find-first-and-last-position-of-element-in-sorted-array/) [[java]](../src/lc034.java)
 
 #### 分治
+
+- [1. 给表达式加括号](https://leetcode-cn.com/problems/different-ways-to-add-parentheses/) [[java]](../src/lc241.java)
+- [2. 不同的二叉搜索树](https://leetcode-cn.com/problems/unique-binary-search-trees-ii/) [[java]](../src/lc095.java)
 
 #### 搜索
 
