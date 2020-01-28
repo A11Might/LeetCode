@@ -18,6 +18,24 @@
  */
 class Solution {
     public boolean canPartition(int[] nums) {
+        int len = nums.length;
+        int sum = 0;
+        for (int num : nums) {
+            sum += num;
+        }
+        if (sum % 2 != 0) return false;
+        return canPartitionCore(nums, sum / 2, 0, 0);
+    }
+
+    private boolean canPartitionCore(int[] nums, int target, int curSum, int index) {
+        if (index == nums.length) return curSum == target;
+        if (curSum == target) return true;
+        if (curSum > target) return false;
+        return canPartitionCore(nums, target, curSum, index + 1) ||
+                canPartitionCore(nums, target, curSum + nums[index], index + 1);
+    }
+
+    public boolean canPartition(int[] nums) {
         if (nums.length <= 1) {
             return false;
         }

@@ -8,48 +8,50 @@ import java.util.*;
  *
  * [127] 单词接龙
  *
- * 题目：在给定字典中找到beginWord到endWord的最短转换序列的长度
- *      (每次转换只能改变一个字母；转换过程中的中间单词必须是字典中的单词)
- *      (若不存在这样的转换序列，返回0；所有单词具有相同的长度，所有单词只有小写字母组成
- *      字典中不存在重复的单词；beginWord和endWord是非空并且不同的)
+ * 题目: 在给定字典中找到beginWord到endWord的最短转换序列的长度
+ *      (每次转换只能改变一个字母; 转换过程中的中间单词必须是字典中的单词)
+ *      (若不存在这样的转换序列, 返回0; 所有单词具有相同的长度, 所有单词只有小写字母组成
+ *      字典中不存在重复的单词; beginWord和endWord是非空并且不同的)
  *
- * 难度：medium
+ * 难度: medium
  *
- * 思路：https://leetcode-cn.com/problems/word-ladder/solution/dan-ci-jie-long-by-leetcode/
- *      对问题建模，整个问题转化为一个图论问题，
- *      将问题抽象在一个无向无权图中，每个单词作为节点，差距只有一个字母的两个单词之间连一条边
- *      问题变成找到从起点到终点的最短路径，如果存在的话
- *      1、广度优先搜索方法
- *      2、双向广度优先搜索
+ * 思路: https://leetcode-cn.com/problems/word-ladder/solution/dan-ci-jie-long-by-leetcode/
+ *      对问题建模, 整个问题转化为一个图论问题,
+ *      将问题抽象在一个无向无权图中, 每个单词作为节点, 差距只有一个字母的两个单词之间连一条边
+ *      问题变成找到从起点到终点的最短路径, 如果存在的话
+ *      1. 广度优先搜索方法, 与lc126方法统一的方法1(bfs模板题)
+ *      2. 双向广度优先搜索
  */
 class Solution {
-    // 与lc126方法统一的方法1
-    public int ladderLengthI(String beginWord, String endWord, List<String> wordList) {
-        if (!wordList.contains(endWord)) {
-            return 0;
-        }
-        HashSet<String> dict = new HashSet<String>(wordList);
-        HashMap<String, Integer> distance = new HashMap<String, Integer>();
-        Deque<String> queue = new ArrayDeque<String>();
+    /**
+     * 时间复杂度: O(m * n) (m为单词长度, n为字典中单词书)
+     * 空间复杂度: O(m * n)
+     */
+    public int ladderLength(String beginWord, String endWord, List<String> wordList) {
+        HashSet<String> dict = new HashSet<>();
+        // 将列表中的单词放入set中方便查找
+        for (String word : wordList) dict.add(word);
+        // 结束单词不在字典中, 则无法完成转换
+        if (!dict.contains(endWord)) return 0;
+
+        HashSet<String> visited = new HashSet<>();
+        Queue<String> queue = new ArrayDeque<>();
         queue.offer(beginWord);
-        distance.put(beginWord, 1);
+        int depth = 0;
         while (!queue.isEmpty()) {
-            int curLevelSize = queue.size();
+            depth++;
+            int size = queue.size();
             // 遍历当前层的每一个节点(类似二叉树的按层打印)
-            for (int i = 0; i < curLevelSize; i++) {
+            while (size-- > 0) {
                 String cur = queue.poll();
-                int curDistance = distance.get(cur);
-                // 当前节点所连接下一层节点
-                ArrayList<String> neighbors = getNeighbors(dict, cur);
-                for (String neighbor : neighbors) {
-                    if (!distance.containsKey(neighbor)) { // distance可以当visited使用
-                        // 找到最短路径
-                        if (neighbor.equals(endWord)) {
-                            return curDistance + 1;
-                        }
-                        queue.offer(neighbor);
-                        distance.put(neighbor, curDistance + 1);
-                    }
+                visited.add(cur);
+                // 遍历当前节点所连接下一层节点
+                for (String neighbor : getNeighbors(cur, dict)) {
+                    if (visited.contains(neighbor)) continue;
+                    // 找到最短路径
+                    if (neighbor.equals(endWord)) return depth + 1;
+                    visited.add(neighbor);
+                    queue.offer(neighbor);
                 }
             }
         }
@@ -58,26 +60,22 @@ class Solution {
     }
 
     // Find all next level nodes
-    private ArrayList<String> getNeighbors(HashSet<String> dict, String word) {
-        ArrayList<String> ans = new ArrayList<String>();
-        int n = word.length();
+    private List<String> getNeighbors(String word, HashSet<String> dict) {
+        List<String> ans = new ArrayList<>();
         char[] chrs = word.toCharArray();
         // 每次替换一个位置为另一个字母，来寻找所有相邻的节点
-        for (int i = 0; i < n; i++) {
+        for (int i = 0; i < chrs.length; i++) {
             for (char chr = 'a'; chr <= 'z'; chr++) {
                 if (chrs[i] == chr) continue;
                 char oldChr = chrs[i];
                 chrs[i] = chr;
-                if (dict.contains(String.valueOf(chrs))) {
-                    ans.add(String.valueOf(chrs));
-                }
+                if (dict.contains(String.valueOf(chrs))) ans.add(String.valueOf(chrs));
                 chrs[i] = oldChr;
             }
         }
 
         return ans;
     }
-
 
     // 与lc126方法统一的方法2
     public int ladderLengthII(String beginWord, String endWord, List<String> wordList) {
@@ -114,7 +112,7 @@ class Solution {
         for (int i = 0; i < levelSize; i++) {
             String cur = queue.poll();
             int curDistance = distance.get(cur);
-            ArrayList<String> neighbors = getNeighbors(dict, cur);
+            List<String> neighbors = getNeighbors(cur, dict);
             for (String neighbor : neighbors) {
                 if (otherDistance.containsKey(neighbor)) {
                     return curDistance + otherDistance.get(neighbor);
@@ -128,27 +126,6 @@ class Solution {
 
         return -1;
     }
-
-//    private ArrayList<String> getNeighbors(HashSet<String> dict, String word) {
-//        int n = word.length();
-//        char[] chrs = word.toCharArray();
-//        ArrayList<String> ans = new ArrayList<String>();
-//        for (int i = 0; i < n; i++) {
-//            for (char chr = 'a'; chr < 'z'; chr++) {
-//                if (chrs[i] == chr) continue;
-//                char oldChr = chrs[i];
-//                chrs[i] = chr;
-//                if (dict.contains(String.valueOf(chrs))) {
-//                    ans.add(String.valueOf(chrs));
-//                }
-//                chrs[i] = oldChr;
-//            }
-//        }
-//
-//        return ans;
-//    }
-
-
 
     // leetcode官方解方法1
     public int ladderLength1(String beginWord, String endWord, List<String> wordList) {
