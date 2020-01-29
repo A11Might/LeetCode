@@ -44,22 +44,22 @@ class Solution {
         if (n == 0) return 0;
         Queue<Integer> queue = new ArrayDeque<>();
         boolean[] visited = new boolean[n + 1]; // 标记当前节点是否访问过
-        // 从n点出发寻找最短路径，当前步数为0
+        // 从n点出发寻找最短路径, 当前步数为0
         queue.add(n);
         visited[n] = true;
         int depth = 0;
         while (!queue.isEmpty()) {
-            depth++; // 层数加一
-            int size = queue.size(); // 当前层的节点数
-            // 遍历当前层的所有节点
+            depth++; // 步数加一
+            int size = queue.size(); // 上一层的节点数
+            // 以上一层遍历到的节点作为起点
             while (size-- > 0) {
                 int cur = queue.poll();
-                // 向所有能走的节点前进
+                // 遍历其能访问到的所有节点
                 for (int i = 1; i * i <= cur; i++) {
                     int next = cur - i * i;
-                    // 走到0点，返回步数
+                    // 走到节点0找到最短路径, 返回步数
                     if (next == 0) return depth;
-                    // 若当前节点之前访问过，则跳过(若再走，步数一定大于之前访问的步数)
+                    // 若当前节点之前访问过, 则跳过(若再走, 步数一定大于之前访问的步数)
                     if (visited[next]) continue;
                     visited[next] = true;
                     queue.add(next);

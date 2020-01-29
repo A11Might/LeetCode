@@ -1,4 +1,4 @@
-# leetcode 272/1327
+# leetcode 274/1327
 
  001 [Java](src/lc001.java)
 | 002 [Java](src/lc002.java)
@@ -227,6 +227,7 @@
 | 538 [Java](src/lc538.java)
 | 540 [Java](src/lc540.java)
 | 543 [Java](src/lc543.java)
+| 547 [Java](src/lc547.java)
 | 557 [Java](src/lc557.java)
 | 560 [Java](src/lc560.java)
 | 581 [Java](src/lc581.java)
@@ -241,6 +242,7 @@
 | 653 [Java](src/lc653.java)
 | 665 [Java](src/lc665.java)
 | 680 [Java](src/lc680.java)
+| 695 [Java](src/lc695.java)
 | 703 [Java](src/lc703.java)
 | 714 [Java](src/lc714.java)
 | 739 [Java](src/lc739.java)

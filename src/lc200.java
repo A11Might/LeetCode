@@ -7,37 +7,40 @@
  *
  * 难度: medium
  * 
- * 思路: floodfill
+ * 思路: dfs, floodfill算法, dfs模板题
  */
 class Solution {
+    /**
+     * 时间复杂度: O(m * n)
+     * 空间复杂度: O(m * n)
+     */
+    private int rows, cols;
+    private int[][] direction = {{1, 0}, {0, 1}, {-1, 0}, {0, -1}};
     public int numIslands(char[][] grid) {
-        if (grid.length == 0 || grid == null) { // 实例 [], grid[0].length数组越界
-            return 0;
-        }
-        int rows = grid.length, cols = grid[0].length;
+        if (grid == null || grid.length == 0) return 0; // 实例 [], grid[0].length数组越界
+        rows = grid.length;
+        cols = grid[0].length;
         boolean[][] visited = new boolean[rows][cols];
-        int ans = 0;
+        int islandsNum = 0; // 当前岛屿的数量
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
-                if (grid[i][j] == '1' && !visited[i][j]) {
-                    ans++;
-                    dfs(grid, visited, i, j);
-                }
+                if (grid[i][j] == '0' || visited[i][j]) continue;
+                islandsNum++;
+                dfs(grid, visited, i, j);
             }
         }
 
-        return ans;
+        return islandsNum;
     }
 
     // 从grid[row][col]位置, 进行floodfill
-    // 保证(row, col)合法, 且grid[row][col]是没有被访问过的陆地
-    private void dfs(char[][] grid, boolean[][] visited, int row, int col) {
-        if (0 <= row && row < grid.length && 0 <= col && col < grid[0].length && grid[row][col] == '1' && !visited[row][col]) {
-            visited[row][col] = true;
-            dfs(grid, visited, row + 1, col);
-            dfs(grid, visited, row - 1, col);
-            dfs(grid, visited, row, col + 1);
-            dfs(grid, visited, row, col - 1);
+    // 保证(row, col)合法为1, 且grid[row][col]是没有被访问过的陆地
+    private void dfs(char[][] grid, boolean[][] visited, int i, int j) {
+        if (i < 0 || i >= rows || j < 0 || j >= cols ||
+                grid[i][j] == '0' || visited[i][j]) return;
+        visited[i][j] = true;
+        for (int[] d : direction) {
+            dfs(grid, visited, i + d[0], j + d[1]);
         }
     }
 }
