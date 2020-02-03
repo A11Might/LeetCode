@@ -1,4 +1,4 @@
-# leetcode 274/1327
+# LeetCode 274/1327
 
  001 [Java](src/lc001.java)
 | 002 [Java](src/lc002.java)

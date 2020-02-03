@@ -3,23 +3,33 @@
  *
  * [79] 单词搜索
  * 
- * 题意：在给定的网格中按字母顺序查找单词，网格中的字母不能重复使用
+ * 题意: 在给定的网格中按字母顺序查找单词, 网格中的字母不能重复使用
  *
  * 难度: medium
  * 
- * 思路：回溯(剪枝, 看当前字母是否对应Word中的字母(我傻乎乎的搞了个curStr))
+ * 思路: 回溯(剪枝, 看当前字母是否对应Word中的字母(我傻乎乎的搞了个curStr))
  * 
- * Tips：递归只看两步，这一步和下一步，在下一步已解决的情况下，考虑怎么解决这一步
+ * Tips: 递归只看两步, 这一步和下一步, 在下一步已解决的情况下, 考虑怎么解决这一步
  */
 class Solution {
+    /**
+     * 时间复杂度: O((m * n) ^2)
+     * 空间复杂度: O(m * n)
+     */
+    private int rows, cols, len;
+    private int[][] direction = {{1, 0}, {0, 1}, {-1, 0}, {0, -1}};
     public boolean exist(char[][] board, String word) {
-        int row = board.length, col = board[0].length;
-        boolean[][] visited = new boolean[row][col];
-        // 遍历整个矩阵，当遇到与单词首字母相同的格子时，开始回溯
-        for (int i = 0; i < row; ++i) {
-            for (int j = 0; j < col; ++j) {
-                if (board[i][j] == word.charAt(0) && process(board, word, 0, i, j, visited)) {
-                    return true;
+        if (word == null || word.length() == 0) return true;
+        if (board == null || board.length == 0 || board[0].length == 0) return false;
+        rows = board.length;
+        cols = board[0].length;
+        len = word.length();
+        boolean[][] visited = new boolean[rows][cols];
+        // 遍历整个矩阵, 当遇到与单词首字母相同的格子时, 开始dfs
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                if (board[i][j] == word.charAt(0)) {
+                    if (dfs(board, word, visited, i, j, 0)) return true;
                 }
             }
         }
@@ -27,24 +37,18 @@ class Solution {
         return false;
     }
 
-    // 回溯从当前格子开始是否能找到单词
-    private boolean process(char[][] board, String word, int index, int i, int j, boolean[][] visited) {
-        if (index == word.length()) {
-            return true;
-        }
-        if (i < 0 || i >= board.length || j < 0 || j >= board[0].length 
-        || board[i][j] != word.charAt(index) || visited[i][j] == true) {
-            return false;
-        }
-        // 从四个方向找
+    // dfs从当前格子开始是否能找到单词
+    private boolean dfs(char[][] board, String word, boolean[][] visited, int i, int j, int index) {
+        if (index == word.length()) return true;
+        if (i < 0 || i >= rows || j < 0 || j >= cols ||
+                board[i][j] != word.charAt(index) ||  visited[i][j]) return false;
         visited[i][j] = true;
-        if (process(board, word, index + 1, i + 1, j, visited) 
-        || process(board, word, index + 1, i, j + 1, visited)
-        || process(board, word, index + 1, i - 1, j, visited)
-        || process(board, word, index + 1, i, j - 1, visited)) {
-            return true;
+        // 向四个方向寻找
+        for (int[] d : direction) {
+            if (dfs(board, word, visited, i + d[0], j + d[1], index + 1)) return true;
         }
-        visited[i][j] = false; // 还原visited矩阵，防止对exist函数下一次调用回溯操作产生影响 <-----我真的干了
+        visited[i][j] = false; // 回溯, 还原visited矩阵, 防止对exist函数下一次调用回溯操作产生影响 <-----我真的干了
+
         return false;
     }
 }

@@ -6,18 +6,15 @@ import java.util.*;
  *
  * [257] 二叉树的所有路径
  *
- * 题目：返回给定二叉树从根节点到叶子结点的路径
+ * 题目: 返回给定二叉树从根节点到叶子结点的路径
  *
- * 难度：easy
+ * 难度: easy
  *
- * 思路：同lc112路径总和
- *      1、递归,
- *           如果当前的节点是叶子节点，则在当前的路径末尾添加该节点后，就得到了一条从根节点到
- *           叶子节点的路径，可以把该路径加入到答案中
- *           如果当前的节点不是叶子节点，则在当前的路径末尾添加该节点，并递归遍历该节点的每一
- *           个孩子节点
- *      2、迭代，bfs(队列中方的是node, path)，若当前节点是叶子节点，则将它对应的路径加入到答案中
- *      3、波波老师的递归
+ * 思路: 同lc112路径总和
+ *      1. 回溯, 如果当前的节点是叶子节点, 则在当前的路径末尾添加该节点后, 就得到了一条从根节点到叶子节点的路径, 可以把该路径加入到答案中
+ *             如果当前的节点不是叶子节点, 则在当前的路径末尾添加该节点, 并递归遍历该节点的每一个孩子节点
+ *      2. 迭代, bfs(队列中方的是node, path), 若当前节点是叶子节点, 则将它对应的路径加入到答案中
+ *      3. 波波老师的递归
  */
 /**
  * Definition for a binary tree node.
@@ -29,24 +26,30 @@ import java.util.*;
  * }
  */
 class Solution {
-    public List<String> binaryTreePaths1(TreeNode root) {
-        List<String> paths = new ArrayList<>();
-        dfs(root, "", paths);
-        return paths;
+    /**
+     * 时间复杂度: O(n)
+     * 空间复杂度: O(n) (递归栈的深度是n)
+     */
+    public List<String> binaryTreePaths(TreeNode root) {
+        if (root == null) return Collections.emptyList();
+        List<String> ans = new ArrayList<>();
+        dfs(root, "", ans);
+
+        return ans;
     }
 
-    private void dfs(TreeNode root, String path, List<String> paths) {
-        if (root == null) {
-            return;
+    private void dfs(TreeNode node, String curStr, List<String> ans) {
+        if (node == null) return;
+        if (curStr.length() != 0) curStr += "->";
+        curStr = curStr + node.val; // string和基础类型变量一样, 参数传递的是值拷贝
+        // 当前节点是叶子节点(不能在空节点时将路径加入到答案中, 空间点不一定是路径, 是路径的话有两个相同的路径, 一个叶子结点有两个空节点)
+        if (node.left == null && node.right == null) {
+            ans.add(curStr); // 把路径加入到答案中
+            return ;
         }
-        path += Integer.toString(root.val); // string基础类型变量一样，参数传递的是拷贝份
-        if ((root.left == null) && (root.right == null)) // 当前节点是叶子节点
-            paths.add(path); // 把路径加入到答案中
-        else {
-            path += "->"; // 当前节点不是叶子节点，继续递归遍历
-            dfs(root.left, path, paths);
-            dfs(root.right, path, paths);
-        }
+        // 当前节点不是叶子节点
+        dfs(node.left, curStr, ans);
+        dfs(node.right, curStr, ans);
     }
 
     public List<String> binaryTreePaths2(TreeNode root) {
@@ -79,7 +82,7 @@ class Solution {
     }
 
     // 波波老师的递归
-    public List<String> binaryTreePaths(TreeNode root) {
+    public List<String> binaryTreePaths3(TreeNode root) {
         List<String> ans = new ArrayList<>();
         if (root == null) {
             return ans;

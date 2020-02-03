@@ -6,7 +6,7 @@
     - [贪心思想](#贪心思想)
     - [二分查找](#二分查找)
     - [分治](#分治)
-    - [搜索](#搜索)
+    - [搜索(推荐阅读)](#搜索)
     - [动态规划](#动态规划)
     - [数学](#数学)
     
@@ -70,7 +70,7 @@
 
 #### 贪心思想
 
-贪心算法一般用来解决需要"找到要做某事的最小数量"或"找到在某些情况下适合的最大物品数量"的问题, 且提供的是无序的输入
+贪心算法一般用来解决需要 "找到要做某事的最小数量" 或 "找到在某些情况下适合的最大物品数量" 的问题, 且提供的是无序的输入
 
 贪心算法的思想是每一步都选择最佳解决方案, 最终获得全局最佳的解决方案
 
@@ -125,25 +125,27 @@ public int binarySearch(int[] nums, int key) {
 
 时间复杂度
 
-二分查找也称为折半查找，每次都能将查找区间减半，这种折半特性的算法时间复杂度为 O(logN)。
+二分查找也称为折半查找, 每次都能将查找区间减半, 这种折半特性的算法时间复杂度为 O(logn)
 
 m 计算
 
-有两种计算中值 m 的方式：
+有两种计算中值 m 的方式: 
 
 - m = (l + h) / 2
 - m = l + (h - l) / 2
-l + h 可能出现加法溢出，也就是说加法的结果大于整型能够表示的范围。但是 l 和 h 都为正数，因此 h - l 不会出现加法溢出问题。所以，最好使用第二种计算法方法。
+
+l + h 可能出现加法溢出, 也就是说加法的结果大于整型能够表示的范围. 但是 l 和 h 都为正数, 因此 h - l 不会出现加法溢出问题. 所以, 最好使用第二种计算法方法.
 
 未成功查找的返回值
 
-循环退出时如果仍然没有查找到 key，那么表示查找失败。可以有两种返回值：
+循环退出时如果仍然没有查找到 key, 那么表示查找失败. 可以有两种返回值: 
 
-- -1：以一个错误码表示没有查找到 key
-- l：将 key 插入到 nums 中的正确位置
+- -1: 以一个错误码表示没有查找到 key
+- l: 将 key 插入到 nums 中的正确位置
+
 变种
 
-二分查找可以有很多变种，实现变种要注意边界值的判断。例如在一个有重复元素的数组中查找 key 的最左位置的实现如下：
+二分查找可以有很多变种, 实现变种要注意边界值的判断. 例如在一个有重复元素的数组中查找 key 的最左位置的实现如下: 
 
 ```java
 public int binarySearch(int[] nums, int key) {
@@ -160,15 +162,15 @@ public int binarySearch(int[] nums, int key) {
 }
 ```
 
-该实现和正常实现有以下不同：
+该实现和正常实现有以下不同: 
 
 - h 的赋值表达式为 h = m
 - 循环条件为 l < h
 - 最后返回 l 而不是 -1
 
-在 nums[m] >= key 的情况下，可以推导出最左 key 位于 [l, m] 区间中，这是一个闭区间。h 的赋值表达式为 h = m，因为 m 位置也可能是解。
+在 nums[m] >= key 的情况下, 可以推导出最左 key 位于 [l, m] 区间中, 这是一个闭区间. h 的赋值表达式为 h = m, 因为 m 位置也可能是解.
 
-在 h 的赋值表达式为 h = m 的情况下，如果循环条件为 l <= h，那么会出现循环无法退出的情况，因此循环条件只能是 l < h。以下演示了循环条件为 l <= h 时循环无法退出的情况：
+在 h 的赋值表达式为 h = m 的情况下, 如果循环条件为 l <= h, 那么会出现循环无法退出的情况, 因此循环条件只能是 l < h. 以下演示了循环条件为 l <= h 时循环无法退出的情况: 
 
 ```
 nums = {0, 1, 2}, key = 1
@@ -179,7 +181,7 @@ l   m   h
 1   1   1  nums[m] >= key
 ...
 ```
-当循环体退出时，不表示没有查找到 key，因此最后返回的结果不应该为 -1。为了验证有没有查找到，需要在调用端判断一下返回位置上的值和 key 是否相等。
+当循环体退出时, 不表示没有查找到 key, 因此最后返回的结果不应该为 -1. 为了验证有没有查找到, 需要在调用端判断一下返回位置上的值和 key 是否相等.
 
 - [1. 求开方](https://leetcode-cn.com/problems/sqrtx/description/) [[java]](../src/lc069.java)
 - [2. 大于给定元素的最小元素](https://leetcode-cn.com/problems/find-smallest-letter-greater-than-target/description/) [[java]](../src/lc744.java)
@@ -244,14 +246,43 @@ l   m   h
     栈: 用栈来保存当前节点信息, 当遍历新节点返回时能够继续遍历当前节点. 可以使用递归栈.
     标记: 和 BFS 一样同样需要对已经遍历过的节点进行标记.
 
-    - [1. 矩阵中的连通分量数目]() [[java]](../src/lc200.java)
-    - [2. 查找最大的连通面积]() [[java]](../src/lc695.java)
-    - [3. 好友关系的连通分量数目]() [[java]](../src/lc547.java)
-    - [4. 填充封闭区域]() [[java]](../src/lc130.java)
-    - [5. 能到达的太平洋和大西洋的区域]() [[java]](../src/lc417.java)
+    - [1. 矩阵中的连通分量数目](https://leetcode-cn.com/problems/number-of-islands/description/) [[java]](../src/lc200.java)
+    - [2. 查找最大的连通面积](https://leetcode-cn.com/problems/max-area-of-island/description/) [[java]](../src/lc695.java)
+    - [3. 好友关系的连通分量数目](https://leetcode-cn.com/problems/friend-circles/description/) [[java]](../src/lc547.java)
+    - [4. 填充封闭区域](https://leetcode-cn.com/problems/surrounded-regions/description/) [[java]](../src/lc130.java)
+    - [5. 能到达的太平洋和大西洋的区域](https://leetcode-cn.com/problems/pacific-atlantic-water-flow/description/) [[java]](../src/lc417.java)
+    
+- Backtracking
+
+    Backtracking(回溯)属于 DFS.
+    
+    普通 DFS 主要用在 `可达性问题` , 这种问题只需要执行到特点的位置然后返回即可.
+    而 Backtracking 主要用于求解 `排列组合` 问题, 例如有 { 'a', 'b', 'c' } 三个字符, 求解所有由这三个字符排列得到的字符串, 这种问题在执行到特定的位置返回之后还会继续执行求解过程.
+    因为 Backtracking 不是立即返回, 而要继续求解, 因此在程序实现时, 需要注意对元素的标记问题: 
+    
+    1. 在访问一个新元素进入新的递归调用时, 需要将新元素标记为已经访问, 这样才能在继续递归调用时不用重复访问该元素;
+    2. 但是在递归返回时, 需要将元素标记为未访问, 因为只需要保证在一个递归链中不同时访问一个元素, 可以访问已经访问过但是不在当前递归链中的元素.
+
+    - [1. 数字键盘组合](https://leetcode-cn.com/problems/letter-combinations-of-a-phone-number/description/) [[java]](../src/lc017.java)
+    - [2. IP 地址划分](https://leetcode-cn.com/problems/restore-ip-addresses/description/) [[java]](../src/lc093.java)
+    - [3. 在矩阵中寻找字符串](https://leetcode-cn.com/problems/word-search/description/) [[java]](../src/lc079.java)
+    - [4. 输出二叉树中所有从根到叶子的路径](https://leetcode-cn.com/problems/binary-tree-paths/description/) [[java]](../src/lc257.java)
+    - [5. 排列](https://leetcode-cn.com/problems/permutations/description/) [[java]](../src/lc046.java)
+    - [6. 含有相同元素求排列](https://leetcode-cn.com/problems/permutations-ii/description/) [[java]](../src/lc047.java)
+    - [7. 组合](https://leetcode-cn.com/problems/combinations/description/) [[java]](../src/lc077.java)
+    - [8. 组合求和](https://leetcode-cn.com/problems/combination-sum/description/) [[java]](../src/lc039.java)
+    - [9. 含有相同元素的组合求和](https://leetcode-cn.com/problems/combination-sum-ii/description/) [[java]](../src/lc040.java)
+    - [10. 1-9 数字的组合求和](https://leetcode-cn.com/problems/combination-sum-iii/description/) [[java]](../src/lc216.java)
+    - [11. 子集](https://leetcode-cn.com/problems/subsets/description/) [[java]](../src/lc078.java)
+    - [12. 含有相同元素求子集](https://leetcode-cn.com/problems/subsets-ii/description/) [[java]](../src/lc090.java)
+    - [13. 分割字符串使得每个部分都是回文数](https://leetcode-cn.com/problems/palindrome-partitioning/description/) [[java]](../src/lc131.java)
+    - [14. 数独](https://leetcode-cn.com/problems/sudoku-solver/description/) [[java]](../src/lc037.java)
+    - [15. N 皇后](https://leetcode-cn.com/problems/n-queens/description/) [[java]](../src/lc051.java)
     
     
 #### 动态规划
+
+   递归和动态规划都是将原问题拆成多个子问题然后求解, 他们之间最本质的区别是, 动态规划保存了子问题的解, 避免重复计算
 
 #### 数学
 

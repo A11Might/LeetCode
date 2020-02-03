@@ -15,21 +15,23 @@ import java.util.List;
  * 思路: 回溯
  */
 class Solution {
+    /**
+     * 时间复杂度: O(1)
+     * 空间复杂度: O(1)
+     */
     public List<List<Integer>> combinationSum3(int k, int n) {
         List<List<Integer>> ans = new ArrayList<>();
-        dfs(k, n, 1, 0, new ArrayList<>(), ans);
+        dfs(k, n, 1, 0, new ArrayList(), ans);
 
         return ans;
     }
 
     private void dfs(int k, int n, int index, int curSum, List<Integer> sublist, List<List<Integer>> ans) {
-        if (sublist.size() == k) {
-            if (curSum == n) {
-                ans.add(new ArrayList<>(sublist));
+        // 统一处理边界条件
+        if (sublist.size() == k || curSum >= n) {
+            if (sublist.size() == k && curSum == n) {
+                ans.add(new ArrayList(sublist));
             }
-            return;
-        }
-        if (curSum > n) {
             return;
         }
         // 使用index, 得到集合的数字会按1-9中的顺序排列
@@ -38,8 +40,9 @@ class Solution {
         // index相当于背包问题的当前index位置数字放与不放
         for (int i = index; i <= 9; i++) {
             sublist.add(i);
-            dfs(k, n, i + 1, curSum + i, sublist, ans); // index = i + 1, 每个元素只用一次
-            sublist.remove(sublist.size() - 1);
+            // index = i + 1, 不重复使用数组中的元素
+            dfs(k, n, i + 1, curSum + i, sublist, ans);
+            sublist.remove(sublist.size() - 1); // 回溯
         }
     }
 }
