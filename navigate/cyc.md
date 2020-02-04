@@ -224,8 +224,10 @@ l   m   h
 
     在程序实现 BFS 时需要考虑以下问题:
 
-    - 队列: 用来存储每一轮遍历得到的节点;
-    - 标记: 对于遍历过的节点, 应该将它标记, 防止重复遍历.
+    1. 队列: 用来存储每一轮遍历得到的节点;
+    2. 标记: 对于遍历过的节点, 应该将它标记, 防止重复遍历.
+
+    例题: 
     
     - [1. 计算在网格中从原点到特定点的最短路径长度](https://leetcode-cn.com/problems/shortest-path-in-binary-matrix/) [[java]](../src/lc1091.java)
     - [2. 组成整数的最小平方数数量](https://leetcode-cn.com/problems/perfect-squares/) [[java]](../src/lc279.java)
@@ -263,6 +265,8 @@ l   m   h
     1. 在访问一个新元素进入新的递归调用时, 需要将新元素标记为已经访问, 这样才能在继续递归调用时不用重复访问该元素;
     2. 但是在递归返回时, 需要将元素标记为未访问, 因为只需要保证在一个递归链中不同时访问一个元素, 可以访问已经访问过但是不在当前递归链中的元素.
 
+    例题: 
+    
     - [1. 数字键盘组合](https://leetcode-cn.com/problems/letter-combinations-of-a-phone-number/description/) [[java]](../src/lc017.java)
     - [2. IP 地址划分](https://leetcode-cn.com/problems/restore-ip-addresses/description/) [[java]](../src/lc093.java)
     - [3. 在矩阵中寻找字符串](https://leetcode-cn.com/problems/word-search/description/) [[java]](../src/lc079.java)
@@ -282,13 +286,26 @@ l   m   h
     
 #### 动态规划
 
-   递归和动态规划都是将原问题拆成多个子问题然后求解, 他们之间最本质的区别是, 动态规划保存了子问题的解, 避免重复计算
+   递归和动态规划都是将原问题拆成多个子问题然后求解, 他们之间最本质的区别是, 动态规划保存了子问题的解, 避免重复计算.
 
 #### 数学
 
 ## 数据结构相关
 
 #### 链表
+
+链表是空节点, 或者有一个值和一个指向下一个链表的指针, 因此很多链表问题可以用递归来处理.
+
+- [1. 找出两个链表的交点](https://leetcode-cn.com/problems/intersection-of-two-linked-lists/description/) [[java]](../src/lc160.java)
+- [2. 链表反转](https://leetcode-cn.com/problems/reverse-linked-list/description/) [[java]](../src/lc206.java)
+- [3. 归并两个有序的链表](https://leetcode-cn.com/problems/merge-two-sorted-lists/description/) [[java]](../src/lc021.java)
+- [4. 从有序链表中删除重复节点](https://leetcode-cn.com/problems/remove-duplicates-from-sorted-list/description/) [[java]](../src/lc083.java)
+- [5. 删除链表的倒数第 n 个节点](https://leetcode-cn.com/problems/remove-nth-node-from-end-of-list/description/) [[java]](../src/lc019.java)
+- [6. 交换链表中的相邻结点](https://leetcode-cn.com/problems/swap-nodes-in-pairs/description/) [[java]](../src/lc024.java)
+- [7. 链表求和](https://leetcode-cn.com/problems/add-two-numbers-ii/description/) [[java]](../src/lc445.java)
+- [8. 回文链表](https://leetcode-cn.com/problems/palindrome-linked-list/description/) [[java]](../src/lc234.java)
+- [9. 分隔链表](https://leetcode-cn.com/problems/split-linked-list-in-parts/description/) [[java]](../src/lc725.java)
+- [10. 链表元素按奇偶聚集](https://leetcode-cn.com/problems/odd-even-linked-list/description/) [[java]](../src/lc328.java)
 
 #### 树
 

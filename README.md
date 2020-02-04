@@ -1,4 +1,4 @@
-# LeetCode 274/1327
+# LeetCode 275/1345
 
  001 [Java](src/lc001.java)
 | 002 [Java](src/lc002.java)
@@ -245,6 +245,7 @@
 | 695 [Java](src/lc695.java)
 | 703 [Java](src/lc703.java)
 | 714 [Java](src/lc714.java)
+| 725 [Java](src/lc725.java)
 | 739 [Java](src/lc739.java)
 | 744 [Java](src/lc744.java)
 | 763 [Java](src/lc763.java)
