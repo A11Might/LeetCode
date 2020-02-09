@@ -1,19 +1,23 @@
-import java.util.ArrayList;
-import java.util.Deque;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 /*
  * @lc app=leetcode.cn id=145 lang=java
  *
  * [145] 二叉树的后序遍历
  * 
- * 题目：返回二叉树的后序遍历
+ * 题目: 返回二叉树的后序遍历
+ *
+ * 难度: hard
  * 
- * 思路：1、递归
- *      2、迭代，空间复杂度O(2N)
- *      3、迭代，空间复杂度O(N)
- *      4、Morris遍历
+ * 思路: 1. 递归
+ *      2. 迭代
+ *      3. 迭代
+ *      3. Morris遍历, 将当前节点记为cur
+ *                    a. 如果cur无左孩子, cur向右移动
+ *                    b. 如果cur有左孩子, 找到cur左孩子的最右节点, 记为mostRight
+ *                       i.  如果mostRight.right指针指向null, 让其指向cur, cur向左移动
+ *                       ii. 如果mostRight.right指针指向cur, 让其指回null, cur向右移动
+ *                    c. 如果cur为空, morris遍历结束
  */
 /**
  * Definition for a binary tree node.
@@ -25,66 +29,64 @@ import java.util.List;
  * }
  */
 class Solution {
-    public List<Integer> res = new LinkedList<>();
+    /**
+     * 时间复杂度: O(n)
+     * 空间复杂度: O(h) (h为二叉树的高度)
+     */
+    private List<Integer> res = new ArrayList<>();
     public List<Integer> postorderTraversal1(TreeNode root) {
-        if (root == null) {
-            return res;
-        }
-        return process(root);
-    }
-
-    private List<Integer> process(TreeNode node) {
-        if (node == null) {
-            return null;
-        }
-        process(node.left);
-        process(node.right);
-        res.add(node.val);
+        dfs(root);
         return res;
     }
 
-    // 用两个栈实现后序遍历（改造先序遍历）
-    public List<Integer> postorderTraversal2(TreeNode root) {
-        if (root == null) {
-            return new ArrayList<>();
-        }
-        List<Integer> res = new LinkedList<>();
-        Deque<TreeNode> stack = new LinkedList<>(); // 弹出顺序中右左
-        Deque<Integer> help = new LinkedList<>(); // 弹出顺序左右中
+    private void dfs(TreeNode node) {
+        if (node == null) return;
+        dfs(node.left);
+        dfs(node.right);
+        res.add(node.val);
+    }
+
+    /**
+     * 改造先序遍历实现后序遍历(左神用两个栈实现后序遍历不太行啊, 直接用链表向前存结点即可)
+     * 时间复杂度: O(n)
+     * 空间复杂度: O(n) (n为树的高度即递归栈的深度)
+     */
+    public List<Integer> postorderTraversal(TreeNode root) {
+        if (root == null) return Collections.emptyList();
+        LinkedList<Integer> ans = new LinkedList<>();
+        Deque<TreeNode> stack = new ArrayDeque<>();
         stack.push(root);
         while (!stack.isEmpty()) {
+            // 按照中-右-左的顺序遍历树
+            // 每遍历一个结点则将其放在上一个结点之前, 则ans中的结点顺序即为左-右-中(后序遍历)
             TreeNode cur = stack.pop();
-            help.push(cur.val);
-            // 栈中先压左，再压右，弹出顺序为先右后左
-            if (cur.left != null) {
-                stack.push(cur.left);
-            }
-            if (cur.right != null) {
-                stack.push(cur.right);
-            }
+            ans.addFirst(cur.val);
+            if (cur.left != null) stack.push(cur.left);
+            if (cur.right != null) stack.push(cur.right);
         }
-        while (!help.isEmpty()) {
-            res.add(help.pop());
-        }
-        return res;
+
+        return ans;
     }
 
-    // 用一个栈实现后序遍历
-    public List<Integer> postorderTraversal3(TreeNode root) {
-        if (root == null) {
-            return new ArrayList<>();
-        }
-        List<Integer> res = new LinkedList<>();
-        Deque<TreeNode> stack = new LinkedList<>();
+    /**
+     * 后序遍历的另一种迭代实现
+     * 时间复杂度: O(n)
+     * 空间复杂度: O(n) (n为树的高度即递归栈的深度)
+     */
+    public List<Integer> postorderTraversal2(TreeNode root) {
+        if (root == null) return Collections.emptyList();
+        List<Integer> res = new ArrayList<>();
+        Deque<TreeNode> stack = new ArrayDeque<>();
         stack.push(root);
-        TreeNode cur = null;
-        //用visited标记打印过的最后一个点，初始化为第一个节点，因为它不在判断内容里
-        // 若初始化为null，则会漏打节点，如[1,null,2,3]中，会漏掉3这个节点
-        // 当cur == 2时，cur.left != null & visited != cur.left但是visited == cur.right == null
+        // 用visited标记打印过的最后一个点, 并初始化为第一个节点(important)
+        // 因为当前遍历顺序是后续遍历(顺序为左-右-中), 通过判断当前遍历到的结点的左右子结点是否遍历过来决定当前遍历到的结点是否应该打印.
+        // 所以root是第一个遍历的结点, 它会判断它的左右子结点是否遍历, 因而visited可以初始化为root(不会影响判断)
+        // 但若将visited初始化为null, 则会漏打节点, 如[1, null , 2, 3]中, 会漏掉3这个节点
+        // 因为当cur == 2时, cur.left != null && visited != cur.left但是visited == cur.right == null. 会将3跳过
         TreeNode visited = root;
         while (!stack.isEmpty()) {
-            cur = stack.peek();
-            if (cur.left != null && visited != cur.left && visited != cur.right) {
+            TreeNode cur = stack.peek();
+            if (cur.left != null && cur.right != visited && cur.left != visited) {
                 stack.push(cur.left);
             } else if (cur.right != null && cur.right != visited) {
                 stack.push(cur.right);
@@ -93,19 +95,21 @@ class Solution {
                 visited = cur;
             }
         }
+
         return res;
     }
 
-    // 后序遍历，逆序打印真的第二次回到自己的节点左子树的右边界，函数退出前打印整棵树的右边界
-    public List<Integer> ans = new LinkedList<>();
+    /**
+     * Morris后序遍历, 逆序打印真的第二次回到自己的节点左子树的右边界, 并在函数退出前打印整棵树的右边界
+     * 时间复杂度: O(n)
+     * 空间复杂度: O(n) (n为树的高度即递归栈的深度)
+     */
+    private List<Integer> ans = new ArrayList<>();
     public List<Integer> postorderTraversal4(TreeNode root) {
-        if (root == null) {
-            return new ArrayList<>();
-        }
+        if (root == null) return Collections.emptyList();
         TreeNode cur = root;
-        TreeNode mostRight = null;
         while (cur != null) {
-            mostRight = cur.left;
+            TreeNode mostRight = cur.left;
             if (mostRight != null) {
                 while (mostRight.right != null && mostRight.right != cur) {
                     mostRight = mostRight.right;
@@ -115,14 +119,16 @@ class Solution {
                     cur = cur.left;
                 } else {
                     mostRight.right = null;
-                    printEdge(cur.left); // 先恢复左子树，再逆序存储左子树的右边界
+                    // 先恢复左子树(防止成环, 进入死循环), 再逆序存储左子树的右边界
+                    printEdge(cur.left);
                     cur = cur.right;
                 }
             } else {
                 cur = cur.right;
             }
         }
-        printEdge(root); // 逆序存储整棵树的右边界
+        // 逆序存储整棵树的右边界
+        printEdge(root);
         return ans;
     }
 
@@ -139,9 +145,7 @@ class Solution {
 
     // 反转当前节点右边界
     private TreeNode reverseEdge(TreeNode from) {
-        TreeNode pre = null;
-        TreeNode cur = from;
-        TreeNode succ = null;
+        TreeNode pre = null, cur = from, succ = null;
         while (cur != null) {
             succ = cur.right;
             cur.right = pre;

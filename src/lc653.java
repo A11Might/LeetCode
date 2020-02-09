@@ -12,7 +12,7 @@ import java.util.HashSet;
  *
  * 思路: 1. 同[1] 两数之和, 遍历(先序遍历或者层次遍历, 这样存入表中和未存入表中的数据存在先后关系, 才不会重复使用)
  *          将元素插入到表中的同时, 检查表中是否已经存在加上当前元素和等于目标元素的元素
- *      2. 利用BST的性质, BST中序遍历序列是升序, 解法同[167] 两数之和 II - 输入有序数组
+ *      2. BST中序遍历序列是升序, 解法同[167] 两数之和 II - 输入有序数组, 使用中序遍历得到有序列表之后, 再利用双指针对数组进行查找(get(index))
  */
 /**
  * Definition for a binary tree node.
@@ -26,11 +26,10 @@ import java.util.HashSet;
 class Solution {
     /**
      * 时间复杂度: O(n)
-     * 空间复杂度: O(n)
+     * 空间复杂度: O(n) (n为树的高度即递归栈的深度)
      */
     public boolean findTarget(TreeNode root, int k) {
-        HashSet<Integer> dict = new HashSet<>();
-        return findTargetCore(root, k, dict);
+        return findTargetCore(root, k, new HashSet());
     }
 
     private boolean findTargetCore(TreeNode root, int k, HashSet<Integer> dict) {

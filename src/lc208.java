@@ -3,72 +3,72 @@
  *
  * [208] 实现 Trie (前缀树)
  * 
- * 题目：实现一个 Trie (前缀树)，包含 insert, search, 和 startsWith 这三个操作(所有输入均为非空字符串)
- * 
- * 思路：节点上保存次数，路径上保存字符(方便实现)
- *      如ab：root(0, 0, nexts[a - 'a']) --> (1, 0, nexts[b - 'b']) --> (1, 1, null);
+ * 题目: 实现一个 Trie (前缀树), 包含 insert, search, 和 startsWith 这三个操作
+ *      (所有输入都是由小写字母a-z组成; 所有输入均为非空字符串)
+ *
+ * 难度: medium
+ *
+ * 思路: 将字符保存在路径上, 因为字符集只有小写字母, 所以使用大小为26的布尔数组即可保存所有种类字符.
  */
 class Trie {
-    public class TrieNode {
-        public int path; // 经过该节点的字符串个数
-        public int end; // 依该节点结尾的字符串个数
-        public TrieNode[] nexts; // 表示路径(所有的输入都是由小写字母 a-z 构成的)
+    private class TrieNode {
+        TrieNode[] next;
+        boolean end;
 
-        public TrieNode() {
-            path = 0;
-            end = 0;
-            nexts = new TrieNode[26];
+        TrieNode() {
+            next = new TrieNode[26];
+            end = false;
         }
     }
 
-    public TrieNode root;
+    private TrieNode root;
 
     /** Initialize your data structure here. */
     public Trie() {
         root = new TrieNode();
     }
-    
+
     /** Inserts a word into the trie. */
     public void insert(String word) {
-        char[] chrs = word.toCharArray();
         TrieNode cur = root;
-        for (char chr : chrs) {
-            int index = chr - 'a';
-            if (cur.nexts[index] == null) {
-                cur.nexts[index] = new TrieNode();
+        for (int i = 0; i < word.length(); i++) {
+            int index = word.charAt(i) - 'a';
+            if (cur.next[index] == null) {
+                cur.next[index] = new TrieNode();
             }
-            cur = cur.nexts[index];
-            cur.path++;
+            cur = cur.next[index];
         }
-        cur.end++;
+        cur.end = true;
     }
-    
+
     /** Returns if the word is in the trie. */
+    // 按照插入的方式进行查找(end == true)
     public boolean search(String word) {
-        char[] chrs = word.toCharArray();
         TrieNode cur = root;
-        for (char chr : chrs) {
-            int index = chr - 'a';
-            if (cur.nexts[index] == null) {
+        for (int i = 0; i < word.length(); i++) {
+            int index = word.charAt(i) - 'a';
+            if (cur.next[index] == null) {
                 return false;
             }
-            cur = cur.nexts[index];
+            cur = cur.next[index];
         }
-        return cur.end >= 1;
+
+        return cur.end;
     }
-    
+
     /** Returns if there is any word in the trie that starts with the given prefix. */
+    // 同查找, 只要前缀树中包含前缀即可(不需要end == true)
     public boolean startsWith(String prefix) {
-        char[] chrs = prefix.toCharArray();
         TrieNode cur = root;
-        for (char chr : chrs) {
-            int index = chr - 'a';
-            if (cur.nexts[index] == null) {
+        for (int i = 0; i < prefix.length(); i++) {
+            int index = prefix.charAt(i) - 'a';
+            if (cur.next[index] == null) {
                 return false;
             }
-            cur = cur.nexts[index];
+            cur = cur.next[index];
         }
-        return cur.path >= cur.end; // ab为ab的前缀
+
+        return true;
     }
 }
 
@@ -79,4 +79,3 @@ class Trie {
  * boolean param_2 = obj.search(word);
  * boolean param_3 = obj.startsWith(prefix);
  */
-

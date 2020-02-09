@@ -309,6 +309,108 @@ l   m   h
 
 #### 树
 
+- 递归
+
+    一棵树要么是空树, 要么有两个指针, 每个指针指向一棵树. 树是一种递归结构, 很多树的问题可以使用递归来处理,
+    
+    - [1. 树的高度](https://leetcode-cn.com/problems/maximum-depth-of-binary-tree/description/) [[java]](../src/lc104.java)
+    - [2. 平衡树](https://leetcode-cn.com/problems/balanced-binary-tree/description/) [[java]](../src/lc110.java)
+    - [3. 两节点的最长路径](https://leetcode-cn.com/problems/diameter-of-binary-tree/description/) [[java]](../src/lc543.java)
+    - [4. 翻转树](https://leetcode-cn.com/problems/invert-binary-tree/description/) [[java]](../src/lc226.java)
+    - [5. 归并两棵树](https://leetcode-cn.com/problems/merge-two-binary-trees/description/) [[java]](../src/lc617.java)
+    - [6. 判断路径和是否等于一个数](https://leetcode-cn.com/problems/path-sum/description/) [[java]](../src/lc112.java)
+    - [7. 统计路径和等于一个数的路径数量](https://leetcode-cn.com/problems/path-sum-iii/description/) [[java]](../src/lc437.java)
+    - [8. 子树](https://leetcode-cn.com/problems/subtree-of-another-tree/description/) [[java]](../src/lc572.java)
+    - [9. 树的对称](https://leetcode-cn.com/problems/symmetric-tree/description/) [[java]](../src/lc101.java)
+    - [10. 最小路径](https://leetcode-cn.com/problems/minimum-depth-of-binary-tree/description/) [[java]](../src/lc111.java)
+    - [11. 统计左叶子节点的和](https://leetcode-cn.com/problems/sum-of-left-leaves/description/) [[java]](../src/lc404.java)
+    - [12. 相同节点值的最大路径长度](https://leetcode-cn.com/problems/longest-univalue-path/) [[java]](../src/lc687.java)
+    - [13. 间隔遍历](https://leetcode-cn.com/problems/house-robber-iii/description/) [[java]](../src/lc337.java)
+    - [14. 找出二叉树中第二小的节点](https://leetcode-cn.com/problems/second-minimum-node-in-a-binary-tree/description/) [[java]](../src/lc671.java)
+    
+- 层次遍历
+
+    使用 BFS 进行层次遍历. 不需要使用两个队列来分别存储当前层的节点和下一层的节点, 因为在开始遍历一层的节点时, 当前队列中的节点数就是当前层的节点数, 只要控制遍历这么多节点数, 就能保证这次遍历的都是当前层的节点.
+    
+    - [1. 一棵树每层节点的平均数](https://leetcode-cn.com/problems/average-of-levels-in-binary-tree/description/) [[java]](../src/lc637.java)
+    - [2. 得到左下角的节点](https://leetcode-cn.com/problems/find-bottom-left-tree-value/description/) [[java]](../src/lc513.java)
+    
+- 前中后序遍历
+
+    ```  
+           1
+          / \
+         2   3
+        / \   \
+       4   5   6
+    ```
+    
+    - 层次遍历顺序：[1 2 3 4 5 6]
+    - 前序遍历顺序：[1 2 4 5 3 6]
+    - 中序遍历顺序：[4 2 5 1 3 6]
+    - 后序遍历顺序：[4 5 2 6 3 1]
+    
+    层次遍历使用 BFS 实现, 利用的就是 BFS 一层一层遍历的特性; 而前序, 中序, 后序遍历利用了 DFS 实现.
+    
+    前序, 中序, 后序遍只是在对节点访问的顺序有一点不同, 其它都相同.
+    
+    a. 前序
+    ```java
+    void dfs(TreeNode root) {
+        visit(root);
+        dfs(root.left);
+        dfs(root.right);
+    }
+    ```
+    
+    b. 中序
+    ```java
+    void dfs(TreeNode root) {
+        dfs(root.left);
+        visit(root);
+        dfs(root.right);
+    }
+    ```
+    c. 后序
+    ```java
+    void dfs(TreeNode root) {
+        dfs(root.left);
+        dfs(root.right);
+        visit(root);
+    }
+    ```
+    例题: 
+
+    - [1. 非递归实现二叉树的前序遍历](https://leetcode-cn.com/problems/binary-tree-preorder-traversal/description/) [[java]](../src/lc144.java)
+    - [2. 非递归实现二叉树的后序遍历](https://leetcode-cn.com/problems/binary-tree-postorder-traversal/description/) [[java]](../src/lc145.java)
+    - [3. 非递归实现二叉树的中序遍历](https://leetcode-cn.com/problems/binary-tree-inorder-traversal/description/) [[java]](../src/lc094.java)
+
+- BST
+
+    二叉查找树（BST）: 根节点大于等于左子树所有节点, 小于等于右子树所有节点.
+    
+    二叉查找树中序遍历有序.
+    
+    - [1. 修剪二叉查找树](https://leetcode-cn.com/problems/trim-a-binary-search-tree/description/) [[java]](../src/lc669.java)
+    - [2. 寻找二叉查找树的第 k 个元素](https://leetcode-cn.com/problems/kth-smallest-element-in-a-bst/description/) [[java]](../src/lc230.java)
+    - [3. 把二叉查找树每个节点的值都加上比它大的节点的值](https://leetcode-cn.com/problems/convert-bst-to-greater-tree/description/) [[java]](../src/lc538.java)
+    - [4. 二叉查找树的最近公共祖先](https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-search-tree/description/) [[java]](../src/lc235.java)
+    - [5. 二叉树的最近公共祖先](https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree/description/) [[java]](../src/lc236.java)
+    - [6. 从有序数组中构造二叉查找树](https://leetcode-cn.com/problems/convert-sorted-array-to-binary-search-tree/description/) [[java]](../src/lc108.java)
+    - [7. 根据有序链表构造平衡的二叉查找树](https://leetcode-cn.com/problems/convert-sorted-list-to-binary-search-tree/description/) [[java]](../src/lc109.java)
+    - [8. 在二叉查找树中寻找两个节点，使它们的和为一个给定值](https://leetcode-cn.com/problems/two-sum-iv-input-is-a-bst/description/) [[java]](../src/lc653.java)
+    - [9. 在二叉查找树中查找两个节点之差的最小绝对值](https://leetcode-cn.com/problems/minimum-absolute-difference-in-bst/description/) [[java]](../src/lc530.java)
+    - [10. 寻找二叉查找树中出现次数最多的值](https://leetcode-cn.com/problems/find-mode-in-binary-search-tree/description/) [[java]](../src/lc501.java)
+    
+- Trie
+
+    ![trie](../image/other/trie.jpg)
+    
+    Trie, 又称前缀树或字典树, 用于判断字符串是否存在或者是否具有某种字符串前缀.
+    
+    - [1. 实现一个 Trie](https://leetcode-cn.com/problems/implement-trie-prefix-tree/description/) [[java]](../src/lc208.java)
+    - [2. 实现一个 Trie，用来求前缀和](https://leetcode-cn.com/problems/map-sum-pairs/description/) [[java]](../src/lc677.java)
+
 #### 栈和队列
 
 #### 哈希表

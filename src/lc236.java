@@ -4,11 +4,16 @@
  *
  * [236] 二叉树的最近公共祖先
  *
- * 题目：在给定二叉树中找到两个指定节点的最近公共祖先
+ * 题目: 在给定二叉树中找到两个指定节点的最近公共祖先
  *
- * 难度：medium
+ * 难度: medium
  *
- * 思路：递归
+ * 思路: 注意p,q必然存在树内, 且所有节点的值唯一!!!
+ *      递归思想, 对以root为根的(子)树进行查找p和q, 如果root == null || p || q 直接返回root
+ *      表示对于当前树的查找已经完毕, 否则对左右子树进行查找, 根据左右子树的返回值判断:
+ *      1. 左右子树的返回值都不为null, 由于值唯一左右子树的返回值就是p和q, 此时root为LCA
+ *      2. 如果左右子树返回值只有一个不为null, 说明只有p和q存在与左或右子树中, 最先找到的那个节点为LCA
+ *      3. 左右子树返回值均为null, p和q均不在树中, 返回null
  */
 /**
  * Definition for a binary tree node.
@@ -20,57 +25,19 @@
  * }
  */
 class Solution {
-    // 在root中寻找p和q
-    // 如果p和q都在root所在的二叉树中, 则返回LCA
-    // 如果p和q只有一个在root所在的二叉树中, 则返回p或者q
-    // 如果p和q均不在root所在的二叉树中, 则返回NULL
+    /**
+     * 时间复杂度: O(n)
+     * 空间复杂度: O(n) (n为树的高度即递归栈的深度)
+     */
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
-        if (root == null) {
-            return null;
-        }
-        if (root == p || root == q) {
-            return root;
-        }
+        if (root == null) return null;
+        if (root == p || root == q) return root;
         TreeNode left = lowestCommonAncestor(root.left, p, q);
         TreeNode right = lowestCommonAncestor(root.right, p, q);
-        if (left != null && right != null) {
-            return root;
-        }
-        if (left != null) {
-            return left;
-        }
-        if (right != null) {
-            return right;
-        }
+        if (left != null && right != null) return root;
+        if (left != null) return left;
+        if (right != null) return right;
 
         return null;
-    }
-
-
-    private TreeNode ret = null;
-    public TreeNode lowestCommonAncestor2(TreeNode root, TreeNode p, TreeNode q) {
-        dfs(root, p, q);
-
-        return ret;
-    }
-
-    // 在root中寻找p和q, 如果包含则返回 true
-    // 否则返回false
-    //
-    // root是p或者q；root的左子树包含p或q；root的右子树包含p或q；三个条件有两个满足
-    // 则 ret = root
-    private boolean dfs(TreeNode root, TreeNode p, TreeNode q) {
-        if (root == null) {
-            return false;
-        }
-        int mid = (root == p || root == q) ? 1 : 0;
-        int left = dfs(root.left, p, q) ? 1 : 0;
-        int right = dfs(root.right, p, q) ? 1 : 0;
-
-        if (mid + left + right >= 2) {
-            ret = root;
-        }
-
-        return mid + left + right > 0;
     }
 }
