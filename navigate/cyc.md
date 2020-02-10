@@ -413,6 +413,13 @@ l   m   h
 
 #### 栈和队列
 
+- [1. 用栈实现队列](https://leetcode-cn.com/problems/implement-queue-using-stacks/description/) [[java]](../src/lc232.java)
+- [2. 用队列实现栈](https://leetcode-cn.com/problems/implement-stack-using-queues/description/) [[java]](../src/lc225.java)
+- [3. 最小值栈](https://leetcode-cn.com/problems/min-stack/description/) [[java]](../src/lc155.java)
+- [4. 用栈实现括号匹配](https://leetcode-cn.com/problems/valid-parentheses/description/) [[java]](../src/lc200.java)
+- [5. 数组中元素与下一个比它大的元素之间的距离](https://leetcode-cn.com/problems/daily-temperatures/description/) [[java]](../src/lc739.java)
+- [6. 循环数组中比当前元素大的下一个元素](https://leetcode-cn.com/problems/next-greater-element-ii/description/) [[java]](../src/lc503.java)
+
 #### 哈希表
 
 #### 字符串

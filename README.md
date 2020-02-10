@@ -1,4 +1,4 @@
-# LeetCode 281/1345
+# LeetCode 286/1345
 
  001 [Java](src/lc001.java)
 | 002 [Java](src/lc002.java)
@@ -81,6 +81,7 @@
 | 106 [Java](src/lc106.java)
 | 107 [Java](src/lc107.java)
 | 108 [Java](src/lc108.java)
+| 109 [Java](src/lc109.java)
 | 110 [Java](src/lc110.java)
 | 111 [Java](src/lc111.java)
 | 112 [Java](src/lc112.java)
@@ -223,8 +224,11 @@
 | 474 [Java](src/lc474.java)
 | 494 [Java](src/lc494.java)
 | 496 [Java](src/lc496.java)
+| 501 [Java](src/lc501.java)
+| 503 [Java](src/lc503.java)
 | 513 [Java](src/lc513.java)
 | 524 [Java](src/lc524.java)
+| 530 [Java](src/lc530.java)
 | 538 [Java](src/lc538.java)
 | 540 [Java](src/lc540.java)
 | 543 [Java](src/lc543.java)
@@ -246,6 +250,7 @@
 | 665 [Java](src/lc665.java)
 | 669 [Java](src/lc669.java)
 | 671 [Java](src/lc671.java)
+| 677 [Java](src/lc677.java)
 | 680 [Java](src/lc680.java)
 | 687 [Java](src/lc687.java)
 | 695 [Java](src/lc695.java)

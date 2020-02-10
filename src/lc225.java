@@ -1,58 +1,53 @@
-import java.util.LinkedList;
+import java.util.ArrayDeque;
 import java.util.Queue;
 
 /*
  * @lc app=leetcode.cn id=225 lang=java
  *
  * [225] 用队列实现栈
- * 
- * 使用两个队列，push， 直接加入datas队列
- *              pop，  将datas队列size - 1个元素倒入help，出队datas最后一个元素
- *              peek， 同弹出
- *              empty，datas为空时，栈为中无数据
+ *
+ * 题目: 使用队列实现栈的push(x), pop(), top()和empty()操作
+ *
+ * 难度: easy
+ *
+ * 思路: 在将一个元素x插入队列时, 为了维护原来的后进先出顺序, 需要让x插入队列首部. 而队列的默认插入顺序是队列尾部, 因此在将x插入队列尾部之后,
+ *      需要让除了x之外的所有元素出队列, 再入队列.
+ *      使用一个队列, push: 加入data队列后, 调整队列元素出队顺序为栈弹出顺序
+ *                  pop: 直接出队队首元素
+ *                  peek: 同弹出
+ *                  empty: data为空时, 栈为中无数据
  */
 class MyStack {
-    // datas为存储数据的队列，help为辅助队列
-    private Queue<Integer> datas;
-    private Queue<Integer> help;
+    // data为存储数据的队列，help为辅助队列
+    private Queue<Integer> data;
 
     /** Initialize your data structure here. */
     public MyStack() {
-        datas = new LinkedList<>();
-        help = new LinkedList<>();
+        data = new ArrayDeque<>();
     }
     
     /** Push element x onto stack. */
     public void push(int x) {
-        datas.add(x);
+        data.add(x);
+        int size = data.size();
+        while (size-- > 1) {
+            data.add(data.poll());
+        }
     }
     
     /** Removes the element on top of the stack and returns that element. */
     public int pop() {
-        while (datas.size() != 1) {
-            help.add(datas.poll());
-        }
-        int res = datas.poll();
-        datas = help;  // 始终使datas为储存数据的队列
-        help = new LinkedList<>(); // 重置help队列
-        return res;
+        return data.poll();
     }
     
     /** Get the top element. */
     public int top() {
-        while (datas.size() != 1) {
-            help.add(datas.poll());
-        }
-        int res = datas.peek();
-        help.add(datas.poll());
-        datas = help;
-        help = new LinkedList<>();
-        return res;
+        return data.peek();
     }
     
     /** Returns whether the stack is empty. */
     public boolean empty() {
-        return datas.isEmpty();
+        return data.isEmpty();
     }
 }
 
