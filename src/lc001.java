@@ -17,7 +17,7 @@ class Solution {
      * 时间复杂度: O(n ^ 2)
      * 空间复杂度: O(1)
      */
-    public int[] twoSum1(int[] nums, int target) {
+    public int[] twoSum(int[] nums, int target) {
         int len = nums.length;
         for (int i = 0; i < len - 1; i++) {
             int aim = target - nums[i];

@@ -1,5 +1,5 @@
 import java.util.Arrays;
-import java.util.HashMap;
+import java.util.HashSet;
 
 /*
  * @lc app=leetcode.cn id=217 lang=java
@@ -10,8 +10,8 @@ import java.util.HashMap;
  *
  * 难度: easy
  * 
- * 思路: 1、查找表set, 记录出现过得元素
- *       2、排序数组, 相同元素相邻
+ * 思路: 1. 查找表set, 记录出现过得元素
+ *       2. 排序数组, 相同元素相邻
  */
 class Solution {
     /**

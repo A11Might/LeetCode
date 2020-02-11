@@ -422,9 +422,49 @@ l   m   h
 
 #### 哈希表
 
+哈希表使用 O(N) 空间复杂度存储数据, 并且以 O(1) 时间复杂度求解问题.
+   
+- Java 中的 HashSet 用于存储一个集合, 可以查找元素是否在集合中. 如果元素有穷, 并且范围不大, 那么可以用一个布尔数组来存储一个元素是否存在. 
+
+    例如对于只有小写字符的元素, 就可以用一个长度为 26 的布尔数组来存储一个字符集合, 使得空间复杂度降低为 O(1).
+    
+- Java 中的 HashMap 主要用于映射关系, 从而把两个元素联系起来. HashMap 也可以用来对元素进行计数统计, 此时键为元素, 值为计数. 和 HashSet 类似, 如果元素有穷并且范围不大, 可以用整型数组来进行统计. 在对一个内容进行压缩或者其它转换时, 利用 HashMap 可以把原始内容和转换后的内容联系起来. 
+
+    例如在一个简化 url 的系统中 [Leetcdoe: 535. TinyURL 的加密与解密](https://leetcode-cn.com/problems/encode-and-decode-tinyurl/) [[java]](../src/lc535.java). 利用 HashMap 就可以存储精简后的 url 到原始 url 的映射, 使得不仅可以显示简化的 url, 也可以根据简化的 url 得到原始 url 从而定位到正确的资源.
+
+- 例题
+    
+    - [1. 数组中两个数的和为给定值](https://leetcode-cn.com/problems/two-sum/description/) [[java]](../src/lc001.java)
+    - [2. 判断数组是否含有重复元素](https://leetcode-cn.com/problems/contains-duplicate/description/) [[java]](../src/lc217.java)
+    - [3. 最长和谐序列](https://leetcode-cn.com/problems/longest-harmonious-subsequence/description/) [[java]](../src/lc594.java)
+    - [4. 最长连续序列](https://leetcode-cn.com/problems/longest-consecutive-sequence/description/) [[java]](../src/lc128.java)
+
 #### 字符串
 
+- [1. 字符串循环移位包含](按发送到) [[java]](../src/lc677.java)
+- [2. 字符串循环移位](按发送到) [[java]](../src/lc677.java)
+- [3. 字符串中单词的翻转](按发送到) [[java]](../src/lc677.java)
+- [4. 两个字符串包含的字符是否完全相同](https://leetcode-cn.com/problems/valid-anagram/description/) [[java]](../src/lc677.java)
+- [5. 计算一组字符集合可以组成的回文字符串的最大长度](https://leetcode-cn.com/problems/longest-palindrome/description/) [[java]](../src/lc677.java)
+- [6. 字符串同构](https://leetcode-cn.com/problems/isomorphic-strings/description/) [[java]](../src/lc677.java)
+- [7. 回文子字符串个数](https://leetcode-cn.com/problems/palindromic-substrings/description/) [[java]](../src/lc677.java)
+- [8. 判断一个整数是否是回文数](https://leetcode-cn.com/problems/palindrome-number/description/) [[java]](../src/lc677.java)
+- [9. 统计二进制字符串中连续 1 和连续 0 数量相同的子字符串个数](https://leetcode-cn.com/problems/count-binary-substrings/description/) [[java]](../src/lc677.java)
+
 #### 数组与矩阵
+
+- [1. 把数组中的 0 移到末尾](https://leetcode-cn.com/problems/move-zeroes/description/) [[java]](../src/lc677.java)
+- [2. 改变矩阵维度](https://leetcode-cn.com/problems/reshape-the-matrix/description/) [[java]](../src/lc677.java)
+- [3. 找出数组中最长的连续 1](https://leetcode-cn.com/problems/max-consecutive-ones/description/) [[java]](../src/lc677.java)
+- [4. 有序矩阵查找](https://leetcode-cn.com/problems/search-a-2d-matrix-ii/description/) [[java]](../src/lc677.java)
+- [5. 有序矩阵的 Kth Element](https://leetcode-cn.com/problems/kth-smallest-element-in-a-sorted-matrix/description/) [[java]](../src/lc677.java)
+- [6. 一个数组元素在 [1, n] 之间，其中一个数被替换为另一个数，找出重复的数和丢失的数](https://leetcode-cn.com/problems/set-mismatch/description/) [[java]](../src/lc677.java)
+- [7. 找出数组中重复的数，数组值在 [1, n] 之间](https://leetcode-cn.com/problems/find-the-duplicate-number/description/) [[java]](../src/lc677.java)
+- [8. 数组相邻差值的个数](https://leetcode-cn.com/problems/beautiful-arrangement-ii/description/) [[java]](../src/lc677.java)
+- [9. 数组的度](https://leetcode-cn.com/problems/degree-of-an-array/description/) [[java]](../src/lc677.java)
+- [10. 对角元素相等的矩阵](https://leetcode-cn.com/problems/toeplitz-matrix/description/) [[java]](../src/lc677.java)
+- [11. 嵌套数组](https://leetcode-cn.com/problems/array-nesting/description/) [[java]](../src/lc677.java)
+- [12. 分隔数组](https://leetcode-cn.com/problems/max-chunks-to-make-sorted/description/) [[java]](../src/lc677.java)
 
 #### 图
 

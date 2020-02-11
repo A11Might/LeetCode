@@ -1,4 +1,4 @@
-# LeetCode 286/1345
+# LeetCode 290/1345
 
  001 [Java](src/lc001.java)
 | 002 [Java](src/lc002.java)
@@ -95,6 +95,7 @@
 | 125 [Java](src/lc125.java)
 | 126 [Java](src/lc126.java)
 | 127 [Java](src/lc127.java)
+| 128 [Java](src/lc128.java)
 | 129 [Java](src/lc129.java)
 | 130 [Java](src/lc130.java)
 | 131 [Java](src/lc131.java)
@@ -229,6 +230,7 @@
 | 513 [Java](src/lc513.java)
 | 524 [Java](src/lc524.java)
 | 530 [Java](src/lc530.java)
+| 535 [Java](src/lc535.java)
 | 538 [Java](src/lc538.java)
 | 540 [Java](src/lc540.java)
 | 543 [Java](src/lc543.java)
@@ -239,6 +241,7 @@
 | 581 [Java](src/lc581.java)
 | 589 [Java](src/lc589.java)
 | 590 [Java](src/lc590.java)
+| 594 [Java](src/lc594.java)
 | 605 [Java](src/lc605.java)
 | 617 [Java](src/lc617.java)
 | 633 [Java](src/lc633.java)
@@ -286,6 +289,7 @@
 | 1333 [Java](src/lc5320.java)
 | 1334 [Java](src/lc5321.java)
 | 1335 [Java](src/lc5322.java)
+| 1339 [Java](src/lc1339.java)
 
 # 分类
 
