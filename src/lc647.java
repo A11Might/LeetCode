@@ -3,18 +3,74 @@
  *
  * [647] 回文子串
  * 
- * 题目：给定一个字符串，计算这个字符串中有多少个回文子串
- *      开始位置不同的相同字符子串，被记为不同的子串
- * 
- * 思路：1、Manacher算法，每个位置上的最长回文半径和即为所有回文子串个数
- * 		2、中心扩展法，同上
- * 		3、动态规划
+ * 题目: 给定一个字符串, 计算这个字符串中有多少个回文子串.
+ *      (开始或结束位置不同的子串, 即使有相同的字符组成, 也被记为不同的子串)
+ *
+ * 难度: medium
+ *
+ * 思路: 1. 动态规划, dp[i][j]表示substring[i, j]是否为回文子串
+ * 			       状态转移方程, dp[i][j] = (s.charAt(i) == s.charAt(j) && dp[i + 1][j - 1])
+ * 		2. 中心扩展法, 从每个可能的回文串中心位置开始, 尽可能扩大它的回文区间, 并同时统计回文串数量
+ * 		3. Manacher算法, 每个位置上的最长回文半径和即为所有回文子串个数
  */
 class Solution {
 	/**
+	 * 时间复杂度: O(n ^ 2)
+	 * 空间复杂度: O(n ^ 2)
+	 */
+	public static int countSubstrings(String s) {
+		int len = s.length();
+		if (s == null || s.length() == 0) {
+			return 0;
+		}
+		// dp[i][j]表示substring[i, j]是否为回文子串
+		boolean[][] dp = new boolean[len][len];
+		int cnt = 0;
+		// 注意, 循环要按照如下方式写
+		// 因为要求dp[i][j]需要知道dp[i + 1][j - 1]
+		for (int r = 0; r < len; ++r) {
+			for (int l = 0; l <= r; ++l) {
+				// dp[i][j] = (s.charAt(i) == s.charAt(j) && dp[i + 1][j - 1])
+				// (s.charAt(i)==s.charAt(j)时, 当元素个数为1,2,3个时一定为回文子串, 不用再通过dp[l + 1][r - 1]判断
+				if ((s.charAt(l) == s.charAt(r)) && (r - l < 2 || dp[l + 1][r - 1])) {
+					dp[l][r] = true;
+					// 更新回文子串个数
+					cnt++;
+				}
+			}
+		}
+
+		return cnt;
+	}
+
+
+	/**
+	 * 时间复杂度: O(n ^ 2)
+	 * 空间复杂度: O(1)
+	 */
+	private int cnt = 0;
+	public int countSubstrings2(String s) {
+		for (int i = 0; i < s.length(); ++i) {
+			count(s, i, i); // 以i为中心的回文串个数(回文串长度为奇数)
+			count(s, i, i + 1); // 以[i, i + 1]为中心的回文串个数(回文串长度长度为偶数)
+		}
+
+		return cnt;
+	}
+
+	// 统计以[left, right]为中心的回文串个数
+	private void count(String s, int left, int right) {
+		while (left >= 0 && right < s.length() && (s.charAt(left) == s.charAt(right))) {
+			cnt++;
+			left--;
+			right++;
+		}
+	}
+
+	/**
 	 * Manacher算法
 	 */
-    public int countSubstrings1(String s) {
+    public int countSubstrings3(String s) {
         if (s == null || s.length() == 0)
 			return 0;
 		char[] charArr = manacherString(s); // 字符串预处理
@@ -60,51 +116,6 @@ class Solution {
 		for (int i = 0; i < res.length; i++) {
 			res[i] = (i & 1) == 0 ? '#' : charArr[index++]; // i为res数组中的位置，若为偶数则放置'#'，奇数则放置当前字符(
 		}
-		return res;
-	}
-	
-	/**
-	 * 中心扩展法
-	 */
-	private int res = 0;
-    public int countSubstrings2(String s) {
-		for (int i = 0; i < s.length(); ++i) {
-			count(s, i, i); // 回文串长度为奇数
-			count(s, i, i + 1); // 回文串长度为偶数
-		}
-		return res;
-	}
-
-	private void count(String s, int left, int right) {
-		while (left >= 0 && right < s.length() && (s.charAt(left) == s.charAt(right))) {
-			res++;
-			left--;
-			right++;
-		}
-	}
-
-	/**
-	 * 动态规划
-	 */
-    public static int countSubstrings(String s) {
-		int len = s.length();
-		if (s == null || s.length() == 0) {
-			return 0;
-		}
-		boolean[][] dp = new boolean[len][len];
-		int res = 0;
-		for (int r = 0; r < len; ++r) {
-			for (int l = 0; l <= r; ++l) {
-				// dp[i][j] == true, s.substring(i, j + 1)为回文子串
-                // dp[i][j] = (s.charAt(i) == s.charAt(j) && dp[i + 1][j - 1])
-                // 当s.substring(l + 1, r)最多只有一个字符时，其本身就是回文子串不用再通过dp[l + 1][r - 1]判断
-				if ((s.charAt(l) == s.charAt(r)) && (r - l < 2 || dp[l + 1][r - 1])) {
-					dp[l][r] = true;
-					res++; // 更新回文子串个数
-				}
-			}
-		}
-
 		return res;
 	}
 }

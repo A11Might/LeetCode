@@ -7,8 +7,8 @@
     - [二分查找](#二分查找)
     - [分治](#分治)
     - [搜索(推荐阅读)](#搜索)
-    - [动态规划](#动态规划)
-    - [数学](#数学)
+    - [动态规划(未完成)](#动态规划)
+    - [数学(未完成)](#数学)
     
 - [数据结构相关](#数据结构相关)
     - [链表](#链表)
@@ -18,7 +18,7 @@
     - [字符串](#字符串)
     - [数组和矩阵](#数组与矩阵)
     - [图](#图)
-    - [位运算](#位运算)
+    - [位运算(未完成)](#位运算)
     
 - [参考[cyc2018-LeetCode题解]](https://github.com/CyC2018/CS-Notes/blob/master/notes/Leetcode%20%E9%A2%98%E8%A7%A3%20-%20%E7%9B%AE%E5%BD%95.md)
 
@@ -441,15 +441,15 @@ l   m   h
 
 #### 字符串
 
-- [1. 字符串循环移位包含](按发送到) [[java]](../src/lc677.java)
-- [2. 字符串循环移位](按发送到) [[java]](../src/lc677.java)
-- [3. 字符串中单词的翻转](按发送到) [[java]](../src/lc677.java)
-- [4. 两个字符串包含的字符是否完全相同](https://leetcode-cn.com/problems/valid-anagram/description/) [[java]](../src/lc677.java)
-- [5. 计算一组字符集合可以组成的回文字符串的最大长度](https://leetcode-cn.com/problems/longest-palindrome/description/) [[java]](../src/lc677.java)
-- [6. 字符串同构](https://leetcode-cn.com/problems/isomorphic-strings/description/) [[java]](../src/lc677.java)
-- [7. 回文子字符串个数](https://leetcode-cn.com/problems/palindromic-substrings/description/) [[java]](../src/lc677.java)
-- [8. 判断一个整数是否是回文数](https://leetcode-cn.com/problems/palindrome-number/description/) [[java]](../src/lc677.java)
-- [9. 统计二进制字符串中连续 1 和连续 0 数量相同的子字符串个数](https://leetcode-cn.com/problems/count-binary-substrings/description/) [[java]](../src/lc677.java)
+- [1. 字符串循环移位包含]()
+- [2. 字符串循环移位]()
+- [3. 字符串中单词的翻转]()
+- [4. 两个字符串包含的字符是否完全相同](https://leetcode-cn.com/problems/valid-anagram/description/) [[java]](../src/lc242.java)
+- [5. 计算一组字符集合可以组成的回文字符串的最大长度](https://leetcode-cn.com/problems/longest-palindrome/description/) [[java]](../src/lc409.java)
+- [6. 字符串同构](https://leetcode-cn.com/problems/isomorphic-strings/description/) [[java]](../src/lc205.java)
+- [7. 回文子字符串个数](https://leetcode-cn.com/problems/palindromic-substrings/description/) [[java]](../src/lc647.java)
+- [8. 判断一个整数是否是回文数](https://leetcode-cn.com/problems/palindrome-number/description/) [[java]](../src/lc009.java)
+- [9. 统计二进制字符串中连续 1 和连续 0 数量相同的子字符串个数](https://leetcode-cn.com/problems/count-binary-substrings/description/) [[java]](../src/lc696.java)
 
 #### 数组与矩阵
 
