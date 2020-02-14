@@ -453,19 +453,43 @@ l   m   h
 
 #### 数组与矩阵
 
-- [1. 把数组中的 0 移到末尾](https://leetcode-cn.com/problems/move-zeroes/description/) [[java]](../src/lc677.java)
-- [2. 改变矩阵维度](https://leetcode-cn.com/problems/reshape-the-matrix/description/) [[java]](../src/lc677.java)
-- [3. 找出数组中最长的连续 1](https://leetcode-cn.com/problems/max-consecutive-ones/description/) [[java]](../src/lc677.java)
-- [4. 有序矩阵查找](https://leetcode-cn.com/problems/search-a-2d-matrix-ii/description/) [[java]](../src/lc677.java)
-- [5. 有序矩阵的 Kth Element](https://leetcode-cn.com/problems/kth-smallest-element-in-a-sorted-matrix/description/) [[java]](../src/lc677.java)
-- [6. 一个数组元素在 [1, n] 之间，其中一个数被替换为另一个数，找出重复的数和丢失的数](https://leetcode-cn.com/problems/set-mismatch/description/) [[java]](../src/lc677.java)
-- [7. 找出数组中重复的数，数组值在 [1, n] 之间](https://leetcode-cn.com/problems/find-the-duplicate-number/description/) [[java]](../src/lc677.java)
-- [8. 数组相邻差值的个数](https://leetcode-cn.com/problems/beautiful-arrangement-ii/description/) [[java]](../src/lc677.java)
-- [9. 数组的度](https://leetcode-cn.com/problems/degree-of-an-array/description/) [[java]](../src/lc677.java)
-- [10. 对角元素相等的矩阵](https://leetcode-cn.com/problems/toeplitz-matrix/description/) [[java]](../src/lc677.java)
-- [11. 嵌套数组](https://leetcode-cn.com/problems/array-nesting/description/) [[java]](../src/lc677.java)
-- [12. 分隔数组](https://leetcode-cn.com/problems/max-chunks-to-make-sorted/description/) [[java]](../src/lc677.java)
+- [1. 把数组中的 0 移到末尾](https://leetcode-cn.com/problems/move-zeroes/description/) [[java]](../src/lc283.java)
+- [2. 改变矩阵维度](https://leetcode-cn.com/problems/reshape-the-matrix/description/) [[java]](../src/lc566.java)
+- [3. 找出数组中最长的连续 1](https://leetcode-cn.com/problems/max-consecutive-ones/description/) [[java]](../src/lc485.java)
+- [4. 有序矩阵查找](https://leetcode-cn.com/problems/search-a-2d-matrix-ii/description/) [[java]](../src/lc240.java)
+- [5. 有序矩阵的 Kth Element](https://leetcode-cn.com/problems/kth-smallest-element-in-a-sorted-matrix/description/) [[java]](../src/lc378.java)
+- [6. 一个数组元素在 [1, n] 之间，其中一个数被替换为另一个数，找出重复的数和丢失的数](https://leetcode-cn.com/problems/set-mismatch/description/) [[java]](../src/lc645.java)
+
+    上题主要思想是通过交换数组元素, 使得数组上的元素在正确的位置上, 类似题目: 
+    - [寻找所有丢失的元素](https://leetcode-cn.com/problems/find-all-numbers-disappeared-in-an-array/description/) [[java]](../src/lc448.java)
+    - [寻找所有重复的元素](https://leetcode-cn.com/problems/find-all-duplicates-in-an-array/description/) [[java]](../src/lc442.java)
+- [7. 找出数组中重复的数，数组值在 [1, n] 之间](https://leetcode-cn.com/problems/find-the-duplicate-number/description/) [[java]](../src/lc287.java)
+- [8. 数组相邻差值的个数](https://leetcode-cn.com/problems/beautiful-arrangement-ii/description/) [[java]](../src/lc667.java)
+- [9. 数组的度](https://leetcode-cn.com/problems/degree-of-an-array/description/) [[java]](../src/lc697.java)
+- [10. 对角元素相等的矩阵](https://leetcode-cn.com/problems/toeplitz-matrix/description/) [[java]](../src/lc766.java)
+- [11. 嵌套数组](https://leetcode-cn.com/problems/array-nesting/description/) [[java]](../src/lc565.java)
+- [12. 分隔数组](https://leetcode-cn.com/problems/max-chunks-to-make-sorted/description/) [[java]](../src/lc769.java)
 
 #### 图
+
+- 二分图
+
+    如果可以用两种颜色对图中的节点进行着色, 并且保证相邻的节点颜色不同, 那么这个图就是二分图.
+    
+    - [判断是否为二分图](https://leetcode-cn.com/problems/is-graph-bipartite/description/) [[java]](../src/lc677.java)
+    
+- 拓扑排序
+
+    常用于在具有先序关系的任务规划中.
+    
+    - [1. 课程安排的合法性](https://leetcode-cn.com/problems/course-schedule/description/) [[java]](../src/lc677.java)
+    - [2. 课程安排的顺序](https://leetcode-cn.com/problems/course-schedule-ii/description/) [[java]](../src/lc677.java)
+    
+    
+- 并查集
+
+    并查集可以动态地连通两个点, 并且可以非常快速地判断两个点是否连通.
+        
+    - [冗余连接](https://leetcode-cn.com/problems/redundant-connection/description/) [[java]](../src/lc677.java)
 
 #### 位运算

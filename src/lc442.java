@@ -1,24 +1,25 @@
 import java.util.ArrayList;
 import java.util.List;
 
-/*
- * @lc app=leetcode.cn id=448 lang=java
+/**
+ * @author qhhu
+ * @date 2020/2/13 - 10:22
  *
- * [448] 找到所有数组中消失的数字
+ * [442] 数组中重复的数据
  *
- * 题目: 给定一个范围在1 <= a[i] <= n(n为数组大小)的整型数组, 数组中的元素一些出现了两次, 另一些只出现一次.
- *      找到所有在[1, n]范围之间未出现在数组中的数字(要求不使用额外空间且时间复杂度O(n))
+ * 题目: 给定一个整数数组a, 其中1 <= a[i] <= n(n为数组长度), 其中有些元素出现两次而其他元素出现一次, 返回所有值出现两次的元素.
+ *      (要求不使用额外空间且时间复杂度O(n))
  *
- * 难度: easy
- * 
- * 思路: 同[442]数组中重复的数据, 将数组中的元素放在对应的下标上, 然后在遍历一遍数组来寻找在[1, n]范围之间未出现在数组中的数字.
+ * 难度: medium
+ *
+ * 思路: 同[448]找到所有数组中消失的数字, 通过交换数组元素, 使得数组上的所有元素都在正确的位置上, 这样重复元素就在不正确的位置上.
  */
 class Solution {
     /**
      * 时间复杂度: O(n)
      * 空间复杂度: O(1)
      */
-    public List<Integer> findDisappearedNumbers(int[] nums) {
+    public List<Integer> findDuplicates(int[] nums) {
         int len = nums.length;
         for (int i = 0; i < len; i++) {
             // 当前元素不在对应下标上并且对应下标上也没有对应元素
@@ -28,12 +29,12 @@ class Solution {
             }
         }
 
-        // 寻找在[1, n]范围之间未出现在数组中的数字
+        // 寻找出现两次的元素
         List<Integer> ret = new ArrayList<>();
         for (int i = 0; i < len; i++) {
             if (i != nums[i] - 1) {
-                // 唯一与[442]不同的地方
-                ret.add(i + 1);
+                // 唯一与[448]不同的地方
+                ret.add(nums[i]);
             }
         }
         return ret;

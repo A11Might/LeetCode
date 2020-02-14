@@ -10,35 +10,35 @@
  *
  * 难度: medium
  *
- * 思路: 1. 类二分查找, 将数组分为含*一定*包含重复元素部分和*一定不*包含重复元素部分:
- *          将区间[1, n]从中间数字m处, 拆分成两部分[1, m]和[m + 1, n], 分别将nums中的数字放入对应区间中
- *          若[1, m]区间内包含nums数组中数字的数目超过m, 则重复数字在[1, m]范围内
- *          否则重复数字在[m + 1, n]范围内, 然后继续把一定含有重复数字的区间一分为二, 直至找到一个重复数字
- *      2. 将数组看成链表, val是结点值也是下个节点的索引, 转换成找到环形链表入环节点问题
+ * 思路: 1. 类二分查找, 将数组分为含*一定*包含重复元素部分和*一定不*包含重复元素部分, 如下:
+ *          将区间[1, n]从中间数字m处, 拆分成两部分[1, m]和[m + 1, n], 分别统计nums中的数字在对应区间中的个数,
+ *          若[1, m]区间内包含nums数组中数字的数目超过m, 则重复数字在[1, m]范围内;
+ *          否则重复数字在[m + 1, n]范围内, 然后继续把一定含有重复数字的区间一分为二, 直至找到一个重复数字.
+ *      2. 将数组看成链表, 索引值index为当前节点, val为下个节点的索引, 其结点值为val, 则原问题转换成找到环形链表入环节点问题.
  *          (数组元素个数位n + 1, 而数组中的数字的范围为[1, n], 所以不会出现数组索引越界)
- *      nums = [2, 5, 9, 6, 9, 3, 8, 9, 7, 1], 构造成链表就是: 2->[9]->1->5->3->6->8->7->[9]，1为入环节点，在[9]处循环
+ *      nums = [2, 5, 9, 6, 9, 3, 8, 9, 7, 1], 构造成链表就是: 2->[9]->1->5->3->6->8->7->[9], nums[1]为入环节点.
  */
 class Solution {
     /**
-     * 时间复杂度: O(n * logn)
+     * 时间复杂度: O(n * logn) (二分查找总比较次数为logn, 每次比较需要遍历数组, 数组大小为n)
      * 空间复杂度: O(1)
      */
     public int findDuplicate(int[] nums) {
         int len = nums.length;
-        int left = 1, right = len - 1; // 在[1, n]中使用二分查找
-        while (left <= right) {
-            int mid = left + ((right - left) >> 1);
-            int count = countRange(nums, left, mid);
-            // 区间只剩下一个元素, 判断其是否为重复元素
-            if (left == right) {
-                return left;
+        int lo = 1, hi = len - 1; // 在[1, n]中使用二分查找
+        while (lo <= hi) {
+            int mid = lo + ((hi - lo) >> 1);
+            int cnt = countRange(nums, lo, mid);
+            // 区间只剩下一个元素, 即为重复元素
+            if (lo == hi) {
+                return lo;
             }
-            // [left, mid]中含有重复元素
-            if (count > (mid - left + 1)) {
-                right = mid;
-            // [mid + 1, right]中含有重复元素
+            // [lo, mid]中含有重复元素
+            if (cnt > (mid - lo + 1)) {
+                hi = mid;
+            // [mid + 1, hi]中含有重复元素
             } else {
-                left = mid + 1;
+                lo = mid + 1;
             }
         }
 
@@ -47,14 +47,14 @@ class Solution {
 
     // 返回数组nums有多少个元素在区间[start, end]内
     private int countRange(int[] nums, int start, int end) {
-        int ans = 0;
+        int cnt = 0;
         for (int num : nums) {
             if (start <= num && num <= end) {
-                ans++;
+                cnt++;
             }
         }
 
-        return ans;
+        return cnt;
     }
 
     /**
@@ -62,20 +62,19 @@ class Solution {
      * 空间复杂度: O(1)
      */
     public int findDuplicate2(int[] nums) {
-        // 快慢指针从0开始进入链表, 链表值在[1, n]范围内不会出现循环链表(值既为数组中的元素, 也是下标, 除了0)
-        int fast = 0, slow = 0;
-        while (true) {
-            fast = nums[nums[fast]];
+        // 快慢指针必须同时从起点开始走, 不然后续会找不到入环节点(出现死循环important)
+        int slow = nums[0], fast = nums[nums[0]];
+        while (slow != fast) {
             slow = nums[slow];
-            if (fast == slow) {
-                fast = 0;
-                while (fast != slow) { // 找到fast和slow在入环节点前的一个节点，即为重复元素
-                    fast = nums[fast];
-                    slow = nums[slow];
-                }
-                return fast;
-            }
+            fast = nums[nums[fast]];
         }
+        // 找入环节点, 即为重复元素
+        fast = 0;
+        while (slow != fast) {
+            slow = nums[slow];
+            fast = nums[fast];
+        }
+        return slow;
     }
 }
 
