@@ -9,7 +9,8 @@
  *
  * 难度: medium
  *
- * 思路: 二分查找, 将区间[0, len)分为大于nums[len - 1]和小于等于nums[len - 1]两个部分, 返回小于等于部分的第一个元素
+ * 思路: 二分查找, 旋转排序数组可以拆分为两个排序数组 nums1 和 nums2, 并且 nums1任意元素 >= nums2 任意元素,
+ *               使用二分查找这两个数组的分界点(nums2 的首元素)即最小元素.
  */
 class Solution {
     /**
@@ -17,19 +18,17 @@ class Solution {
      * 空间复杂度: O(1)
      */
     public int findMin(int[] nums) {
-        int len = nums.length;
-        int lo = 0, hi = len; // 区间[lo, hi)
+        int lo = 0, hi = nums.length - 1;
         while (lo < hi) {
             int mid = lo + ((hi - lo) >> 1);
-            // 将区间[0, len)分为大于nums[len - 1]和小于等于nums[len - 1]两个部分
-            // 即将原区间分为两个升序的子区间, 第二个子区间的第一个元素为原数组中的最小元素
-            if (nums[mid] <= nums[len - 1]) {
-                hi = mid;
-            } else {
+            // 当前mid的值大于当前区间的hi值, mid在左有序区间内, 最小元素在mid右边
+            if (nums[mid] > nums[hi]) {
                 lo = mid + 1;
+            } else if (nums[mid] < nums[hi]) {
+                // 当前mid的值小于当前区间的hi值, mid在右有序区间内, mid可能为最小元素
+                hi = mid;
             }
         }
-
         return nums[lo];
     }
 }

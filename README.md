@@ -1,4 +1,4 @@
-# LeetCode 302/1429
+# LeetCode 303/1429
 
  001 [Java](src/lc001.java)
 | 002 [Java](src/lc002.java)
@@ -114,6 +114,7 @@
 | 151 [Java](src/lc151.java)
 | 152 [Java](src/lc152.java)
 | 153 [Java](src/lc153.java)
+| 154 [Java](src/lc154.java)
 | 155 [Java](src/lc155.java)
 | 160 [Java](src/lc160.java)
 | 167 [Java](src/lc167.java)
