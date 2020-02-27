@@ -476,20 +476,20 @@ l   m   h
 
     如果可以用两种颜色对图中的节点进行着色, 并且保证相邻的节点颜色不同, 那么这个图就是二分图.
     
-    - [判断是否为二分图](https://leetcode-cn.com/problems/is-graph-bipartite/description/) [[java]](../src/lc677.java)
+    - [判断是否为二分图](https://leetcode-cn.com/problems/is-graph-bipartite/description/) [[java]](../src/lc785.java)
     
 - 拓扑排序
 
     常用于在具有先序关系的任务规划中.
     
-    - [1. 课程安排的合法性](https://leetcode-cn.com/problems/course-schedule/description/) [[java]](../src/lc677.java)
-    - [2. 课程安排的顺序](https://leetcode-cn.com/problems/course-schedule-ii/description/) [[java]](../src/lc677.java)
+    - [1. 课程安排的合法性](https://leetcode-cn.com/problems/course-schedule/description/) [[java]](../src/lc207.java)
+    - [2. 课程安排的顺序](https://leetcode-cn.com/problems/course-schedule-ii/description/) [[java]](../src/lc210.java)
     
     
 - 并查集
 
     并查集可以动态地连通两个点, 并且可以非常快速地判断两个点是否连通.
         
-    - [冗余连接](https://leetcode-cn.com/problems/redundant-connection/description/) [[java]](../src/lc677.java)
+    - [冗余连接](https://leetcode-cn.com/problems/redundant-connection/description/) [[java]](../src/lc684.java)
 
 #### 位运算

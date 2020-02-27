@@ -40,10 +40,11 @@ class Solution {
         // 到达叶子节点并且当前路径总和等于curSum
         if (root.left == null && root.right == null && root.val == curSum) {
             ans.add(new ArrayList<>(subList));
+        } else {
+            // 当前节点不是叶子节点，或当前路径总和不等于curSum，继续递归遍历
+            dfs(root.left, ans, subList, curSum - root.val);
+            dfs(root.right, ans, subList, curSum - root.val);
         }
-        // 当前节点不是叶子节点，或当前路径总和不等于curSum，继续递归遍历
-        dfs(root.left, ans, subList, curSum - root.val);
-        dfs(root.right, ans, subList, curSum - root.val);
         subList.remove(subList.size() - 1);
     }
 }
