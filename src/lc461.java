@@ -2,29 +2,21 @@
  * @lc app=leetcode.cn id=461 lang=java
  *
  * [461] 汉明距离
- * 
- * 1、一位一位比较
- * 2、异或求后1的个数
+ *
+ * 题目: 返回两个整数之间的汉明距离.
+ *      (两个整数之间的汉明距离指的是这两个数字对应二进制位不同的位置的数目.)
+ *
+ * 难度: easy
+ *
+ * 思路: 对两个数进行异或操作, 位级表示不同的那一位为 1, 统计有多少个 1 即可.
  */
 class Solution {
+    /**
+     * 时间复杂度: O(1)
+     * 空间复杂度: O(1)
+     */
     public int hammingDistance(int x, int y) {
-        if (x == y) {
-            return 0;
-        }
-        int res = 0;
-        while (x != y) {
-            // 将除最后一位都置为0，然后比较最后一位
-            if ((x & 1) != (y & 1)) {
-                res++;
-            }
-            x = x >> 1;
-            y = y >> 1;
-        }
-        return res;
-    }
-
-    public int hammingDistance2(int x, int y) {
-        return Integer.bitCount(x ^ y);
+        int ret = x ^ y;
+        return Integer.bitCount(ret);
     }
 }
-

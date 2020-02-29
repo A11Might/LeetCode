@@ -2,43 +2,28 @@
  * @lc app=leetcode.cn id=268 lang=java
  *
  * [268] 缺失数字
- * 
- * 1、排序后遍历数组，差谁缺谁
- * 2、求和nums数组，然后和1到n项的数列和对比，相差的数就是缺的这个数(使用加减防止溢出)
- * 3、使用异或运算，进行抵消，剩下的数字就是缺失的
- * 
+ *
+ * 题目: 给定一个包含 0, 1, 2, ..., n 中 n 个数的序列, 找出 0 .. n 中没有出现在序列中的那个数.
+ *
+ * 难度: easy
+ *
+ * 思路: 同 136. 只出现一次的数字, 从 0 异或到 n, 再使用异或和依次异或数组中的数字, 最终剩下的就是没有出现的数.
  */
 class Solution {
-    public int missingNumber1(int[] nums) {
-        java.util.Arrays.sort(nums);
-        if (nums[0] != 0) {
-            return 0;
-        }
-        for (int i = 1; i < nums.length; ++i) {
-            if (nums[i] - 1 != nums[i - 1]) {
-                return nums[i] - 1;
-            }
-        }
-        return nums[nums.length - 1] + 1;
-    }
-
-    public int missingNumber2(int[] nums) {
-        int res = nums.length; // 先加上n，因为遍历只能到n - 1
-        for (int i = 0; i < nums.length; ++i) {
-            // 将两和相减，拆分开来防止溢出
-            res += i;
-            res -= nums[i];
-        }
-        return res;
-    }
-
+    /**
+     * 时间复杂度: O(n)
+     * 空间复杂度: O(1)
+     */
     public int missingNumber(int[] nums) {
-        int res = nums.length; // 初值设为n，因为遍历只能到n - 1
-        for (int i = 0; i < nums.length; ++i) {
-            res ^= i;
-            res ^= nums[i];
+        int ret = 0;
+        for (int i = 0; i <= nums.length; i++) {
+            ret ^= i;
         }
-        return res;
+        for (int num : nums) {
+            ret ^= num;
+        }
+
+        return ret;
     }
 }
 

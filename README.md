@@ -1,4 +1,4 @@
-# LeetCode 306/1429
+# LeetCode 312/1429
 
  001 [Java](src/lc001.java)
 | 002 [Java](src/lc002.java)
@@ -159,6 +159,7 @@
 | 241 [Java](src/lc241.java)
 | 242 [Java](src/lc242.java)
 | 257 [Java](src/lc257.java)
+| 260 [Java](src/lc260.java)
 | 263 [Java](src/lc263.java)
 | 264 [Java](src/lc264.java)
 | 268 [Java](src/lc268.java)
@@ -175,6 +176,7 @@
 | 309 [Java](src/lc309.java)
 | 314 [Java](src/lc314.java)
 | 316 [Java](src/lc316.java)
+| 318 [Java](src/lc318.java)
 | 322 [Java](src/lc322.java)
 | 326 [Java](src/lc326.java)
 | 328 [Java](src/lc328.java)
@@ -185,6 +187,7 @@
 | 337 [Java](src/lc337.java)
 | 338 [Java](src/lc338.java)
 | 341 [Java](src/lc341.java)
+| 342 [Java](src/lc342.java)
 | 343 [Java](src/lc343.java)
 | 344 [Java](src/lc344.java)
 | 345 [Java](src/lc345.java)
@@ -193,6 +196,7 @@
 | 350 [Java](src/lc350.java)
 | 357 [Java](src/lc357.java)
 | 368 [Java](src/lc368.java)
+| 371 [Java](src/lc371.java)
 | 375 [Java](src/lc375.java)
 | 376 [Java](src/lc376.java)
 | 377 [Java](src/lc377.java)
@@ -228,6 +232,7 @@
 | 460 [Java](src/lc460.java)
 | 461 [Java](src/lc461.java)
 | 474 [Java](src/lc474.java)
+| 476 [Java](src/lc476.java)
 | 485 [Java](src/lc485.java)
 | 494 [Java](src/lc494.java)
 | 496 [Java](src/lc496.java)
@@ -267,6 +272,7 @@
 | 680 [Java](src/lc680.java)
 | 684 [Java](src/lc684.java)
 | 687 [Java](src/lc687.java)
+| 693 [Java](src/lc693.java)
 | 695 [Java](src/lc695.java)
 | 697 [Java](src/lc697.java)
 | 696 [Java](src/lc696.java)

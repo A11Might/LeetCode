@@ -2,21 +2,25 @@
  * @lc app=leetcode.cn id=136 lang=java
  *
  * [136] 只出现一次的数字
- * 
- * 1、暴力遍历 O(n^2)
- * 2、排序后，比较前后元素 O(nlogn)
- * 2、异或，自己与自己异或为0 O(n)
+ *
+ * 题目: 给定一个非空整数数组, 除了某个元素只出现一次以外, 其余每个元素均出现两次. 找出那个只出现了一次的元素.
+ *
+ * 难度: easy
+ *
+ * 思路: 两个相同的数异或的结果为 0, 对所有数进行异或操作, 最后的结果就是单独出现的那个数.
  */
 class Solution {
+    /**
+     * 时间复杂度: O(n)
+     * 空间复杂度: O(1)
+     */
     public int singleNumber(int[] nums) {
-        if (nums.length == 1) {
-            return nums[0];
-        }
-        int res = 0;
+        int ret = 0;
         for (int num : nums) {
-            res ^= num;
+            ret ^= num;
         }
-        return res;
+
+        return ret;
     }
 }
 
