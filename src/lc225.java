@@ -18,7 +18,6 @@ import java.util.Queue;
  *                  empty: data为空时, 栈为中无数据
  */
 class MyStack {
-    // data为存储数据的队列，help为辅助队列
     private Queue<Integer> data;
 
     /** Initialize your data structure here. */

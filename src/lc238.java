@@ -3,31 +3,33 @@
  *
  * [238] 除自身以外数组的乘积
  * 
- * 题目：给定长度为n的整数数组nums，其中n > 1，返回输出数组output，其中output[i]等于nums中除nums[i] 之外其余各元素的乘积
- *      
- * 要求：不能使用除法，使用常数空间复杂度和O(n)时间复杂度内完成
+ * 题目：给定长度为 n 的整数数组nums，其中 n > 1，返回输出数组 output，其中 output[i] 等于 nums 中除 nums[i] 之外其余各元素的乘积。
+ *      （不能使用除法，使用常数空间复杂度和 O(n) 时间复杂度内完成）
+ *
+ * 难度：medium
  * 
- * 思路：output[i] = nums[i]左边的数乘积 * nums[i]右边的数乘积
+ * 思路：output[i] = nums[0] * nums[i - 1] * 1 * nums[i + 1] + ... + nums[len - 1]
  */
 class Solution {
+    /**
+     * 时间复杂度：O(n)
+     * 空间复杂度：O(1)
+     */
     public int[] productExceptSelf(int[] nums) {
-        int n = nums.length;
-        int curProduct = 1; // 当前位置左边或右边乘积的值，初始为1(最左边或最右边的位置没有左边的值或右边的值乘上1不改变其值)
-
-        int[] res = new int[n];
-        // 在返回值对应位置先存储当前元素左边的元素乘积
-        for (int i = 0; i < n; ++i) {
-            res[i] = curProduct;
-            curProduct *= nums[i];
+        int len = nums.length;
+        int[] ret = new int[len];
+        ret[0] = 1;
+        for (int i = 1; i < len; i++) {
+            // 在返回值对应位置先存储当前元素左边的元素乘积
+            ret[i] = ret[i - 1] * nums[i - 1];
         }
-        curProduct = 1;
-        // 在返回值对应位置存储再乘上当前元素右边的元素乘积
-        for (int i = n - 1; i >= 0; --i) {
-            res[i] *= curProduct;
-            curProduct *= nums[i];
+        int temp = 1;
+        for (int i = len - 2; i >= 0; i--) {
+            // 在返回值对应位置再乘上当前元素右边的元素乘积
+            temp *= nums[i + 1];
+            ret[i] *= temp;
         }
 
-        return res;
+        return ret;
     }
 }
-

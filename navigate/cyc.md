@@ -306,8 +306,77 @@ l   m   h
     x 和 y 的最小公倍数为: lcm(x, y) = 2 ^max(m0, n0) * 3 ^max(m1, n1) * 5 ^max(m2, n2) * ...
 
     - [1. 生成素数序列](https://leetcode-cn.com/problems/count-primes/description/) [[java]](../src/lc204.java)
-    - 2. 最大公约数
-    - 3. 使用位操作和减法求解最大公约数
+    - 2.最大公约数
+    
+        ```java
+        int gcd(int a, int b) {
+            return b == 0 ? a : gcd(b, a % b);
+        }
+        ```
+      
+        最小公倍数为两数的乘积除以最大公约数.
+        ```java
+        int lcm(int a, int b) {
+            return a * b / gcd(a, b);
+        }
+        ```
+    - 3.使用位操作和减法求解最大公约数
+        
+        对于 a 和 b 的最大公约数 f(a, b), 有:
+        
+        - 如果 a 和 b 均为偶数, f(a, b) = 2 * f(a / 2, b / 2);
+        - 如果 a 是偶数 b 是奇数, f(a, b) = f(a / 2, b);
+        - 如果 b 是偶数 a 是奇数, f(a, b) = f(a, b / 2);
+        - 如果 a 和 b 均为奇数, f(a, b) = f(b, a - b);
+        
+        乘 2 和除 2 都可以转换为移位操作.
+        
+        ```java
+        public int gcd(int a, int b) {
+            if (a < b) {
+                return gcd(b, a);
+            }
+            if (b == 0) {
+                return a;
+            }
+            boolean isAEven = isEven(a), isBEven = isEven(b);
+            if (isAEven && isBEven) {
+                return 2 * gcd(a >> 1, b >> 1);
+            } else if (isAEven && !isBEven) {
+                return gcd(a >> 1, b);
+            } else if (!isAEven && isBEven) {
+                return gcd(a, b >> 1);
+            } else {
+                return gcd(b, a - b);
+            }
+        }
+        ```
+      
+- 进制转换
+    - [1. 7 进制](https://leetcode-cn.com/problems/base-7/description/) [[java]](../src/lc504.java)
+    - [2. 16 进制](https://leetcode-cn.com/problems/convert-a-number-to-hexadecimal/description/) [[java]](../src/lc405.java)
+    - [3. 26 进制](https://leetcode-cn.com/problems/excel-sheet-column-title/description/) [[java]](../src/lc168.java)
+    ../src/lc168.java
+- 阶乘
+    - [统计阶乘尾部有多少个 0](https://leetcode-cn.com/problems/factorial-trailing-zeroes/description/) [[java]](../src/lc172.java)
+    
+    如果统计的是 n! 的二进制表示中最低位 1 的位置, 只要统计有多少个 2 即可, 该题目出自 编程之美: 2.2. 和求解有多少个 5 一样, 2 的个数为 n / 2 + n / 2 ^2 + n / 2 ^3 + ...
+
+- 字符串的加法减法
+    - [1. 二进制加法](https://leetcode-cn.com/problems/add-binary/description/) [[java]](../src/lc067.java)
+    - [2. 字符串加法](https://leetcode-cn.com/problems/add-strings/description/) [[java]](../src/lc415.java)
+    
+- 相遇问题
+    - [改变数组元素使所有的数组元素都相等](https://leetcode-cn.com/problems/minimum-moves-to-equal-array-elements-ii/description/) [[java]](../src/lc462.java)
+    
+- 多数投票问题
+    - [数组中出现次数多于 n / 2 的元素](https://leetcode-cn.com/problems/majority-element/description/) [[java]](../src/lc169.java)
+    
+- 其它
+    - [1. 平方数](https://leetcode-cn.com/problems/valid-perfect-square/description/) [[java]](../src/lc367.java)
+    - [2. 3 的 n 次方](https://leetcode-cn.com/problems/power-of-three/description/) [[java]](../src/lc326.java)
+    - [3. 乘积数组](https://leetcode-cn.com/problems/product-of-array-except-self/description/) [[java]](../src/lc238.java)
+    - [4. 找出数组中的乘积最大的三个数](https://leetcode-cn.com/problems/maximum-product-of-three-numbers/description/) [[java]](../src/lc628.java)
 
 ## 数据结构相关
 
