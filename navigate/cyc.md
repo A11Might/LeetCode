@@ -7,8 +7,8 @@
     - [二分查找](#二分查找)
     - [分治](#分治)
     - [搜索(推荐阅读)](#搜索)
-    - [动态规划(未完成)](#动态规划)
-    - [数学(未完成)](#数学)
+    - [动态规划](#动态规划)
+    - [数学](#数学)
     
 - [数据结构相关](#数据结构相关)
     - [链表](#链表)
@@ -286,7 +286,111 @@ l   m   h
     
 #### 动态规划
 
-   递归和动态规划都是将原问题拆成多个子问题然后求解, 他们之间最本质的区别是, 动态规划保存了子问题的解, 避免重复计算.
+递归和动态规划都是将原问题拆成多个子问题然后求解, 他们之间最本质的区别是, 动态规划保存了子问题的解, 避免重复计算.
+   
+- 斐波那契数列
+    - [1. 爬楼梯](https://leetcode-cn.com/problems/climbing-stairs/description/) [[java]](../src/lc070.java)
+    - [2. 强盗抢劫](https://leetcode-cn.com/problems/house-robber/description/) [[java]](../src/lc198.java)
+    - [3. 强盗在环形街区抢劫](https://leetcode-cn.com/problems/house-robber-ii/description/) [[java]](../src/lc213.java)
+    - 4.信件错排
+    
+        题目描述: 有 N 个 信 和 信封, 它们被打乱, 求错误装信方式的数量(所有信封都没有装各自的信).
+        
+        定义一个数组 dp 存储错误方式数量, dp[i] 表示前 i 个信和信封的错误方式数量. 假设第 i 个信装到第 j 个信封里面, 而第 j 个信装到第 k 个信封里面. 根据 i 和 k 是否相等, 有两种情况:
+        
+        - i == k, 交换 i 和 j 的信后, 它们的信和信封在正确的位置, 但是其余 i - 2 封信有 dp[i - 2] 种错误装信的方式. 由于 j 有 i - 1 种取值, 因此共有 (i - 1) * dp[i - 2] 种错误装信方式.
+        
+        - i != k, 交换 i 和 j 的信后, 第 i 个信和信封在正确的位置, 其余 i-1 封信有 dp[i-1] 种错误装信方式. 由于 j 有 i - 1 种取值, 因此共有 (i - 1) * dp[i - 1] 种错误装信方式.
+        
+        综上所述, 错误装信数量方式数量为:
+        
+            dp[i] = (i - 1)dp[i - 2] + (i - 1)dp[i - 1]
+            
+    - 5.母牛生产
+        
+        题目描述: 假设农场中成熟的母牛每年都会生 1 头小母牛, 并且永远不会死. 第一年有 1 只小母牛, 从第二年开始, 母牛开始生小母牛. 每只小母牛 3 年之后成熟又可以生小母牛. 给定整数 N, 求 N 年后牛的数量.
+        
+        第 i 年成熟的牛的数量为: 
+        
+            dp[i] = dp[i - 1] + dp[i - 3]
+        
+- 矩阵路径
+    - [1. 矩阵的最小路径和](https://leetcode-cn.com/problems/minimum-path-sum/description/) [[java]](../src/lc064.java)
+    - [2. 矩阵的总路径数](https://leetcode-cn.com/problems/unique-paths/description/) [[java]](../src/lc062.java)
+    
+- 数组区间
+    - [1. 数组区间和](https://leetcode-cn.com/problems/range-sum-query-immutable/description/) [[java]](../src/lc303.java)
+    - [2. 数组中等差递增子区间的个数](https://leetcode-cn.com/problems/arithmetic-slices/description/) [[java]](../src/lc413.java)
+    
+- 分割整数
+    - [1. 分割整数的最大乘积](https://leetcode-cn.com/problems/integer-break/description/) [[java]](../src/lc343.java)
+    - [2. 按平方数来分割整数](https://leetcode-cn.com/problems/perfect-squares/description/) [[java]](../src/lc279.java)
+    - [3. 分割整数构成字母字符串](https://leetcode-cn.com/problems/decode-ways/description/) [[java]](../src/lc091.java)
+    
+- 最长递增子序列
+
+    已知一个序列 {S1, S2,...,Sn}, 取出若干数组成新的序列 {Si1, Si2,..., Sim}, 其中 i1, i2 ... im 保持递增, 即新序列中各个数仍然保持原数列中的先后顺序, 称新序列为原序列的一个子序列.
+    
+    如果在子序列中, 当下标 ix > iy 时, Six > Siy, 称子序列为原序列的一个递增子序列.
+    
+    定义一个数组 dp 存储最长递增子序列的长度, dp[n] 表示以 Sn 结尾的序列的最长递增子序列长度. 对于一个递增子序列 {Si1, Si2,...,Sim}, 如果 im < n 并且 Sim < Sn, 此时 {Si1, Si2,..., Sim, Sn} 为一个递增子序列, 递增子序列的长度增加 1. 满足上述条件的递增子序列中, 长度最长的那个递增子序列就是要找的, 在长度最长的递增子序列上加上 Sn 就构成了以 Sn 为结尾的最长递增子序列. 因此 dp[n] = max{ dp[i] + 1 | Si < Sn && i < n} .
+    
+    因为在求 dp[n] 时可能无法找到一个满足条件的递增子序列, 此时 {Sn} 就构成了递增子序列, 需要对前面的求解方程做修改, 令 dp[n] 最小为 1, 即:
+    
+    dp[n] = max{1, dp[i] + 1 | Si < Sn && i < n}
+    
+    对于一个长度为 n 的序列, 最长递增子序列并不一定会以 Sn 为结尾, 因此 dp[n] 不是序列的最长递增子序列的长度, 需要遍历 dp 数组找出最大值才是所要的结果, max{ dp[i] | 1 <= i <= n} 即为所求.
+
+    - [1. 最长递增子序列](https://leetcode-cn.com/problems/longest-increasing-subsequence/description/) [[java]](../src/lc300.java)
+    - [2. 一组整数对能够构成的最长链](https://leetcode-cn.com/problems/maximum-length-of-pair-chain/description/) [[java]](../src/lc646.java)
+    - [3. 最长摆动子序列](https://leetcode-cn.com/problems/wiggle-subsequence/description/) [[java]](../src/lc376.java)
+    
+- 最长公共子序列
+    
+    对于两个子序列 S1 和 S2, 找出它们最长的公共子序列.
+    
+    定义一个二维数组 dp 用来存储最长公共子序列的长度, 其中 dp[i][j] 表示 S1 的前 i 个字符与 S2 的前 j 个字符最长公共子序列的长度. 考虑 S1i 与 S2j 值是否相等, 分为两种情况:
+    
+    当 S1i == S2j 时, 那么就能在 S1 的前 i - 1 个字符与 S2 的前 j - 1 个字符最长公共子序列的基础上再加上 S1i 这个值, 最长公共子序列长度加 1,即 dp[i][j] = dp[i - 1][j - 1] + 1.
+    
+    当 S1i != S2j 时, 此时最长公共子序列为 S1 的前 i-1 个字符和 S2 的前 j 个字符最长公共子序列, 或者 S1 的前 i 个字符和 S2 的前 j - 1 个字符最长公共子序列, 取它们的最大者, 即 dp[i][j] = max{dp[i - 1][j], dp[i][j - 1]}。
+    综上, 最长公共子序列的状态转移方程为:
+    
+                        = dp[i - 1][j - 1] + 1, S1i == S2j
+            dp[i][j] 
+                        = max(dp[i - 1][j], dp[i][j - 1], S1i != S2j
+    
+    对于长度为 n 的序列 S1 和长度为 m 的序列 S2, dp[n][m] 就是序列 S1 和序列 S2 的最长公共子序列长度.
+    
+    与最长递增子序列相比, 最长公共子序列有以下不同点:
+    
+    - 针对的是两个序列, 求它们的最长公共子序列.
+    - 在最长递增子序列中, dp[i] 表示以 Si 为结尾的最长递增子序列长度, 子序列必须包含 Si; 在最长公共子序列中, dp[i][j] 表示 S1 中前 i 个字符与 S2 中前 j 个字符的最长公共子序列长度, 不一定包含 S1i 和 S2j.
+    - 在求最终解时, 最长公共子序列中 dp[n][m] 就是最终解, 而最长递增子序列中 dp[n] 不是最终解, 因为以 Sn 为结尾的最长递增子序列不一定是整个序列最长递增子序列, 需要遍历一遍 dp 数组找到最大者.
+    
+    例题：
+
+    - [最长公共子序列](https://leetcode-cn.com/problems/longest-common-subsequence/) [[java]](../src/lc1143.java)
+    
+- 0-1 背包
+    - [1. 划分数组为和相等的两部分](https://leetcode-cn.com/problems/partition-equal-subset-sum/description/) [[java]](../src/lc416.java)
+    - [2. 改变一组数的正负号使得它们的和为一给定数](https://leetcode-cn.com/problems/target-sum/description/) [[java]](../src/lc494.java)
+    - [3. 01 字符构成最多的字符串](https://leetcode-cn.com/problems/ones-and-zeroes/description/) [[java]](../src/lc474.java)
+    - [4. 找零钱的最少硬币数](https://leetcode-cn.com/problems/coin-change/description/) [[java]](../src/lc322.java)
+    - [5. 找零钱的硬币数组合](https://leetcode-cn.com/problems/coin-change-2/description/) [[java]](../src/lc518.java)
+    - [6. 字符串按单词列表分割](https://leetcode-cn.com/problems/word-break/description/) [[java]](../src/lc139.java)
+    - [7. 组合总和](https://leetcode-cn.com/problems/combination-sum-iv/description/) [[java]](../src/lc377.java)
+    
+- 股票交易
+    - [1. 需要冷却期的股票交易](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/description/) [[java]](../src/lc309.java)
+    - [2. 需要交易费用的股票交易](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/description/) [[java]](../src/lc714.java)
+    - [3. 只能进行两次的股票交易](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iii/description/) [[java]](../src/lc123.java)
+    - [4. 只能进行 k 次的股票交易](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iv/description/) [[java]](../src/lc188.java)
+    
+- 字符串编辑
+    - [1. 删除两个字符串的字符使它们相等](https://leetcode-cn.com/problems/delete-operation-for-two-strings/description/) [[java]](../src/lc583.java)
+    - [2. 编辑距离](https://leetcode-cn.com/problems/edit-distance/description/) [[java]](../src/lc072.java)
+    - [3. 复制粘贴字符](https://leetcode-cn.com/problems/2-keys-keyboard/description/) [[java]](../src/lc650.java)
 
 #### 数学
 

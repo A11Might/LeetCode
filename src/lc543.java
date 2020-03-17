@@ -3,19 +3,15 @@
  *
  * [543] 二叉树的直径
  *
- * 题目: 计算给定二叉树的直径长度
- *      (一棵二叉树的直径长度是任意两个结点路径长度中的最大值, 这条路径可能穿过根结点)
+ * 题目：计算给定二叉树的直径长度。
+ *      (一棵二叉树的直径长度是任意两个结点路径长度中的最大值，这条路径可能穿过根结点。)
  *
- * 难度: easy
+ * 难度：easy
  *
- * 思路: 树型dp, 二叉树的直径为所有结点左子树的最大深度和右子树的最大深度之和中的最大值
- *
- *                 a
- *           b          c
- *       d       e
- *     f   g   l    m
- *    n o p q r s  t u
+ * 思路：树型DP，定义 dfs 返回值为 {height, diameter}，height 为当前树的高度，diameter 为当前树的直径。
+ *             二叉树的直径长度为左子树的直径长度，右子树的直径长度和经过当前根结点的直径长度三者中的最大值。
  */
+
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
@@ -30,18 +26,17 @@ class Solution {
      * 时间复杂度: O(n)
      * 空间复杂度: O(n) (n为树的高度即递归栈的深度)
      */
-    private int diameter = 0;
     public int diameterOfBinaryTree(TreeNode root) {
-        dfs(root);
-        return diameter;
+        int[] ret = dfs(root);
+        return ret[1];
     }
 
-    private int dfs(TreeNode root) {
-        if (root == null) return 0;
-        int left = dfs(root.left);
-        int right = dfs(root.right);
-        diameter = Math.max(diameter, left + right); // 左子树与右子树深度之和即为树的直径
-        return Math.max(left, right) + 1; // 节点的深度为, 该节点左子树的最大深度和右子树的最大深度的较大值加一
+    private int[] dfs(TreeNode root) {
+        if (root == null) return new int[] {0, 0};
+        int[] left = dfs(root.left);
+        int[] right = dfs(root.right);
+        int height = Math.max(left[0], right[0]) + 1;
+        int diameter = Math.max(left[0] + right[0], Math.max(left[1], right[1]));
+        return new int[] {height, diameter};
     }
 }
-

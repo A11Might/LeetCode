@@ -3,44 +3,44 @@
  *
  * [200] 岛屿的个数
  *
- * 题目: 给定一个由 '1'（陆地）和 '0'（水）组成的的二维网格，计算岛屿的数量
+ * 题目：给定一个由 '1'（陆地）和 '0'（水）组成的的二维网格，计算岛屿的数量。
  *
- * 难度: medium
+ * 难度：medium
  * 
- * 思路: dfs, floodfill算法, dfs模板题
+ * 思路：Flood Fill（深度优先搜素）：遍历矩阵，若当前点为陆地，则深度优先搜索遍历所有与之相连的陆地，来标记整个岛屿。在遍历过程中累计岛屿数量。
  */
 class Solution {
     /**
      * 时间复杂度: O(m * n)
      * 空间复杂度: O(m * n)
      */
-    private int rows, cols;
-    private int[][] direction = {{1, 0}, {0, 1}, {-1, 0}, {0, -1}};
+    private boolean[][] visited;
+    private int[][] direction = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
+
     public int numIslands(char[][] grid) {
-        if (grid == null || grid.length == 0) return 0; // 实例 [], grid[0].length数组越界
-        rows = grid.length;
-        cols = grid[0].length;
-        boolean[][] visited = new boolean[rows][cols];
-        int islandsNum = 0; // 当前岛屿的数量
+        if (grid.length == 0 || grid[0].length == 0) return 0;
+        int rows = grid.length, cols = grid[0].length;
+        visited = new boolean[rows][cols];
+        int cnt = 0;
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
-                if (grid[i][j] == '0' || visited[i][j]) continue;
-                islandsNum++;
-                dfs(grid, visited, i, j);
+                if (grid[i][j] == '1' && !visited[i][j]) {
+                    cnt++;
+                    dfs(grid, i, j);
+                }
             }
         }
 
-        return islandsNum;
+        return cnt;
     }
 
-    // 从grid[row][col]位置, 进行floodfill
-    // 保证(row, col)合法为1, 且grid[row][col]是没有被访问过的陆地
-    private void dfs(char[][] grid, boolean[][] visited, int i, int j) {
-        if (i < 0 || i >= rows || j < 0 || j >= cols ||
-                grid[i][j] == '0' || visited[i][j]) return;
+    private void dfs(char[][] grid, int i, int j) {
         visited[i][j] = true;
-        for (int[] d : direction) {
-            dfs(grid, visited, i + d[0], j + d[1]);
+        for (int[] dir : direction) {
+            int x = i + dir[0], y = j + dir[1];
+            if (x < 0 || x >= grid.length || y < 0 || y >= grid[0].length
+                    || grid[x][y] == '0' || visited[x][y]) continue;
+            dfs(grid, x, y);
         }
     }
 }
