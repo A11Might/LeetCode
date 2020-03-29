@@ -1,4 +1,4 @@
-# LeetCode 328/1429
+# LeetCode 330/1429
 
  001 [Java](src/lc001.java)
 | 002 [Java](src/lc002.java)
@@ -198,6 +198,7 @@
 | 349 [Java](src/lc349.java)
 | 350 [Java](src/lc350.java)
 | 357 [Java](src/lc357.java)
+| 365 [Java](src/lc365.java)
 | 367 [Java](src/lc367.java)
 | 368 [Java](src/lc368.java)
 | 371 [Java](src/lc371.java)
@@ -328,9 +329,14 @@
 | 1334 [Java](src/lc5321.java)
 | 1335 [Java](src/lc5322.java)
 | 1339 [Java](src/lc1339.java)
+| 1368 [Java](src/lc1368.java)
 
 # 分类
 
 - [高频面试题](navigate/liuyubobobo.md)
 
 - [经典面试题](navigate/cyc.md)
+
+#|题名|题解
+---|---|---
+1162|[地图分析](https://leetcode-cn.com/problems/as-far-from-land-as-possible/)|[java](solution/md/1162.md)

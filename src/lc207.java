@@ -35,11 +35,11 @@ class Solution {
         }
 
         // 计算实际可以上几节课。
-        int res = 0;
+        int cnt = 0;
         while (!queue.isEmpty()) {
             // 没有先修课程的课直接学习（先访问入度为 0 的节点）。
             int curCourse = queue.poll();
-            res++;
+            cnt++;
             // 每个以当前课为先修课程的课，先修课程数减一（当前节点访问完其对应节点入度减一）。
             for (int[] pre : prerequisites) {
                 if (pre[1] == curCourse) {
@@ -52,7 +52,7 @@ class Solution {
             }
         }
 
-        return res == numCourses;
+        return cnt == numCourses;
     }
 
     /**
