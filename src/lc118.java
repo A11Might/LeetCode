@@ -1,35 +1,38 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /*
  * @lc app=leetcode.cn id=118 lang=java
  *
  * [118] 杨辉三角
+ *
+ * 题目：给定一个非负整数 numRows，生成杨辉三角的前 numRows 行。
+ *
+ * 难度：easy
  * 
- * 根据每对相邻的值计算出它的下一行
+ * 思路：从上到下依次计算每一行，对于每一行，先把 1 放在首尾两个位置，然后计算中间的数。
  */
 class Solution {
     public List<List<Integer>> generate(int numRows) {
-        List<List<Integer>> res = new ArrayList<>();
-        if (numRows == 0) {
-            return res;
-        }
+        if (numRows == 0) return Collections.emptyList();
+        List<List<Integer>> ans = new ArrayList<>();
+        List<Integer> sublist = new ArrayList<>();
+        List<Integer> prelist = new ArrayList<>();
         // 加入第一行
-        res.add(new ArrayList<>());
-        res.get(0).add(1);
-        for (int i = 1; i < numRows; ++i) {
-            List<Integer> row = new ArrayList<>();
-            List<Integer> preRow = res.get(i - 1);
-            row.add(1);
-            // g(n) = f(n - 1) + f(n) 下一行等于上一行相邻两数之和
-            for (int j = 1; j < i; ++j) {
-                row.add(preRow.get(j - 1) + preRow.get(j));
+        sublist.add(1);
+        ans.add(sublist);
+        for (int i = 1; i < numRows; i++) {
+            sublist = new ArrayList<>();
+            sublist.add(1);
+            for (int j = 0; j < i - 1; j++) {
+                // 下一行等于上一行相邻两数之和
+                sublist.add(prelist.get(j) + prelist.get(j + 1));
             }
-            row.add(1);
-            res.add(row);
-
+            sublist.add(1);
+            ans.add(sublist);
+            prelist = sublist;
         }
-        return res;
+        return ans;
     }
 }
-

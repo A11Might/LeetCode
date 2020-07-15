@@ -10,9 +10,11 @@ import java.util.Queue;
  *
  * 难度：easy
  * 
- * 思路：1. 树型DP，如果左右子树都不为空，那么树的最小深度等于左右子树的最小值加上1；
- *                如果左右子树有一个为空，那么树的深度等于非空子树的值加上1。(因为求的是叶节点的最小深度，如果子树为空就不能考虑这半边了)
- *      2. 按层遍历树每层的节点，若当前节点为叶结点，则找到最小深度。
+ * 思路：1. 树型DP：
+ *         如果左右子树都不为空，那么树的最小深度等于左右子树的最小值加上 1；
+ *         如果左右子树有一个为空，那么树的深度等于非空子树的值加上 1。(因为求的是叶节点的最小深度，如果子树为空就不能考虑这半边了)
+ *      2. 层序遍历：
+ *         按层遍历树每层的节点，若当前节点为叶结点，则找到最小深度。
  */
 /**
  * Definition for a binary tree node.
@@ -32,6 +34,7 @@ class Solution {
         if (root == null) return 0;
         int left = minDepth(root.left);
         int right = minDepth(root.right);
+        // 注意是最小深度，需要考虑没有左子树和右子树的情况
         if (left == 0 || right == 0) return left + right + 1;
         return Math.min(left, right) + 1;
     }

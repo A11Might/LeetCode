@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -11,9 +12,7 @@ import java.util.List;
  *
  * 难度：medium
  *
- * 思路：同lc129
- *      1、递归，dfs
- *      2、迭代见lc112 dfs，lc257 bfs
+ * 思路：回溯
  */
 /**
  * Definition for a binary tree node.
@@ -25,26 +24,29 @@ import java.util.List;
  * }
  */
 class Solution {
-    public List<List<Integer>> pathSum(TreeNode root, int sum) {
-        List<List<Integer>> ans = new ArrayList<>();
-        dfs(root, ans, new ArrayList<Integer>(), sum);
+    /**
+     * 时间复杂度: O(n)
+     * 空间复杂度: O(n) (n 为树的高度即递归栈的深度)
+     */
+    private List<List<Integer>> ans = new ArrayList<>();
 
+    public List<List<Integer>> pathSum(TreeNode root, int sum) {
+        if (root == null) return Collections.emptyList();
+        dfs(root, new ArrayList<>(), sum);
         return ans;
     }
 
-    private void dfs(TreeNode root, List<List<Integer>> ans, ArrayList<Integer> subList, int curSum) {
-        if (root == null) {
-            return;
-        }
-        subList.add(root.val);
-        // 到达叶子节点并且当前路径总和等于curSum
-        if (root.left == null && root.right == null && root.val == curSum) {
-            ans.add(new ArrayList<>(subList));
+    private void dfs(TreeNode root, List<Integer> sublist, int sum) {
+        if (root == null) return;
+        sublist.add(root.val);
+        if (root.left == null && root.right == null) {
+            // 找到一条路径和为目标和的路径
+            if (root.val == sum) ans.add(new ArrayList<>(sublist));
         } else {
-            // 当前节点不是叶子节点，或当前路径总和不等于curSum，继续递归遍历
-            dfs(root.left, ans, subList, curSum - root.val);
-            dfs(root.right, ans, subList, curSum - root.val);
+            // 当前节点不是叶子节点，递归调用函数, 判断其孩子节点是否存在 sum - node.val 的路径
+            dfs(root.left, sublist, sum - root.val);
+            dfs(root.right, sublist, sum - root.val);
         }
-        subList.remove(subList.size() - 1);
+        sublist.remove(sublist.size() - 1); // 恢复现场
     }
 }
