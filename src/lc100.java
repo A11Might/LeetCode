@@ -10,9 +10,8 @@ import java.util.Queue;
  *
  * 难度：easy
  * 
- * 思路：同101对称二叉树
- *      1、递归，递归判断每个节点是否相同
- *      2、迭代，bfs判断每个节点是否相同
+ * 思路：1、递归，减而治之：先判断根节点是否相同，再判断左右子树是否相同
+ *      2、迭代，bfs 判断每个节点是否相同
  */
 /**
  * Definition for a binary tree node.
@@ -24,23 +23,21 @@ import java.util.Queue;
  * }
  */
 class Solution {
+    /**
+     * 时间复杂度：O(n)
+     * 空间复杂度：O(n)
+     */
     public boolean isSameTree(TreeNode p, TreeNode q) {
-        // p == null & q == null
-        if (p == null && q == null) {
-            return true;
-        }
-        // p == null & q != null 或者 p != null & q == null
-        if (p == null || q == null) {
-            return false;
-        }
-        // p != null & q != null
-        if (p.val != q.val) {
-            return false;
-        }
-        // 递归判断每个节点是否相同
+        if (p == null && q == null) return true;
+        if (p == null || q == null
+                || p.val != q.val) return false;
         return isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
     }
 
+    /**
+     * 时间复杂度：O(n)
+     * 空间复杂度：O(n)
+     */
     public boolean isSameTree2(TreeNode p, TreeNode q) {
         if (p == null && q == null) {
             return true;

@@ -8,9 +8,7 @@
  *
  * 难度：medium
  *
- * 思路：同lc113
- *      1、递归，dfs
- *      2、迭代见lc112 dfs，lc257 bfs
+ * 思路：从根节点递归遍历整棵树，遍历时维护从根节点到该节点的路径表示的数，当遍历到叶节点时，将路径表示的数累加到答案中。
  */
 /**
  * Definition for a binary tree node.
@@ -22,24 +20,27 @@
  * }
  */
 class Solution {
-    public int sumNumbers(TreeNode root) {
-        int[] ans = {0}; // 使用数组(参数传递时不是值传递)very important
-        dfs(root, 0, ans);
+    /**
+     * 时间复杂度：O(n)
+     * 空间复杂度：O(n)
+     */
+    private int ans = 0;
 
-        return ans[0];
+    public int sumNumbers(TreeNode root) {
+        dfs(root, 0);
+        return ans;
     }
 
-    private void dfs(TreeNode root, int curNum, int[] ans) {
-        if (root == null) {
-            return;
-        }
+    private void dfs(TreeNode root, int curNum) {
+        if (root == null) return;
         curNum = curNum * 10 + root.val;
-        // 当前节点是叶子节点
         if (root.left == null && root.right == null) {
-            ans[0] += curNum;
+            // 当前节点是叶子节点
+            ans += curNum;
+        } else {
+            // 当前节点不是叶子节点，继续递归遍历
+            dfs(root.left, curNum);
+            dfs(root.right, curNum);
         }
-        // 当前节点不是叶子节点，继续递归遍历
-        dfs(root.left, curNum, ans);
-        dfs(root.right, curNum, ans);
     }
 }

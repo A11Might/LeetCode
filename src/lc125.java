@@ -2,40 +2,39 @@
  * @lc app=leetcode.cn id=125 lang=java
  *
  * [125] 验证回文串
- * 
- * 指针碰撞，两个指针跳过不是小写字母和数字的字符
+ *
+ * 题目：判断给定字符串是否是回文串
+ *      （只考虑字母和数字字符，忽略字母的大小写）
+ *
+ * 难度：easy
+ *
+ * 思路：使用两个指针分别指向字符串的开头和结尾，每次判断当前指针指向的字母或者数字是否相同，判断完后都向中间移动一位，如果当前指针指向的不是字母或数字则跳过。
  */
 class Solution {
+    /**
+     * 时间复杂度：O(n)
+     * 空间复杂度：O(1)
+     */
     public boolean isPalindrome(String s) {
-        if (s == null) {
-            return true;
-        }
-        s = s.toLowerCase();
-        char[] chrsS = s.toCharArray();
-        int l = 0, r = chrsS.length - 1;
-        while (l < r) { // 小于即可，奇数个字符时最中间字符不用比较
-            while (l < chrsS.length && !isValid(chrsS, l)) {
-                l++;
-            }
-            while (r >= 0 && !isValid(chrsS, r)) {
-                r--;
-            }
-            // 比较前后字符后不移动指针，会进入死循环
-            if (l < r && chrsS[l++] != chrsS[r--]) {
-                    return false;
+        int n = s.length();
+        for (int i = 0, j = n - 1; i < j; i++, j--) {
+            while (i < j && !check(s.charAt(i))) i++;
+            while (j > i && !check(s.charAt(j))) j--;
+            if (s.charAt(i) != s.charAt(j)
+                    // 在相同字母的大小写的二进制表示里，只有第5位不同，异或32可以起到只改变第5位的效果，从而实现大小写的转化
+                    && s.charAt(i) != (s.charAt(j) ^ 32)) {
+                return false;
             }
         }
-        
         return true;
     }
 
-    private boolean isValid(char[] chrs, int index) {
-        // 使用字符asicII码判断字符是否是字母和数字
-        if (chrs[index] >= 'a' && chrs[index] <= 'z' || chrs[index] >= '0' && chrs[index] <= '9') {
+    private boolean check(char chr) {
+        if ((chr >= '0' && chr <= '9')
+                || (chr >= 'a' && chr <= 'z')
+                || (chr >= 'A' && chr <= 'Z')) {
             return true;
         }
-        
         return false;
     }
 }
-

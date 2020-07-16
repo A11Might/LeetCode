@@ -22,51 +22,50 @@ class Solution {
      * 时间复杂度：O(m * n) (m 为单词长度，n 为字典中单词书)
      * 空间复杂度：O(m * n)
      */
-    public int ladderLength1(String beginWord, String endWord, List<String> wordList) {
+    public int ladderLength(String beginWord, String endWord, List<String> wordList) {
         // 将列表中的单词放入 set 中方便查找。
-        HashSet<String> dict = new HashSet<>();
-        for (String word : wordList) dict.add(word);
-        // 结束单词不在字典中无法完成转换。
-        if (!dict.contains(endWord)) return 0;
-
+        HashSet<String> dict = new HashSet<>(wordList);
         Queue<String> queue = new ArrayDeque<>();
         // 使用 hashmap 记录每个节点距离源点（beginWord）的距离，同时它也可以当做 visited 使用。
         HashMap<String, Integer> dist = new HashMap<>();
         queue.offer(beginWord);
         dist.put(beginWord, 1);
+        int depth = 0;
         while (!queue.isEmpty()) {
             String cur = queue.poll();
-            if (cur.equals(endWord)) return dist.get(endWord);
-            for (String nextWord : getNextWords(cur, dict)) {
-                if (dist.containsKey(nextWord)) continue;
-                queue.offer(nextWord);
-                dist.put(nextWord, dist.get(cur) + 1);
+            int distance = dist.get(cur);
+            if (cur.equals(endWord)) return distance;
+            List<String> nextWord = getNextWord(cur);
+            for (String next : nextWord) {
+                if (dict.contains(next) && !dist.containsKey(next)) {
+                    queue.offer(next);
+                    dist.put(next, distance + 1);
+                }
             }
         }
-
         return 0;
     }
 
     // 找到与节点 word 相邻的节点。
-    private List<String> getNextWords(String word, HashSet<String> dict) {
+    private List<String> getNextWord(String str) {
         List<String> ret = new ArrayList<>();
-        char[] chrs = word.toCharArray();
+        char[] chrs = str.toCharArray();
         for (int i = 0; i < chrs.length; i++) {
             // 每次替换一个位置为另一个字母，来寻找所有相邻的节点
-            for (char chr = 'a'; chr <= 'z'; chr++) {
-                if (chrs[i] == chr) continue;
-                char oldChr = chrs[i];
-                chrs[i] = chr;
-                String newWord = new String(chrs);
-                if (dict.contains(newWord)) ret.add(newWord);
-                chrs[i] = oldChr;
+            char tmp = chrs[i];
+            for (char cur = 'a'; cur <= 'z'; cur++) {
+                if (cur == tmp) continue;
+                chrs[i] = cur;
+                ret.add(new String(chrs));
             }
+            chrs[i] = tmp;
         }
-
         return ret;
     }
 
-    // 与lc126方法统一的方法2
+    /**
+     * 与 lc126 方法统一的方法 2
+     */
     public int ladderLengthII(String beginWord, String endWord, List<String> wordList) {
         if (!wordList.contains(endWord)) {
             return 0;
@@ -114,5 +113,23 @@ class Solution {
         }
 
         return -1;
+    }
+
+    private List<String> getNextWords(String word, HashSet<String> dict) {
+        List<String> ret = new ArrayList<>();
+        char[] chrs = word.toCharArray();
+        for (int i = 0; i < chrs.length; i++) {
+            // 每次替换一个位置为另一个字母，来寻找所有相邻的节点
+            for (char chr = 'a'; chr <= 'z'; chr++) {
+                if (chrs[i] == chr) continue;
+                char oldChr = chrs[i];
+                chrs[i] = chr;
+                String newWord = new String(chrs);
+                if (dict.contains(newWord)) ret.add(newWord);
+                chrs[i] = oldChr;
+            }
+        }
+
+        return ret;
     }
 }

@@ -26,7 +26,7 @@
 class Solution {
     /**
      * 时间复杂度: O(n)
-     * 空间复杂度: O(n) (n为树的高度即递归栈的深度)
+     * 空间复杂度: O(n) (n 为树的高度即递归栈的深度)
      */
     public boolean isBalanced(TreeNode root) {
         return dfs(root)[0] == 1;
