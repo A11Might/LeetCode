@@ -10,10 +10,9 @@ import java.util.Queue;
  *
  * 难度: easy
  *
- * 思路: 同100相同的树
- *      判断对称二叉树的左右子树是否是镜像二叉树即可,
- *      两个树互为镜像的条件: a. 它们的两个根结点具有相同的值;
- *                       b. 每个树的右子树都与另一个树的左子树镜像对称(牛逼, 还以为少了左子树与右子树对称能)
+ * 思路: 判断给定二叉树的左右子树是否是镜像二叉树即可，
+ *      两个树互为镜像的条件：a. 它们的两个根结点具有相同的值；
+ *                        b. 每个树的右子树都与另一个树的左子树镜像对称(牛逼, 还以为少了左子树与右子树对称能)
  *      1. 递归(减而治之),
  *         f(left, right) = if left.val == right.val && f(left.left, right.right) && f(left.right, right.right)
  *      2. 迭代, 类似于 BFS, 每次取出两个结点并比较它们的值, 将两个结点的左右子结点按相反的顺序插入队列中(将需要相等的节点放在一起)
@@ -34,16 +33,16 @@ class Solution {
      */
     public boolean isSymmetric(TreeNode root) {
         if (root == null) return true;
+        // 判断左右两个子树是否为对称二叉树
         return dfs(root.left, root.right);
     }
 
-    // 判断以left和right为根结点的两棵树是否互为镜像
-    private boolean dfs(TreeNode left, TreeNode right) {
-        if (left == null && right == null) return true;
-        if (left == null || right == null) return false;
-        // 若两棵树的根结点的值相同并且每个树的右子树都与另一个树的左子树镜像对称, 则这两棵树互为镜像
-        return left.val == right.val
-                && dfs(left.left, right.right) && dfs(left.right, right.left);
+    // 判断以 root1 和 root2 为根结点的两棵树是否互为镜像
+    private boolean dfs(TreeNode root1, TreeNode root2) {
+        if (root1 == null && root2 == null) return true;
+        if (root1 == null || root2 == null
+                || root1.val != root2.val) return false;
+        return dfs(root1.left, root2.right) && dfs(root1.right, root2.left);
     }
 
     /**

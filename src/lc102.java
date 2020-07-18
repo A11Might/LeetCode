@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.Deque;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 /*
  * @lc app=leetcode.cn id=102 lang=java
@@ -10,9 +7,7 @@ import java.util.List;
  * 
  * 题目：返回二叉树按层遍历的节点值(逐层的)
  * 
- * 思路：层次遍历，
- *      1、使用变量记录每行的最后一个节点,当到达遍历到该行最后一个节点时，换行
- *      2、记录每行节点个数，当打印完该行元素后，换行(左神的方法没这个简单啊，妈蛋)
+ * 思路：层次遍历，每次遍历时队列中的元素就是当前行中元素的个数，记录每行节点个数，遍历当前行后换行
  */
 /**
  * Definition for a binary tree node.
@@ -24,64 +19,30 @@ import java.util.List;
  * }
  */
 class Solution {
-    public List<List<Integer>> levelOrder1(TreeNode root) {
-        if (root == null) {
-            return new ArrayList<>();
-        }
-        List<List<Integer>> res = new LinkedList<>();
-        List<Integer> list = new LinkedList<>();
-        Deque<TreeNode> queue = new LinkedList<>();
-        TreeNode cur = null; // 当前节点
-        TreeNode last = root; // 当前节点所在行的最右节点
-        TreeNode nLast = null; // 当前节点下一行的最右节点
+    /**
+     * 时间复杂度：O(n)
+     * 空间复杂度：O(n)
+     */
+    public List<List<Integer>> levelOrder(TreeNode root) {
+        if (root == null) return Collections.emptyList();
+        List<List<Integer>> ans = new ArrayList<>();
+        Queue<TreeNode> queue = new ArrayDeque<>();
         queue.offer(root);
         while (!queue.isEmpty()) {
-            cur = queue.poll();
-            list.add(cur.val);
-            if (cur.left != null) {
-                queue.offer(cur.left);
-                nLast = cur.left; // 实时更新下一行最右节点
-            } 
-            if (cur.right != null) {
-                queue.offer(cur.right);
-                nLast = cur.right; // 实时更新下一行最右节点
-            }
-            // 当cur == last时，换行
-            if (cur == last) {
-                last = nLast;
-                res.add(list);
-                list = new LinkedList<>();
-            }
-        }
-        return res;
-    }
-
-    public List<List<Integer>> levelOrder2(TreeNode root) {
-        if (root == null) {
-            return new ArrayList<>();
-        }
-        List<List<Integer>> res = new LinkedList<>();
-        Deque<TreeNode> queue = new LinkedList<>();
-        queue.offer(root);
-        while (!queue.isEmpty()) {
-            LinkedList<Integer> list = new LinkedList<>();
             // number of elements in the current level
-            int nums = queue.size();
-            for (int i = 0; i < nums; i++) {
+            int levelSize = queue.size();
+            List<Integer> sublist = new ArrayList<>();
+            while (levelSize-- > 0) {
                 TreeNode cur = queue.poll();
                 // fulfill the current level
-                list.add(cur.val);
+                sublist.add(cur.val);
                 // add child nodes of the current level
                 // in the queue for the next level
-                if (cur.left != null) {
-                    queue.offer(cur.left);
-                } 
-                if (cur.right != null) {
-                    queue.offer(cur.right);
-                }
+                if (cur.left != null) queue.offer(cur.left);
+                if (cur.right != null) queue.offer(cur.right);
             }
-            res.add(list);
+            ans.add(sublist);
         }
-        return res;
+        return ans;
     }
 }

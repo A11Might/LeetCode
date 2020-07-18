@@ -27,16 +27,7 @@ class Solution {
      * 空间复杂度: O(n) (n为树的高度即递归栈的深度)
      */
     public int maxDepth(TreeNode root) {
-        return dfs(root);
-    }
-
-    // 以root为根结点的树的最大深度
-    private int dfs(TreeNode root) {
-        // 第三步, 定义递归基
         if (root == null) return 0;
-        // 第一步, 把process当做黑盒
-        // 讨论每种情况
-        // 第二步, 将黑盒实现
         return Math.max(maxDepth(root.left), maxDepth(root.right)) + 1;
     }
 }
