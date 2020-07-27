@@ -3,12 +3,12 @@
  *
  * [148] 排序链表
  *
- * 题目：在O(n * logn)的时间复杂度和空间复杂度下，对链表进行排序
+ * 题目：在 O(n * logn) 的时间复杂度和空间复杂度下，对链表进行排序
  *
  * 难度：medium
  *
- * 思路：1、链表的归并排序：递归排序三部曲：1，快慢指针找中点；2，递归调用mergeSort，3，合并两个链表
- *       2、bottom-to-up：热评三https://leetcode-cn.com/problems/sort-list/comments/
+ * 思路： 1. 归并排序
+ *       2. 快速排序
  */
 /**
  * Definition for singly-linked list.
@@ -19,111 +19,88 @@
  * }
  */
 class Solution {
-    public ListNode sortList(ListNode head) {
-        return mergeSort(head);
-    }
-
-    private ListNode mergeSort(ListNode node) {
-        if (node == null || node.next == null) {
-            return node;
-        }
-        // 将链表一分为二，分别递归排序
-        ListNode fast = node, slow = node, slowPre = null;
+    /**
+     * 时间复杂度：O(n * logn)
+     * 空间复杂度：O(logn)
+     */
+    public ListNode sortList1(ListNode head) {
+        if (head == null || head.next == null) return head;
+        ListNode fast = head, slow = head;
+        ListNode midPre = slow; // 链表中间节点的前一个节点
         while (fast != null && fast.next != null) {
             fast = fast.next.next;
-            slowPre = slow;
+            midPre = slow;
             slow = slow.next;
         }
-        slowPre.next = null;
-        ListNode left = mergeSort(node);
-        ListNode right = mergeSort(slow);
-        // 将排序后的两链表合并
-        return merge(left, right);
+        // 将链表等分成两个部分
+        ListNode head2 = midPre.next;
+        midPre.next = null;
+        // 归并排序
+        head = sortList1(head);
+        head2 = sortList1(head2);
+        return mergeList(head, head2);
     }
 
-    private ListNode merge(ListNode left, ListNode right) {
-        // 使用dummyhead，储存排序后的链表
-        ListNode dummyHead = new ListNode(0);
-        ListNode tail = dummyHead;
-        while (left != null && right != null) {
-            if (left.val <= right.val) {
-                tail.next = left;
-                tail = left;
-                left = left.next;
+    private ListNode mergeList(ListNode p, ListNode q) {
+        if (p == null) return q;
+        if (q == null) return p;
+        ListNode dummy = new ListNode(-1), tail = dummy;
+        while (p != null || q != null) {
+            int val1 = p == null ? Integer.MAX_VALUE : p.val;
+            int val2 = q == null ? Integer.MAX_VALUE : q.val;
+            if (val1 <= val2) {
+                tail.next = p;
+                p = p.next;
             } else {
-                tail.next = right;
-                tail = right;
-                right = right.next;
+                tail.next = q;
+                q = q.next;
             }
+            tail = tail.next;
         }
-        // 剩下部分本就是有序链表，只需要与已排好序的链表连接一下即可
-        if (left == null) {
-            tail.next = right;
-        } else {
-            tail.next = left;
-        }
-
-        return dummyHead.next;
+        return dummy.next;
     }
 
-    public:
-    ListNode* sortList(ListNode* head) {
-        ListNode dummyHead(0);
-        dummyHead.next = head;
-        auto p = head;
-        int length = 0;
-        while (p) {
-            ++length;
-            p = p->next;
-        }
-
-        for (int size = 1; size < length; size <<= 1) {
-            auto cur = dummyHead.next;
-            auto tail = &dummyHead;
-
-            while (cur) {
-                auto left = cur;
-                auto right = cut(left, size); // left->@->@ right->@->@->@...
-                cur = cut(right, size); // left->@->@ right->@->@  cur->@->...
-
-                tail->next = merge(left, right);
-                while (tail->next) {
-                    tail = tail->next;
-                }
-            }
-        }
-        return dummyHead.next;
-    }
-
-    ListNode* cut(ListNode* head, int n) {
-        auto p = head;
-        while (--n && p) {
-            p = p->next;
-        }
-
-        if (!p) return nullptr;
-
-        auto next = p->next;
-        p->next = nullptr;
-        return next;
-    }
-
-    ListNode* merge(ListNode* l1, ListNode* l2) {
-        ListNode dummyHead(0);
-        auto p = &dummyHead;
-        while (l1 && l2) {
-            if (l1->val < l2->val) {
-                p->next = l1;
-                p = l1;
-                l1 = l1->next;
+    /**
+     * 时间复杂度：O(n * logn)
+     * 空间复杂度：O(logn)
+     */
+    public ListNode sortList2(ListNode head) {
+        if (head == null || head.next == null) return head;
+        int x = head.val;
+        // 将链表分为小于 x、等于 x、大于 x 三部分
+        ListNode headL = new ListNode(-1), tailL = headL;
+        ListNode headM = new ListNode(-1), tailM = headM;
+        ListNode headR = new ListNode(-1), tailR = headR;
+        while (head != null) {
+            if (head.val < x) {
+                tailL.next = head;
+                tailL = head;
+            } else if (head.val > x) {
+                tailR.next = head;
+                tailR = head;
             } else {
-                p->next = l2;
-                p = l2;
-                l2 = l2->next;
+                tailM.next = head;
+                tailM = head;
             }
+            head = head.next;
         }
-        p->next = l1 ? l1 : l2;
-        return dummyHead.next;
+        // 将三个子链表排序
+        tailL.next = tailM.next = tailR.next = null;
+        headL.next = sortList2(headL.next);
+        headR.next = sortList2(headR.next);
+        // 合并成一个链表
+        tailL = getTail(headL);
+        tailM = getTail(headM);
+        tailL.next = headM.next;
+        tailM.next = headR.next;
+        return headL.next;
+    }
+
+    private ListNode getTail(ListNode head) {
+        if (head == null || head.next == null) return head;
+        while (head.next != null) {
+            head = head.next;
+        }
+        return head;
     }
 }
-

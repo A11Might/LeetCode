@@ -5,11 +5,11 @@ import java.util.*;
  *
  * [144] 二叉树的前序遍历
  * 
- * 题目: 返回二叉树的前序遍历
+ * 题目：返回二叉树的前序遍历
  *
- * 难度: medium
+ * 难度：medium
  * 
- * 思路: 1. 递归
+ * 思路：1. 递归
  *      2. 迭代
  *      3. Morris遍历, 将当前节点记为cur
  *                    a. 如果cur无左孩子, cur向右移动
@@ -29,8 +29,8 @@ import java.util.*;
  */
 class Solution {
     /**
-     * 时间复杂度: O(n)
-     * 空间复杂度: O(h) (h为二叉树的高度)
+     * 时间复杂度：O(n)
+     * 空间复杂度：O(h) (h 为二叉树的高度)
      */
     private List<Integer> res = new ArrayList<>();
     public List<Integer> preorderTraversal(TreeNode root) {
@@ -46,8 +46,8 @@ class Solution {
     }
 
     /**
-     * 时间复杂度: O(n)
-     * 空间复杂度: O(h) (h为二叉树的高度)
+     * 时间复杂度：O(n)
+     * 空间复杂度：O(h) (h 为二叉树的高度)
      */
     public List<Integer> preorderTraversal2(TreeNode root) {
         if (root == null) return Collections.emptyList();
@@ -66,8 +66,8 @@ class Solution {
 
     /**
      * Morris前序遍历, 在第一次遇到当前节点时打印
-     * 时间复杂度: O(n)
-     * 空间复杂度: O(h) (h为二叉树的高度)
+     * 时间复杂度：O(n)
+     * 空间复杂度：O(h) (h 为二叉树的高度)
      */
     public List<Integer> preorderTraversal3(TreeNode root) {
         if (root == null) return Collections.emptyList();

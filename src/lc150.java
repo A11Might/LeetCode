@@ -15,24 +15,22 @@ import java.util.Deque;
  * 思路：将数字压入栈中，遇到操作符时，弹出两个数字运算
  */
 class Solution {
+    /**
+     * 时间复杂度：O(n)
+     * 空间复杂度：O(n)
+     */
     public int evalRPN(String[] tokens) {
-        Deque<Integer> stack = new ArrayDeque<>();
-        for (String str : tokens) {
-            if (str.equals("+")) {
-                stack.push(stack.pop() + stack.pop());
-            } else if (str.equals("-")) {
-                int succ = stack.pop();
-                stack.push(stack.pop() - succ);
-            } else if (str.equals("*")) {
-                stack.push(stack.pop() * stack.pop());
-            } else if (str.equals("/")) {
-                int succ = stack.pop();
-                stack.push(stack.pop() / succ);
-            } else {
-                stack.push(Integer.valueOf(str));
-            }
+        int n = tokens.length;
+        Deque<Integer> nums = new ArrayDeque<>();
+        for (String token : tokens) {
+            if (token.equals("+") || token.equals("-") || token.equals("*") || token.equals("/")) {
+                int b = nums.pop(), a = nums.pop();
+                if (token.equals("+")) nums.push(a + b);
+                else if (token.equals("-")) nums.push(a - b);
+                else if (token.equals("*")) nums.push(a * b);
+                else nums.push(a / b);
+            } else nums.push(Integer.valueOf(token));
         }
-
-        return stack.pop();
+        return nums.pop();
     }
 }

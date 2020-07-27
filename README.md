@@ -1,4 +1,4 @@
-# LeetCode 334/1715
+# LeetCode 336/1715
 
  001 [Java](src/lc001.java)
 | 002 [Java](src/lc002.java)

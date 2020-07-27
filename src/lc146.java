@@ -5,119 +5,94 @@ import java.util.HashMap;
  *
  * [146] LRU缓存机制
  * 
- * 题目：设计和实现一个LRU(最近最少使用)缓存机制，包括：获取数据get和写入数据put
+ * 题目：设计和实现一个LRU（最近最少使用）缓存机制，包括：获取数据 get 和写入数据 put
+ *
+ * 难度：medium
  * 
- * 思路：哈希表加双向链表
- *      哈希表get()和put()操作O(1)，双向链表维护访问顺序
+ * 思路：哈希表加双向链表，哈希表 get() 和 put() 操作 O(1)，双向链表维护访问顺序
  */
 class LRUCache {
 
-    // doublelinkedlist's node
-    class Node {
-        int key;
-        int value;
-        Node pre;
-        Node succ;
-
-        public Node() {
-            super();
-        }
-
-        public Node(int key, int value) {
-            this.key = key;
-            this.value = value;
-        }
-    }
-
-    // doublelinkedlist
-    class DoubleLinkedList {
-        private Node head;
-        private Node tail;
-
-        public DoubleLinkedList() {
-            head = new Node();
-            tail = new Node();
-
-            head.succ = tail;
-            tail.pre = head;
-        }
-
-        // Always add the new node right after head
-        public void addNode(Node node) {
-            node.pre = head;
-            node.succ = head.succ;
-            head.succ = node;
-            node.succ.pre = node;
-        }
-
-        // Remove an existing node from the linked list
-        public void deleteNode(Node node) {
-            Node pre = node.pre;
-            Node succ = node.succ;
-
-            pre.succ = succ;
-            succ.pre = pre;
-        }
-
-        // Move certain node in between to the head
-        public void moveToHead(Node node) {
-            deleteNode(node);
-            addNode(node);
-        }
-
-        // Pop the current tail
-        public Node popTail() {
-            Node res = tail.pre;
-            deleteNode(res);
-
-            return res;
-        }
-    }
-
-    private HashMap<Integer, Node> map;
-    private DoubleLinkedList list;
-    private int capacity;
-    private int size;
+    private int capacity, size;
+    private HashMap<Integer, Node> map = new HashMap<>();
+    private Node head = new Node(), tail = new Node();
 
     public LRUCache(int capacity) {
-        map = new HashMap<>();
-        list = new DoubleLinkedList();
         this.capacity = capacity;
         size = 0;
+        head.next = tail;
+        tail.pre = head;
     }
-    
+
     public int get(int key) {
-        Node res = map.get(key);
+        Node cur = map.get(key);
         // if this key isn't exist, return -1
-        if (res == null) {
-            return -1;
-        // if this key is exist, return the value and change node's priority
-        } else {
-            list.moveToHead(res);
-            return res.value;
+        if (cur == null) return -1;
+        else {
+            // if this key is exist, return the value and change node's priority
+            moveToFirst(cur);
+            return cur.val;
         }
     }
-    
+
     public void put(int key, int value) {
-        Node node = map.get(key);
-        if (node == null) {
-            // if this key isn't exist, create a new node about this key
-            node = new Node(key, value);
+        Node cur = map.get(key);
+        if (cur != null) {
+            // if this key is exist, update the value, and move item after head
+            cur.val = value;
+            moveToFirst(cur);
+        } else {
+            // if this key isn't exist, create a new node about this key, and add item after head
+            Node node = new Node(key, value);
             map.put(key, node);
-            list.addNode(node);
+            addFirst(node);
             size++;
             // if size over capacity, remove list's last node
             if (size > capacity) {
-                node = list.popTail();
-                map.remove(node.value);
+                Node last = pollLast();
+                map.remove(last.key);
             }
-        } else {
-            // if this key is exist, update the value
-            node.value = value;
-            list.moveToHead(node);
         }
     }
 
+    //  add node after head
+    private void addFirst(Node node) {
+        node.next = head.next;
+        node.pre = head;
+        head.next = node;
+        node.next.pre = node;
+    }
+
+    // remove node from the linked list
+    private void deleteNode(Node node) {
+        node.pre.next = node.next;
+        node.next.pre = node.pre;
+    }
+
+    // move certain node to the head's right
+    private void moveToFirst(Node node) {
+        deleteNode(node);
+        addFirst(node);
+    }
+
+    // pop the current tail node
+    private Node pollLast() {
+        Node ret = tail.pre;
+        deleteNode(ret);
+        return ret;
+    }
+
+    private class Node {
+        int key, val;
+        Node pre, next;
+
+        public Node() {}
+
+        public Node(int key, int val) {
+            this.key = key;
+            this.val = val;
+        }
+    }
 }
 
 /**
@@ -126,4 +101,3 @@ class LRUCache {
  * int param_1 = obj.get(key);
  * obj.put(key,value);
  */
-

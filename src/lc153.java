@@ -9,8 +9,8 @@
  *
  * 难度: medium
  *
- * 思路: 二分查找, 旋转排序数组可以拆分为两个排序数组 nums1 和 nums2, 并且 nums1任意元素 >= nums2 任意元素,
- *               使用二分查找这两个数组的分界点(nums2 的首元素)即最小元素.
+ * 思路: 二分查找, 该旋转点左边的数满足 nums[i] >= nums[0]；而该旋转点右边的数不满足这个条件，所以分界点就是整个数组的最小值。
+ *      另外，不要忘记处理数组完全单调的特殊情况。
  */
 class Solution {
     /**
@@ -18,17 +18,15 @@ class Solution {
      * 空间复杂度: O(1)
      */
     public int findMin(int[] nums) {
-        int lo = 0, hi = nums.length - 1;
-        while (lo < hi) {
-            int mid = lo + ((hi - lo) >> 1);
-            // 当前mid的值大于当前区间的hi值, mid在左有序区间内, 最小元素在mid右边
-            if (nums[mid] > nums[hi]) {
-                lo = mid + 1;
-            } else if (nums[mid] < nums[hi]) {
-                // 当前mid的值小于当前区间的hi值, mid在右有序区间内, mid可能为最小元素
-                hi = mid;
-            }
+        int n = nums.length;
+        int l = 0, r = n - 1;
+        // 数组完全单调的情况
+        if (nums[l] < nums[r]) return nums[l];
+        while (l < r) {
+            int mid = l + r >> 1;
+            if (nums[mid] < nums[0]) r = mid;
+            else l = mid + 1;
         }
-        return nums[lo];
+        return nums[l];
     }
 }
