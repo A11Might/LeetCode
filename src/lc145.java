@@ -11,7 +11,6 @@ import java.util.*;
  * 
  * 思路：1. 递归
  *      2. 迭代
- *      3. 迭代
  *      3. Morris遍历, 将当前节点记为cur
  *                    a. 如果cur无左孩子, cur向右移动
  *                    b. 如果cur有左孩子, 找到cur左孩子的最右节点, 记为mostRight
@@ -51,7 +50,7 @@ class Solution {
      * 时间复杂度: O(n)
      * 空间复杂度: O(n) (n为树的高度即递归栈的深度)
      */
-    public List<Integer> postorderTraversal(TreeNode root) {
+    public List<Integer> postorderTraversal2_1(TreeNode root) {
         if (root == null) return Collections.emptyList();
         LinkedList<Integer> ans = new LinkedList<>();
         Deque<TreeNode> stack = new ArrayDeque<>();
@@ -69,11 +68,33 @@ class Solution {
     }
 
     /**
+     * 改造先序遍历实现后序遍历(左神用两个栈实现后序遍历不太行啊, 直接用链表向前存结点即可)
+     * 时间复杂度: O(n)
+     * 空间复杂度: O(n) (n为树的高度即递归栈的深度)
+     */
+    public List<Integer> postorderTraversal2_2(TreeNode root) {
+        if (root == null) return Collections.emptyList();
+        LinkedList<Integer> ans = new LinkedList<>();
+        Deque<TreeNode> stk = new ArrayDeque<>();
+        var cur = root;
+        while (cur != null || !stk.isEmpty()) {
+            while (cur != null) {
+                ans.addFirst(cur.val);
+                stk.push(cur);
+                cur = cur.right;
+            }
+            cur = stk.pop().left;
+        }
+
+        return ans;
+    }
+
+    /**
      * 后序遍历的另一种迭代实现
      * 时间复杂度: O(n)
      * 空间复杂度: O(n) (n为树的高度即递归栈的深度)
      */
-    public List<Integer> postorderTraversal2(TreeNode root) {
+    public List<Integer> postorderTraversal2_3(TreeNode root) {
         if (root == null) return Collections.emptyList();
         List<Integer> res = new ArrayList<>();
         Deque<TreeNode> stack = new ArrayDeque<>();

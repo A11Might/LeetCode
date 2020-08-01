@@ -52,18 +52,17 @@ class Solution {
     public List<Integer> inorderTraversal2(TreeNode root) {
         if (root == null) return Collections.emptyList();
         List<Integer> ans = new ArrayList<>();
-        Deque<TreeNode> stack = new ArrayDeque<>();
-        TreeNode cur = root;
-        while (!stack.isEmpty() || cur != null) {
+        Deque<TreeNode> stk = new ArrayDeque<>();
+        var cur = root;
+        while (cur != null || !stk.isEmpty()) {
             while (cur != null) {
-                stack.push(cur);
+                stk.push(cur);
                 cur = cur.left;
             }
-            cur = stack.pop();
+            cur = stk.pop();
             ans.add(cur.val);
             cur = cur.right;
         }
-
         return ans;
     }
 

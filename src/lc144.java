@@ -49,7 +49,7 @@ class Solution {
      * 时间复杂度：O(n)
      * 空间复杂度：O(h) (h 为二叉树的高度)
      */
-    public List<Integer> preorderTraversal2(TreeNode root) {
+    public List<Integer> preorderTraversal2_1(TreeNode root) {
         if (root == null) return Collections.emptyList();
         List<Integer> ans = new ArrayList<>();
         Deque<TreeNode> stack = new ArrayDeque<>();
@@ -59,6 +59,27 @@ class Solution {
             ans.add(cur.val);
             if (cur.right != null) stack.push(cur.right);
             if (cur.left != null) stack.push(cur.left);
+        }
+
+        return ans;
+    }
+
+    /**
+     * 时间复杂度：O(n)
+     * 空间复杂度：O(h) (h 为二叉树的高度)
+     */
+    public List<Integer> preorderTraversal2_2(TreeNode root) {
+        if (root == null) return Collections.emptyList();
+        List<Integer> ans = new ArrayList<>();
+        Deque<TreeNode> stk = new ArrayDeque<>();
+        var cur = root;
+        while (cur != null || !stk.isEmpty()) {
+            while (cur != null) {
+                ans.add(cur.val);
+                stk.push(cur);
+                cur = cur.left;
+            }
+            cur = stk.pop().right;
         }
 
         return ans;
