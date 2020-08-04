@@ -1,4 +1,4 @@
-# LeetCode 336/1715
+# LeetCode 344/1715
 
  001 [Java](src/lc001.java)
 | 002 [Java](src/lc002.java)
@@ -134,7 +134,7 @@
 | 171 [Java](src/lc171.java)
 | 172 [Java](src/lc172.java)
 | 173 [Java](src/lc173.java)
-| 174 [Java](src/lc174.java)
+| 174 [Java](src/lc174.md)
 | 179 [Java](src/lc179.java)
 | 188 [Java](src/lc188.java)
 | 189 [Java](src/lc189.java)
