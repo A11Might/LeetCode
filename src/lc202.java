@@ -10,33 +10,28 @@ import java.util.HashSet;
  *      平方和，然后重复这个过程直到这个数变为 1，也可能是无限循环但始终变不到 1。如
  *      果可以变为 1，那么这个数就是快乐数)
  * 
+ * 难度：easy
+ * 
  * 思路：查找表set，用于判断当前数是否出现过
  */
 class Solution {
+    /**
+     * 时间复杂度：O(1)
+     * 空间复杂度：O(n)
+     */
     public boolean isHappy(int n) {
-        HashSet<Integer> record = new HashSet<>();
-        record.add(n);
+        HashSet<Integer> set = new HashSet<>();
         while (n != 1) {
-            n = help(n);
-            if (record.contains(n)) {
-                return false;
-            } else {
-                record.add(n);
+            int ans = 0;
+            while (n != 0) {
+                int t = n % 10;
+                ans += t * t;
+                n /= 10;
             }
+            if (set.contains(ans)) return false;
+            set.add(ans);
+            n = ans;
         }
-        
         return true;
     }
-    
-    private int help(int n) {
-        int res = 0;
-        while (n != 0) {
-            int t = n % 10;
-            res += t * t;
-            n /= 10;
-        }
-        
-        return res;
-    }
 }
-
