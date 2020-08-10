@@ -9,73 +9,52 @@ import java.util.PriorityQueue;
  *
  * 难度: medium
  * 
- * 思路：1, 大小为k的小根堆
- *      2, 利用快排partition分割数组, 分割位置为n - k时, 找到第k个最大的元素
- *      3, bfprt算法
+ * 思路：1. 使用大小为 k 的小根堆
+ *      2. 利用快排 partition 分割数组，分割位置为 n - k 时，找到第 k 个最大的元素
+ *      3. bfprt 算法
  */
 class Solution {
     /**
-     * 时间复杂度: O(n * logk)
-     * 空间复杂度: O(k)
+     * 时间复杂度：O(n * logk)
+     * 空间复杂度：O(k)
      */
     public int findKthLargest(int[] nums, int k) {
-        PriorityQueue<Integer> heap = new PriorityQueue<>(
-                (num1, num2) -> num1 - num2
-        ); // 定义小根堆
+        PriorityQueue<Integer> heap = new PriorityQueue<>(); // 默认为小根堆
         // 将数组中的元素加入到小根堆中
         for (int num : nums) {
             heap.add(num);
-            // 维持小根堆大小为k
-            if (heap.size() > k) {
-                heap.poll();
-            }
+            // 维持小根堆大小为 k
+            if (heap.size() > k) heap.poll();
         }
 
         return heap.peek();
     }
 
     /**
-     * 时间复杂度: O(n)
-     * 空间复杂度: O(1)
+     * 时间复杂度：O(n)
+     * 空间复杂度：O(1)
      */
-    public int findKthLargest2(int[] nums, int k) {
-        int len = nums.length;
-        int target = len - k; // 目标元素的索引
-        int left = 0, right = len - 1;
-        // 在数组中寻找位置为target的pivot
-        while (left <= right) {
-            int index = partition(nums, left, right);
-            if (index == target) {
-                return nums[target];
-            } else if (index > target) {
-                right = index - 1;
-            } else {
-                left = index + 1;
+    public int findKthLargest(int[] nums, int k) {
+        int n = nums.length;
+        return quickSort(nums, 0, n - 1, n - k + 1); // 注意题目给的 k 是排序后从后往前数的
+    }
+    
+    private int quickSort(int[] nums, int l, int r, int k) {
+        if (l >= r) return nums[l];
+        
+        int i = l - 1, j = r + 1, x = nums[l + r >> 1];
+        while (i < j) {
+            do i++; while (nums[i] < x);
+            do j--; while (nums[j] > x);
+            if (i < j) {
+                int tmp = nums[i];
+                nums[i] = nums[j];
+                nums[j] = tmp;
             }
         }
-
-        throw new IllegalArgumentException("no solution");
-    }
-
-    // 返回pivot位置的索引
-    private int partition(int[] nums, int left, int right) {
-        int len = right - left + 1;
-        swap(nums, right, left + (int) Math.random() * len); // 随机选取一个元素作为partition的pivot
-        int small = left; // 将区间分为 <= 和 > 两部分
-        while (left < right) {
-            if (nums[left] <= nums[right]) {
-                swap(nums, small++, left);
-            }
-            left++;
-        }
-        swap(nums, small, right);
-        return small;
-    }
-
-    private void swap(int[] arr, int a, int b) {
-        int temp = arr[b];
-        arr[b] = arr[a];
-        arr[a] = temp;
+        int leftSize = j - l + 1;
+        if (k <= leftSize) return quickSort(nums, l, j, k);
+        return quickSort(nums, j + 1, r, k - leftSize);
     }
 }
 

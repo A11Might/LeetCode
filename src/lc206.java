@@ -3,12 +3,12 @@
  *
  * [206] 反转链表
  * 
- * 题目: 反转一个单链表
+ * 题目：反转一个单链表
  *
- * 难度: easy
+ * 难度：easy
  * 
- * 思路: 1. 迭代: 使用三个指针pre, cur和succ
- *      2. 递归(减而治之): f(head) = 反转head和head.next之间的链式结构 + f(head.next)
+ * 思路：1. 迭代：使用三个指针pre, cur 和 succ
+ *      2. 递归（减而治之）：f(head) = f(head.next) + 反转 head
  */
 /**
  * Definition for singly-linked list.
@@ -20,10 +20,10 @@
  */
 class Solution {
     /**
-     * 时间复杂度: O(n)
-     * 空间复杂度: O(1)
+     * 时间复杂度：O(n)
+     * 空间复杂度：O(1)
      */
-    public ListNode reverseList(ListNode head) {
+    public ListNode reverseList1(ListNode head) {
         if (head == null) return null;
         ListNode pre = null, cur = head, succ = null;
         while (cur != null) {
@@ -37,23 +37,17 @@ class Solution {
     }
 
     /**
-     * 时间复杂度: O(n)
-     * 空间复杂度: O(n) (n为递归栈的深度)
+     * 时间复杂度：O(n)
+     * 空间复杂度：O(n) (n 为递归栈的深度)
      */
     public ListNode reverseList2(ListNode head) {
-        return process(head);
-    }
-
-    // 反转链表 = 反转当前节点 + 反转剩余节点
-    private ListNode process(ListNode head) {
         if (head == null || head.next == null) return head;
-        ListNode newHead = process(head.next);
-        head.next.next = head;
+        ListNode succ = head.next;
+        ListNode newHead = reverseList(succ);
+        succ.next = head;
         head.next = null;
-
         return newHead;
     }
-
 }
 
 // Definition for singly-linked list.
