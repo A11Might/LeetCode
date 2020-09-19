@@ -1,4 +1,4 @@
-# LeetCode 345/1419
+# LeetCode 349/1419
 
  001 [Java](src/lc001.java)
 | 002 [Java](src/lc002.java)
@@ -156,7 +156,7 @@
 | 211 [Java](src/lc211.java)
 | 212 [Java](src/lc212.java)
 | 213 [Java](src/lc213.md)
-| 214 [Java](src/lc214.java)
+| 214 [Java](src/lc214.md)
 | 215 [Java](src/lc215.java)
 | 216 [Java](src/lc216.java)
 | 217 [Java](src/lc217.java)
@@ -188,6 +188,7 @@
 | 279 [Java](src/lc279.java)
 | 283 [Java](src/lc283.java)
 | 287 [Java](src/lc287.java)
+| 289 [Java](src/lc289.java)
 | 290 [Java](src/lc290.java)
 | 292 [Java](src/lc292.java)
 | 297 [Java](src/lc297.java)

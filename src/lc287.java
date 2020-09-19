@@ -24,37 +24,27 @@ class Solution {
      * 空间复杂度: O(1)
      */
     public int findDuplicate(int[] nums) {
-        int len = nums.length;
-        int lo = 1, hi = len - 1; // 在[1, n]中使用二分查找
-        while (lo <= hi) {
-            int mid = lo + ((hi - lo) >> 1);
-            int cnt = countRange(nums, lo, mid);
-            // 区间只剩下一个元素, 即为重复元素
-            if (lo == hi) {
-                return lo;
-            }
-            // [lo, mid]中含有重复元素
-            if (cnt > (mid - lo + 1)) {
-                hi = mid;
-            // [mid + 1, hi]中含有重复元素
-            } else {
-                lo = mid + 1;
-            }
+        if (nums.length == 0) return -1;
+        int n = nums.length;
+        // 在 [1, n] 中使用查找重复的数
+        int l = 1, r = n; 
+        while (l < r) {
+            int mid = l + r >> 1;
+            // [l, mid]中含有重复元素
+            if (check(nums, l, mid)) r = mid;
+            // [mid + 1, r]中含有重复元素
+            else l = mid + 1;
         }
-
-        throw new IllegalArgumentException("No solution");
+        return l;
     }
 
-    // 返回数组nums有多少个元素在区间[start, end]内
-    private int countRange(int[] nums, int start, int end) {
+    // 判断区间 [st, ed] 中是否存在重复的数
+    private boolean check(int[] nums, int st, int ed) {
         int cnt = 0;
         for (int num : nums) {
-            if (start <= num && num <= end) {
-                cnt++;
-            }
+            if (num >= st && num <= ed) cnt++;
         }
-
-        return cnt;
+        return cnt > ed - st + 1;
     }
 
     /**
