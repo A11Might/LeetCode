@@ -1,4 +1,4 @@
-# LeetCode 349/1419
+# LeetCode 352/1419
 
  001 [Java](src/lc001.java)
 | 002 [Java](src/lc002.java)
@@ -216,6 +216,9 @@
 | 347 [Java](src/lc347.java)
 | 349 [Java](src/lc349.java)
 | 350 [Java](src/lc350.java)
+| 352 [Java](src/lc352.java)
+| 354 [Java](src/lc354.md)
+| 355 [Java](src/lc355.java)
 | 357 [Java](src/lc357.java)
 | 365 [Java](src/lc365.java)
 | 367 [Java](src/lc367.java)
